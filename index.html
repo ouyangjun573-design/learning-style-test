@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>学习风格测评 | 了解你的孩子</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#FFF7F0,#FFFBF7 30%,#FFF0E8);color:#4A3728;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:600px;margin:0 auto;padding:20px 20px 40px}
+.pg{display:none}.pg.on{display:block;animation:in .4s ease}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* Landing */
+.brand{text-align:center;padding:12px 0 0;font-size:12px;color:#C8B0A0;letter-spacing:1px}
+.hero{text-align:center;padding:28px 0 20px}
+.hero .em{font-size:44px;margin-bottom:8px}
+.hero h1{font-size:26px;font-weight:800;color:#C8832A;line-height:1.4;margin-bottom:8px}
+.hero .sub{font-size:15px;color:#A89080}
+.card{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(120,60,20,.06)}
+.card h3{font-size:16px;color:#C8832A;margin-bottom:8px}
+.card p,.card li{font-size:14px;color:#7A6A5C;line-height:1.7}
+.trust{text-align:center;padding:8px 0 20px;font-size:12px;color:#B8A090}
+.btn{display:block;width:100%;padding:16px 24px;border:none;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;-webkit-tap-highlight-color:transparent;letter-spacing:.5px}
+.btn:active{transform:scale(.98)}
+.btn-go{background:linear-gradient(135deg,#E8A24A,#D8853A);color:white;box-shadow:0 4px 20px rgba(200,120,40,.25)}
+
+/* Quiz */
+.qh{padding:16px 0 8px}
+.pb{height:6px;background:#F0E0D5;border-radius:3px;overflow:hidden;margin-bottom:8px}
+.pf{height:100%;background:linear-gradient(90deg,#E8A24A,#D8853A);border-radius:3px;transition:width .3s ease;width:5%}
+.pt{text-align:right;font-size:13px;color:#B8A090}
+.qr{text-align:center;font-size:14px;color:#A89080;padding:0 0 12px}
+.qc{background:white;border-radius:16px;padding:18px 18px 4px;box-shadow:0 2px 16px rgba(120,60,20,.06);margin-bottom:14px}
+.qn{display:inline-block;background:#FFF0E0;color:#C8832A;font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.qt{font-size:17px;font-weight:600;color:#4A3728;margin-bottom:12px;line-height:1.5}
+.qo{display:flex;flex-direction:column;gap:8px;padding-bottom:14px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border:2px solid #F0E0D5;border-radius:12px;cursor:pointer;transition:all .2s;background:#FFFAF6;font-size:15px;color:#5A4A3C;-webkit-tap-highlight-color:transparent;user-select:none}
+.opt:hover,.opt.sel{border-color:#E8A24A;background:#FFF5EC}
+.opt .rd{width:20px;height:20px;border-radius:50%;border:2px solid #E0C8B0;flex-shrink:0}
+.opt.sel .rd{border-color:#E8A24A;background:#E8A24A}
+.opt.sel .rd::after{content:"";display:block;width:8px;height:8px;border-radius:50%;background:white;margin:4px}
+.btn-row{display:flex;gap:12px;margin:0 0 20px}
+.btn-row .btn{flex:1;font-size:15px;padding:14px}
+.btn-pv{background:#F5EDE5;color:#7A6A5C}
+.btn-nx{background:linear-gradient(135deg,#E8A24A,#D8853A);color:white}
+
+/* Results */
+.rh{text-align:center;padding:20px 0 8px}
+.rh .hi{font-size:15px;color:#B8A090}
+.rh h2{font-size:24px;font-weight:800;color:#C8832A;margin-bottom:4px}
+.rh .sm{font-size:14px;color:#7A6A5C}
+.rc{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(120,60,20,.06)}
+.rc h4{font-size:16px;color:#C8832A;margin-bottom:8px}
+.rc .tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:12px;margin-right:4px;margin-bottom:4px;background:#FFF5EC;color:#C8832A}
+.rc .dt{font-size:14px;color:#5A4A3C;line-height:1.8}
+.rc li{margin-left:16px;padding:2px 0;font-size:14px;color:#5A4A3C;line-height:1.9}
+.tm{background:#FFFAF5;border:1px dashed #E8C8A8;border-radius:12px;padding:16px 20px;margin:16px 0 20px}
+.tm p{font-size:14px;color:#5A4A3C;line-height:1.8}
+.cp{display:inline-block;margin-top:10px;padding:8px 20px;font-size:13px;background:#F5EDE5;border:none;border-radius:8px;cursor:pointer;color:#7A6A5C}
+.surprise{background:linear-gradient(135deg,#FFF8F0,#FFEFE0);border:2px solid #F5C842;border-radius:16px;padding:24px 20px;margin-bottom:16px;text-align:center}
+.surprise h3{font-size:17px;color:#C8832A;margin-bottom:10px}
+.surprise ul{text-align:left;font-size:14px;color:#5A4A3C;line-height:2.2;margin-bottom:12px;padding:0 12px;list-style:none}
+.surprise ul li::before{content:"🎁 ";font-size:12px}
+.footer{text-align:center;font-size:12px;color:#B8A090;padding:16px;line-height:1.8}
+.rdr{text-align:center;padding:12px 0}
+.rdr canvas{max-width:100%;height:auto}
+@media(max-width:400px){.hero h1{font-size:22px}.qt{font-size:15px}.opt{font-size:14px;padding:12px 14px}.btn{font-size:16px;padding:14px 20px}.rh h2{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="brand">🧠 学习风格测评</div>
+<div class="c">
+
+<!-- ====== PAGE 0: Landing ====== -->
+<div class="pg on" id="p0">
+<div class="hero">
+<div class="em">🧒</div>
+<h1>你家孩子<br>是哪种学习风格？</h1>
+<p class="sub">20道题 · 5分钟 · 找到最适合他的方式</p>
+</div>
+<div class="card">
+<h3>🔍 你会知道</h3>
+<p>为什么有些方法教他就是不管用？<br>什么样的方式他做起来最顺手？<br>你在家该怎么帮，而不是跟他较劲？<br>怎么跟老师一句话说清楚孩子的情况？</p>
+</div>
+<div class="card">
+<h3>📖 有科学依据的</h3>
+<p>Felder-Soloman 学习风格量表，全球用了 30+ 年，不是娱乐测试。</p>
+</div>
+<button class="btn btn-go" onclick="start()">开始测试（免费）</button>
+<p class="trust">没有对错 · 选最像你家孩子的那个就行</p>
+<div class="footer">Felder & Soloman ILS (1991) · 20题短版 · Haug 2023 验证准确率 84-89%</div>
+</div>
+
+<!-- ====== PAGE 1: Quiz ====== -->
+<div class="pg" id="p1">
+<div class="qh"><div class="pb"><div class="pf" id="pf"></div></div><div class="pt" id="pt">1/20</div></div>
+<p class="qr">选最像你家孩子的，没有对错 ✨</p>
+<div id="qa"></div>
+<div class="btn-row">
+<button class="btn btn-pv" id="bp" onclick="prev()">← 上一题</button>
+<button class="btn btn-nx" id="bn" onclick="next()">下一题 →</button>
+</div>
+</div>
+
+<!-- ====== PAGE 2: Results ====== -->
+<div class="pg" id="p2">
+<div class="rh">
+<p class="hi">了解你的孩子 💡</p>
+<h2 id="rt"></h2>
+<p class="sm" id="rs"></p>
+</div>
+<div class="rdr"><canvas id="cv" width="300" height="300"></canvas></div>
+<div id="rx"></div>
+<div class="surprise">
+<h3>🎁 额外送你一个小惊喜</h3>
+<p style="font-size:14px;color:#7A6A5C;margin-bottom:10px">除了测评结果，还为你准备了这些：</p>
+<ul>
+<li>5 个科学学习策略（间隔复习法 / 番茄法 / 小老师法等）</li>
+<li>30 天每日学习打卡模板</li>
+<li>家长跟孩子不吵架的沟通话术</li>
+</ul>
+<a href="bonus.html" style="display:inline-block;margin:8px 0;padding:12px 24px;background:#F5C842;color:#4A3728;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none">📖 点我直接领取</a><p style="font-size:12px;color:#A89080;margin-top:8px">想要完整的30天定制方案？加微信 ww1987870012 备注"学习风格" 👩‍🏫</p>
+</div>
+<button class="btn" style="background:white;color:#C8832A;border:2px solid #E8C8A8" onclick="location.reload()">重新测试</button>
+<div class="footer">Felder & Soloman ILS量表 · 30年全球验证 · 成绩是过程的产物</div>
+</div>
+
+</div>
+
+<script>
+const Q=[
+{id:0,d:"ACT/REF",q:"学新东西时，孩子更喜欢？",a:"先动手试试，边做边学",b:"先想清楚，看别人怎么做"},
+{id:1,d:"ACT/REF",q:"几个人一起学习时，孩子通常？",a:"很活跃，参与讨论动手",b:"先听大家说，观察一下"},
+{id:2,d:"ACT/REF",q:"学习过程中，孩子？",a:"学一会儿就需起来动一下",b:"可以安安静静坐很久"},
+{id:3,d:"ACT/REF",q:"遇到难题时，孩子会？",a:"立刻动手尝试各种办法",b:"先停下来分析再行动"},
+{id:4,d:"ACT/REF",q:"在课堂或集体活动中，孩子？",a:"经常举手发言不怕表达",b:"比较安静，喜欢听和观察"},
+{id:5,d:"SEN/INT",q:"孩子更容易理解？",a:"具体的例子、身边的事",b:"抽象的概念、新奇的想法"},
+{id:6,d:"SEN/INT",q:"学新知识时，孩子更愿意？",a:"学马上就能用到的东西",b:"不介意先学暂时用不上的"},
+{id:7,d:"SEN/INT",q:"解决问题时，孩子倾向于？",a:"用以前学过的方法来解",b:"想一些新的、不一样的方法"},
+{id:8,d:"SEN/INT",q:"孩子更喜欢？",a:"有清楚步骤，一步步来",b:"自由探索，不怕不确定"},
+{id:9,d:"SEN/INT",q:"记东西的时候，孩子？",a:"多练几遍就记住了",b:"理解了为什么才记得住"},
+{id:10,d:"VIS/VRB",q:"孩子喜欢什么样的学习材料？",a:"带图片、图表的",b:"文字描述清楚的"},
+{id:11,d:"VIS/VRB",q:"听了一段信息后，孩子脑子里？",a:"会浮现出画面和场景",b:"记住的是原话和关键词"},
+{id:12,d:"VIS/VRB",q:"复习的时候，孩子喜欢？",a:"画思维导图、涂涂画画",b:"整理文字笔记和要点"},
+{id:13,d:"VIS/VRB",q:"老师讲课时？",a:"有板书PPT演示就更好懂",b:"光是听也能跟上"},
+{id:14,d:"VIS/VRB",q:"记一篇课文，孩子？",a:"画成图画记得更牢",b:"反复朗读记得更牢"},
+{id:15,d:"SEQ/GLO",q:"学习节奏上，孩子更倾向于？",a:"一步一个脚印稳扎稳打",b:"先大概了解全貌再深入"},
+{id:16,d:"SEQ/GLO",q:"面对全新学科，孩子？",a:"从最基础的开始逐步深入",b:"先整体浏览再挑感兴趣的深入"},
+{id:17,d:"SEQ/GLO",q:"做练习题时，孩子？",a:"按顺序一道一道来",b:"先跳着做自己会的"},
+{id:18,d:"SEQ/GLO",q:"理解一个难的概念时，孩子？",a:"需要按逻辑步骤讲给他",b:"可能突然就懂了说不清过程"},
+{id:19,d:"SEQ/GLO",q:"做项目或事情时，孩子？",a:"喜欢明确的时间表和步骤",b:"喜欢灵活可以随时调整"},
+];
+
+const DI={
+"ACT/REF":{l:"活跃 ↔ 反思",d:"怎么消化信息",L:"活跃型",R:"反思型",
+  LD:"动手做、讨论、尝试中学习。不是多动，是大脑需要身体参与。",
+  RD:"需要安静想一想才能消化。不是不会，是在心里思考。"},
+"SEN/INT":{l:"感觉 ↔ 直觉",d:"喜欢什么信息",L:"感觉型",R:"直觉型",
+  LD:"喜欢看得见摸得着的东西。说'这很重要'没用，给他看'学了这个能干嘛'。",
+  RD:"喜欢先知道大概和原理。看起来不认真，其实在建立自己的理解地图。"},
+"VIS/VRB":{l:"视觉 ↔ 言语",d:"用什么感官来学",L:"视觉型",R:"言语型",
+  LD:"用眼睛学的。画出来就记住了，光听记不住。书上画满小人是好事。",
+  RD:"用耳朵和嘴巴学的。讲出来、讨论过就记住了，默默看效果不好。"},
+"SEQ/GLO":{l:"循序 ↔ 整体",d:"怎么理解新东西",L:"循序型",R:"整体型",
+  LD:"喜欢按顺序有步骤地来。别催他，每一步走稳了自然会下一步。",
+  RD:"先看全貌再深入。可能先翻完整本书再读第一章，不是不专注是建框架。"},
+};
+
+const M={
+"活跃型":{s:["每次学前让他动一动释放能量","把知识编成动作手势或小表演","教玩偶/爸妈——教别人是他最好的方式","把练习变成闯关游戏","每15-20分钟起来活动一下"],
+  p:["不要强迫坐着不动","学前让他先跑10分钟","不说坐好——说来表演这道题"]},
+"反思型":{s:["学前花2分钟想今天学什么","给他安静时间不要一直盯着","不强迫发言——让他在心里准备好再说","写日记写总结比口头提问更有效","提前预习让他有思考准备时间"],
+  p:["不催促不盯着——他需要思考时间","问你怎么想的而非怎么还不会","接受他不发言——不是不会"]},
+"感觉型":{s:["用真实例子——数学用超市算账","给明确步骤和清单完成一项勾一项","反复练习同类型——熟能生巧","先让他知道学了这个能干嘛","不嫌他慢——他需要反复建立信心"],
+  p:["给他看到学会了能干嘛","不嫌慢——需要反复建立信心","多给真实例子少讲道理"]},
+"直觉型":{s:["先讲大概念和框架再深入细节","允许他用自己顺手的方法解题","鼓励他用不同方法做同一题","给开放性问题激发探索兴趣","把知识编成故事或比喻理解更快"],
+  p:["允许跳来跳去——就是他的方式","对突然开窍有耐心","多问你怎么想的"]},
+"视觉型":{s:["画思维导图漫画流程图——画出来就记住了","用不同颜色标注不同类型的信息","看科普视频比看纯文字书好","把一课内容画成一张大图","不要收他的画笔——画画就是学习"],
+  p:["不收画笔——画画是他的学习","给他买白板让他画","陪他看科普纪录片"]},
+"言语型":{s:["鼓励他大声读出来讲出来","让他当小老师给你讲今天学了什么","参加讨论辩论讲故事活动","把学到的写成一段话或录音","朗读比默读效果好得多"],
+  p:["当他的学生——让他给你讲课","多讨论不是单向告诉","鼓励演讲辩论读书分享"]},
+"循序型":{s:["帮他把大任务拆成小步骤一步步来","理解上一步了再走下一步","用清单和进度条让他看见进度","同类型集中练习先不混着来","不突然加任务打乱他的节奏"],
+  p:["帮他做计划表——先做什么再做什么","完成一步夸一步","不突然加任务打乱节奏"]},
+"整体型":{s:["学新东西前先花几分钟浏览全貌","允许他跳着学——不是不专注是在连接","用思维导图帮他把碎片连成网","不纠结某点暂时搞不懂后面自然会通","给他足够时间酝酿突然就会开窍"],
+  p:["允许跳着学——不是不专注","酝酿期有耐心——会突然开窍","帮他做大的框架图"]},
+};
+
+let cur=0,ans=new Array(20).fill(null);
+
+function pg(n){document.querySelectorAll(".pg").forEach(e=>e.classList.remove("on"));document.getElementById("p"+n).classList.add("on");window.scrollTo({top:0,behavior:"smooth"})}
+
+function start(){cur=0;ans=new Array(20).fill(null);pg(1);rq();un()}
+
+function rq(){
+let q=Q[cur],d=DI[q.d];
+document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#B8A090;margin-left:6px">'+d.l+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" onclick="sel(\"a\")"><div class="rd"></div><span>'+q.a+'</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" onclick="sel(\"b\")"><div class="rd"></div><span>'+q.b+'</span></div></div></div>';
+let pct=Math.round((cur+1)/20*100);
+document.getElementById("pf").style.width=pct+"%";
+document.getElementById("pt").textContent=(cur+1)+"/20";
+}
+
+function sel(v){ans[cur]=v;rq();setTimeout(()=>{if(cur<19){cur++;rq();un()}},350)}
+
+function next(){
+if(ans[cur]===null){document.querySelectorAll(".opt").forEach(o=>{o.style.borderColor="#F0C0A0";setTimeout(()=>o.style.borderColor="#F0E0D5",600)});return}
+if(cur<19){cur++;rq();un()}else{show()}
+}
+
+function prev(){if(cur>0){cur--;rq();un()}}
+
+function un(){
+document.getElementById("bp").style.visibility=cur===0?"hidden":"visible";
+document.getElementById("bn").textContent=cur===19?"看结果 →":"下一题 →";
+}
+
+function score(){
+let d=["ACT/REF","SEN/INT","VIS/VRB","SEQ/GLO"],r={};
+d.forEach((dm,di)=>{let s=0;for(let i=di*5;i<di*5+5;i++){if(ans[i]==="a")s++;else if(ans[i]==="b")s--}let ab=Math.abs(s),nfo=DI[dm],lb,st;if(s>0){lb=nfo.L;st=ab>=3?"明显偏好":"轻微偏好"}else if(s<0){lb=nfo.R;st=ab>=3?"明显偏好":"轻微偏好"}else{lb="均衡";st="均衡"}r[dm]={score:s,label:lb,strength:st,abs:ab}});
+return r;
+}
+
+function radar(r){
+let cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+let sz=Math.min(cv.parentElement.clientWidth-16,280);
+cv.width=sz;cv.height=sz;
+let cx=sz/2,cy=sz/2,ra=sz*0.32;
+let ds=["ACT/REF","SEN/INT","VIS/VRB","SEQ/GLO"];
+let lbs=["活跃-反思","感觉-直觉","视觉-言语","循序-整体"];
+let vs=ds.map(d=>Math.abs(r[d].score)/5);
+ctx.clearRect(0,0,sz,sz);
+for(let i=1;i<=5;i++){ctx.beginPath();ctx.arc(cx,cy,ra*i/5,0,Math.PI*2);ctx.strokeStyle="#F0E0D5";ctx.lineWidth=1;ctx.stroke()}
+for(let i=0;i<4;i++){let a=-Math.PI/2+(Math.PI*2/4)*i;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+ra*Math.cos(a),cy+ra*Math.sin(a));ctx.strokeStyle="#E8D0C0";ctx.stroke()}
+ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);ctx.fillStyle="#D0C0B0";ctx.fill();
+ctx.beginPath();
+for(let i=0;i<4;i++){let a=-Math.PI/2+(Math.PI*2/4)*i,v=vs[i],px=cx+ra*v*Math.cos(a),py=cy+ra*v*Math.sin(a);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}
+ctx.closePath();ctx.fillStyle="rgba(232,162,74,0.25)";ctx.fill();ctx.strokeStyle="#E8A24A";ctx.lineWidth=2.5;ctx.stroke();
+for(let i=0;i<4;i++){let a=-Math.PI/2+(Math.PI*2/4)*i,v=vs[i],px=cx+ra*v*Math.cos(a),py=cy+ra*v*Math.sin(a);ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle="#E8A24A";ctx.fill();ctx.strokeStyle="white";ctx.lineWidth=2;ctx.stroke()}
+ctx.fillStyle="#7A6A5C";ctx.font="bold 12px PingFang SC,Microsoft YaHei,sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+for(let i=0;i<4;i++){let a=-Math.PI/2+(Math.PI*2/4)*i,lx=cx+(ra+26)*Math.cos(a),ly=cy+(ra+26)*Math.sin(a);ctx.fillText(lbs[i],lx,ly)}
+}
+
+function show(){
+let r=score(),ds=["ACT/REF","SEN/INT","VIS/VRB","SEQ/GLO"];
+let sts=[];ds.forEach(d=>{if(r[d].label!=="均衡")sts.push(r[d])});
+let pn="",mx=0;sts.forEach(s=>{if(s.abs>mx){mx=s.abs;pn=s.label}});
+if(!pn)pn="均衡型";
+document.getElementById("rt").textContent="是个「"+pn+"」学习者";
+let sn=sts.map(s=>s.label+"("+s.strength+")");
+document.getElementById("rs").textContent=sn.length>0?"4个维度中："+sn.join("、"):"四个维度比较均衡，学习灵活";
+pg(2);
+setTimeout(()=>radar(r),150);
+
+let h="";
+ds.forEach(dm=>{
+let rr=r[dm],nfo=DI[dm];
+let desc=rr.label===nfo.L?nfo.LD:rr.label===nfo.R?nfo.RD:"两边都能适应，比较灵活";
+h+='<div class="rc"><h4>'+nfo.l+' <span style="font-size:12px;color:#B8A090;font-weight:400">— '+nfo.d+'</span></h4><span class="tag">'+rr.label+'</span><span class="tag">'+rr.strength+'</span> <span style="font-size:13px;color:#A89080">得分:'+(rr.score>0?"+":"")+rr.score+'</span><p class="dt">'+desc+'</p></div>';
+});
+
+if(sts.length>0){
+h+='<h4 style="font-size:16px;color:#4A3728;margin:16px 0 8px">📝 最适合他的学习方式</h4>';
+sts.forEach(s=>{
+let m=M[s.label];if(!m)return;
+h+='<div class="rc"><h4>'+s.label+'型 · 学习方法</h4><ul>'+m.s.slice(0,4).map(t=>"<li>"+t+"</li>").join("")+"</ul></div>";
+});
+
+let pt=new Set();sts.forEach(s=>{let m=M[s.label];if(m)m.p.forEach(p=>pt.add(p))});
+let ta=[...pt].slice(0,5);
+h+='<h4 style="font-size:16px;color:#4A3728;margin:16px 0 8px">👩‍👦 家长可以这样做</h4><div class="rc"><ul>'+ta.map(t=>"<li>"+t+"</li>").join("")+"</ul></div>";
+}
+
+let tl=sts.map(s=>s.label).join("、")||"多种";
+let tm="老师您好，我是孩子的家长。最近了解了一下孩子的学习习惯，发现他可能更偏向「"+tl+"」型的学习方式。不是给孩子贴标签，是想了解一下他在课堂上的状态，看看我们在家怎么配合您。谢谢您！";
+h+='<h4 style="font-size:16px;color:#4A3728;margin:16px 0 8px">📩 跟老师可以这样说</h4><div class="tm"><p id="tt">'+tm+'</p><button class="cp" onclick="cpy()">📋 一键复制发给老师</button></div>';
+
+document.getElementById("rx").innerHTML=h;
+}
+
+function cpy(){
+let t=document.getElementById("tt").textContent;
+if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>{let b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(()=>b.textContent="📋 一键复制发给老师",2000)})}else{
+let ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.left="-9999px";document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);
+let b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(()=>b.textContent="📋 一键复制发给老师",2000)}
+}
+
+window.addEventListener("resize",()=>{if(document.getElementById("p2").classList.contains("on")){radar(score())}});
+</script>
+</body>
+</html>
