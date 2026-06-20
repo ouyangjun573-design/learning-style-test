@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>阅读能力 | 了解你的孩子</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#F0F5FF,#F8FBFF 30%,#EBF0FF);color:#2D354A;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:600px;margin:0 auto;padding:20px 20px 40px}
+.pg{display:none}.pg.on{display:block;animation:in .4s ease}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.brand{text-align:center;padding:12px 0 0;font-size:12px;color:#9098B8;letter-spacing:1px}
+.hero{text-align:center;padding:28px 0 20px}
+.hero .em{font-size:44px;margin-bottom:8px}
+.hero h1{font-size:26px;font-weight:800;color:#3B82F6;line-height:1.4;margin-bottom:8px}
+.hero .sub{font-size:15px;color:#8090A8}
+.card{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(40,80,200,.06)}
+.card h3{font-size:16px;color:#3B82F6;margin-bottom:8px}
+.card p,.card li{font-size:14px;color:#5A6A7C;line-height:1.7}
+.trust{text-align:center;padding:8px 0 20px;font-size:12px;color:#98A8B8}
+.btn{display:block;width:100%;padding:16px 24px;border:none;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;-webkit-tap-highlight-color:transparent;letter-spacing:.5px}
+.btn:active{transform:scale(.98)}
+.btn-go{background:linear-gradient(135deg,#60A5FA,#3B82F6);color:white;box-shadow:0 4px 20px rgba(40,80,220,.25)}
+.qh{padding:16px 0 8px}
+.pb{height:6px;background:#D8E0F0;border-radius:3px;overflow:hidden;margin-bottom:8px}
+.pf{height:100%;background:linear-gradient(90deg,#60A5FA,#3B82F6);border-radius:3px;transition:width .3s ease;width:10%}
+.pt{text-align:right;font-size:13px;color:#98A8B8}
+.qr{text-align:center;font-size:14px;color:#8090A8;padding:0 0 12px}
+.qc{background:white;border-radius:16px;padding:18px 18px 4px;box-shadow:0 2px 16px rgba(40,80,200,.06);margin-bottom:14px}
+.qn{display:inline-block;background:#E8F0FF;color:#3B82F6;font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.qt{font-size:17px;font-weight:600;color:#2D354A;margin-bottom:12px;line-height:1.5}
+.qo{display:flex;flex-direction:column;gap:8px;padding-bottom:14px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border:2px solid #D8E0F0;border-radius:12px;cursor:pointer;transition:all .2s;background:#FBFDFF;font-size:15px;color:#5A6A6C;-webkit-tap-highlight-color:transparent;user-select:none}
+.opt:hover,.opt.sel{border-color:#60A5FA;background:#F0F5FF}
+.rd{width:20px;height:20px;border-radius:50%;border:2px solid #C0D0E8;flex-shrink:0}
+.sel .rd{border-color:#60A5FA;background:#60A5FA}
+.sel .rd::after{content:"";display:block;width:8px;height:8px;border-radius:50%;background:white;margin:4px}
+.btn-row{display:flex;gap:12px;margin:0 0 20px}
+.btn-row .btn{flex:1;font-size:15px;padding:14px}
+.btn-pv{background:#EDF0F5;color:#5A6A7C}
+.btn-nx{background:linear-gradient(135deg,#60A5FA,#3B82F6);color:white}
+.rh{text-align:center;padding:20px 0 8px}
+.rh .hi{font-size:15px;color:#98A8B8}
+.rh h2{font-size:24px;font-weight:800;color:#3B82F6;margin-bottom:4px}
+.rh .sm{font-size:14px;color:#5A6A7C}
+.rc{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(40,80,200,.06)}
+.rc h4{font-size:16px;color:#3B82F6;margin-bottom:8px}
+.tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:12px;margin-right:4px;margin-bottom:4px;background:#F0F5FF;color:#3B82F6}
+.dt{font-size:14px;color:#5A6A7C;line-height:1.8}
+.rc li{margin-left:16px;padding:2px 0;font-size:14px;color:#5A6A7C;line-height:1.9}
+.tm{background:#FBFDFF;border:1px dashed #C0D0E8;border-radius:12px;padding:16px 20px;margin:16px 0 20px}
+.tm p{font-size:14px;color:#5A6A7C;line-height:1.8}
+.cp{display:inline-block;margin-top:10px;padding:8px 20px;font-size:13px;background:#EDF0F5;border:none;border-radius:8px;cursor:pointer;color:#5A6A7C}
+.surprise{background:linear-gradient(135deg,#F8FBFF,#EFF5FF);border:2px solid #93C5FD;border-radius:16px;padding:24px 20px;margin-bottom:16px;text-align:center}
+.surprise h3{font-size:17px;color:#3B82F6;margin-bottom:10px}
+.surprise ul{text-align:left;font-size:14px;color:#5A6A7C;line-height:2.2;margin-bottom:12px;padding:0 12px;list-style:none}
+.surprise ul li::before{content:"🎁 ";font-size:12px}
+.footer{text-align:center;font-size:12px;color:#98A8B8;padding:16px;line-height:1.8}
+.rdr{text-align:center;padding:12px 0}
+.rdr canvas{max-width:100%;height:auto}
+@media(max-width:400px){.hero h1{font-size:22px}.qt{font-size:15px}.opt{font-size:14px;padding:12px 14px}.btn{font-size:16px;padding:14px 20px}.rh h2{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="brand">📖 阅读能力评估</div>
+<div class="c">
+
+<div class="pg on" id="p0">
+<div class="hero"><div class="em">📖</div><h1>给他买的书<br>为什么全在吃灰？</h1><p class="sub">10道题 · 3分钟 · 找到阅读能力的真正卡点</p></div>
+<div class="card"><h3>🔍 你会知道</h3><p>是不爱看书，还是阅读能力跟不上？<br>他卡在哪个环节——拼读、流利度还是理解？<br>什么难度的书刚好适合他？<br>怎么引导他从"不看书"变成"主动拿书"？</p></div>
+<div class="card"><h3>📖 有科学依据的</h3><p>美国 NRP 阅读五大支柱研究，全球阅读教学的基础框架。看不懂书不是因为懒。</p></div>
+<button class="btn btn-go" onclick="start()">开始测试（免费）</button>
+<p class="trust">根据孩子日常阅读表现来选</p>
+<div class="footer">NRP 5 Components of Reading (2000) · 全球阅读教学金标准 · 每个孩子都能爱上阅读</div>
+</div>
+
+<div class="pg" id="p1">
+<div class="qh"><div class="pb"><div class="pf" id="pf"></div></div><div class="pt" id="pt">1/10</div></div>
+<p class="qr">根据孩子的真实表现来选 ✨</p>
+<div id="qa"></div>
+<div class="btn-row">
+<button class="btn btn-pv" id="bp" onclick="prev()">← 上一题</button>
+<button class="btn btn-nx" id="bn" onclick="next()">下一题 →</button>
+</div>
+</div>
+
+<div class="pg" id="p2">
+<div class="rh"><p class="hi">了解你的孩子 💡</p><h2 id="rt"></h2><p class="sm" id="rs"></p></div>
+<div class="rdr"><canvas id="cv" width="300" height="300"></canvas></div>
+<div id="rx"></div>
+<div class="surprise">
+<h3>🎁 额外送你阅读工具包</h3>
+<p style="font-size:14px;color:#5A6A7C;margin-bottom:10px">除了评估结果，还为你准备了：</p>
+<ul><li>按年龄段的分级书单</li><li>亲子共读打卡表</li><li>读后讨论提问模板</li></ul>
+<a href="reading-bonus.html" style="display:inline-block;margin:8px 0;padding:12px 24px;background:#93C5FD;color:#2D354A;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none">📖 点我直接领取</a><p style="font-size:12px;color:#8090A8;margin-top:8px">想要专属阅读提升方案？加微信 ww1987870012 备注"阅读" 👩‍🏫</p>
+</div>
+<button class="btn" style="background:white;color:#3B82F6;border:2px solid #C0D0E8" onclick="location.reload()">重新测试</button>
+<div class="footer">NRP 5 Components · 全球阅读教学金标准 · 阅读能力可以训练</div>
+</div>
+
+</div>
+
+<script>
+const Q=[
+{id:0,d:"DEC",q:"遇到不认识的字，孩子？",a:"自己试着拼出来，或用上下文猜",b:"直接跳过或停下来等人帮忙"},
+{id:1,d:"DEC",q:"读书时遇到多音字或形近字",a:"能根据上下文判断正确读音",b:"经常读错，分不清相近的字"},
+{id:2,d:"DEC",q:"读一句稍长的句子时",a:"能比较顺畅地读下来",b:"经常卡顿，一个字一个字蹦"},
+{id:3,d:"FLU",q:"朗读一篇熟悉的课文",a:"读得顺畅有节奏，像在说话",b:"读得断断续续，很费力"},
+{id:4,d:"FLU",q:"读完之后问他刚才读了什么",a:"能说出主要内容",b:"光顾着认字了，不知道读了什么"},
+{id:5,d:"FLU",q:"读书的速度和节奏",a:"速度适中，该快则快该慢则慢",b:"读得很慢或很快但没停顿"},
+{id:6,d:"COM",q:"读完一个故事后，孩子？",a:"能把故事讲出来，还能说出自己的想法",b:"说不太清讲了什么"},
+{id:7,d:"COM",q:"问到'为什么这个人物这样做'",a:"能根据自己的理解给出解释",b:"回答'不知道'或重复书里的句子"},
+{id:8,d:"COM",q:"读非故事类的书（如科普书）",a:"能抓住主要信息和逻辑关系",b:"读完说不出学到了什么"},
+{id:9,d:"COM",q:"预测后面的情节或推断作者意图",a:"喜欢猜后面的发展，猜对猜错都开心",b:"很少做预测，觉得看书就是认字"}
+];
+
+const DI={
+"DEC":{l:"解码拼读",d:"认字和拼读能力",L:"拼读流畅",R:"拼读吃力",
+ LD:"认字拼读基础扎实，能顺畅地把文字转换成声音。",
+ RD:"认字或拼读还不够熟练，经常卡在单个字词上。"},
+"FLU":{l:"阅读流利度",d:"读得是否顺畅有节奏",L:"流利顺畅",R:"流利不足",
+ LD:"读书有节奏、有停顿、有感情，能把注意力放在理解上。",
+ RD:"读得磕磕绊绊，精力都耗在认字上，顾不上理解内容。"},
+"COM":{l:"阅读理解",d:"能否理解所读内容",L:"理解深入",R:"理解困难",
+ LD:"不仅能读懂字面意思，还能推理、预测、说出自己的想法。",
+ RD:"读懂表面内容都有困难，更别说深层理解了。"},
+};
+
+const M={
+"拼读流畅":{s:["继续保持每日自由阅读的习惯","逐步增加文本难度和多样性","尝试桥梁书过渡到章节书"],
+ p:["不用太管——他自己能搞定","偶尔跟他聊聊读了什么就行"]},
+"拼读吃力":{s:["用五指法则选书——翻开一页超过5个不认识的字就太难了","多做自然拼读游戏——音节拆分、押韵接龙","同级别多读几本再升级——不要急着加难度","先听后读——你先读一遍让他跟读"],
+ p:["不催促——'快读'对拼读困难的孩子是折磨","不怕重复——同一本书读5遍比5本新书各读1遍好","选他感兴趣的话题——恐龙迷就给他恐龙书"]},
+"流利顺畅":{s:["继续保持朗读习惯","尝试不同文体——诗歌、剧本、演讲稿","录音听自己的朗读——自我反馈进步最快"],
+ p:["偶尔请他给你读一段——你的听众身份是他最大的动力"]},
+"流利不足":{s:["用指读法——手指跟着文字走帮助眼睛聚焦","同一段反复读到流畅再往下","先默读一遍再朗读——降低压力","跟读——你先读一句他跟一句"],
+ p:["不当众让他朗读——紧张会让流利度雪上加霜","不打断纠错——读完再说一两个大问题","每天10分钟比周末1小时有效"]},
+"理解深入":{s:["读完后讨论——'你最喜欢哪个角色？为什么？'","鼓励他从不同角度看故事","读和写结合——让他改写结局或续写"],
+ p:["多问他'你怎么想的'而不是'书上怎么说的'","跟他分享你读的书——做平等读者而非检查者"]},
+"理解困难":{s:["读前先预览——看封面标题图片预测内容","读中暂停——每读一段就问'这里发生了什么'","用五指复述法——谁/发生了什么/在哪/什么时候/为什么","读后画出来——把故事画成几格漫画"],
+ p:["从他感兴趣的话题选书——哪怕只是漫画书","降低一个阅读级别——在能读懂的书里重建信心","你先读一段他读一段——降低认知负荷"]},
+};
+
+let cur=0,ans=new Array(10).fill(null);
+function pg(n){document.querySelectorAll(".pg").forEach(e=>e.classList.remove("on"));document.getElementById("p"+n).classList.add("on");window.scrollTo({top:0,behavior:"smooth"})}
+function start(){cur=0;ans=new Array(10).fill(null);pg(1);rq();un()}
+var autoTimer=null;
+function rq(){
+let q=Q[cur],d=DI[q.d];
+document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#98A8B8;margin-left:6px">'+d.l+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" data-v="a"><div class="rd"></div><span>'+q.a+'</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" data-v="b"><div class="rd"></div><span>'+q.b+'</span></div></div></div>';
+let pct=Math.round((cur+1)/10*100);document.getElementById("pf").style.width=pct+"%";document.getElementById("pt").textContent=(cur+1)+"/10";
+document.querySelectorAll("#qa .opt").forEach(function(el){el.onclick=function(){var v=this.getAttribute("data-v");ans[cur]=v;if(autoTimer)clearTimeout(autoTimer);rq();if(cur<9){autoTimer=setTimeout(function(){cur++;rq();un()},400)}}});
+}
+function next(){if(ans[cur]===null){document.querySelectorAll(".opt").forEach(o=>{o.style.borderColor="#A0C0F0";setTimeout(()=>o.style.borderColor="#D8E0F0",600)});return}if(autoTimer)clearTimeout(autoTimer);if(cur<9){cur++;rq();un()}else{show()}}
+function prev(){if(cur>0){cur--;rq();un()}}
+function un(){document.getElementById("bp").style.visibility=cur===0?"hidden":"visible";document.getElementById("bn").textContent=cur===9?"看结果 →":"下一题 →"}
+function score(){
+let r={};["DEC","FLU","COM"].forEach(dm=>{let s=0;for(let i=0;i<10;i++){if(Q[i].d===dm){if(ans[i]==="a")s++;else if(ans[i]==="b")s--}}let ab=Math.abs(s),nfo=DI[dm],lb,st;if(s>0){lb=nfo.L;st=ab>=2?"明显":"轻微"}else if(s<0){lb=nfo.R;st=ab>=2?"明显":"轻微"}else{lb="均衡";st="均衡"}r[dm]={score:s,label:lb,strength:st,abs:ab}});
+return r;
+}
+function radar(r){
+let cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+let sz=Math.min(cv.parentElement.clientWidth-16,280);cv.width=sz;cv.height=sz;
+let cx=sz/2,cy=sz/2,ra=sz*0.32;
+let ds=["DEC","FLU","COM"],lbs=["解码拼读","阅读流利度","阅读理解"];
+let vs=ds.map(d=>Math.max(0.15,Math.abs(r[d].score)/Math.max(3,Math.abs(r[d].score)+1)));
+ctx.clearRect(0,0,sz,sz);
+for(let i=1;i<=4;i++){ctx.beginPath();ctx.arc(cx,cy,ra*i/4,0,Math.PI*2);ctx.strokeStyle="#D8E0F0";ctx.lineWidth=1;ctx.stroke()}
+for(let i=0;i<3;i++){let a=-Math.PI/2+(Math.PI*2/3)*i;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+ra*Math.cos(a),cy+ra*Math.sin(a));ctx.strokeStyle="#C8D0E8";ctx.stroke()}
+ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);ctx.fillStyle="#B0C0D8";ctx.fill();
+ctx.beginPath();for(let i=0;i<3;i++){let a=-Math.PI/2+(Math.PI*2/3)*i,v=vs[i],px=cx+ra*v*Math.cos(a),py=cy+ra*v*Math.sin(a);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}
+ctx.closePath();ctx.fillStyle="rgba(96,165,250,0.25)";ctx.fill();ctx.strokeStyle="#60A5FA";ctx.lineWidth=2.5;ctx.stroke();
+for(let i=0;i<3;i++){let a=-Math.PI/2+(Math.PI*2/3)*i,v=vs[i],px=cx+ra*v*Math.cos(a),py=cy+ra*v*Math.sin(a);ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle="#60A5FA";ctx.fill();ctx.strokeStyle="white";ctx.lineWidth=2;ctx.stroke()}
+ctx.fillStyle="#5A6A7C";ctx.font="bold 12px PingFang SC,Microsoft YaHei,sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+for(let i=0;i<3;i++){let a=-Math.PI/2+(Math.PI*2/3)*i,lx=cx+(ra+30)*Math.cos(a),ly=cy+(ra+30)*Math.sin(a);ctx.fillText(lbs[i],lx,ly)}
+}
+function show(){
+let r=score(),dec=r["DEC"],flu=r["FLU"],com=r["COM"],pn="阅读全面发展型",names={"解码困难型":"卡在认字环节","流利度不足型":"认字可以但读不顺","理解困难型":"读得顺但不太懂","阅读全面发展型":"阅读能力全面发展"};
+if(dec.label==="拼读吃力")pn="解码困难型";
+else if(dec.label==="拼读流畅"&&flu.label==="流利不足")pn="流利度不足型";
+else if(dec.label==="拼读流畅"&&flu.label==="流利顺畅"&&com.label==="理解困难")pn="理解困难型";
+document.getElementById("rt").textContent="是「"+pn+"」";
+document.getElementById("rs").textContent=names[pn]||"";pg(2);setTimeout(()=>radar(r),150);
+
+let h="";["DEC","FLU","COM"].forEach(dm=>{let rr=r[dm],nfo=DI[dm],desc=rr.label===nfo.L?nfo.LD:rr.label===nfo.R?nfo.RD:"比较平衡";h+='<div class="rc"><h4>'+nfo.l+' <span style="font-size:12px;color:#98A8B8;font-weight:400">— '+nfo.d+'</span></h4><span class="tag">'+rr.label+'</span><span class="tag">'+rr.strength+'</span><p class="dt">'+desc+'</p></div>'});
+
+let sts=[];if(dec.label!=="均衡")sts.push(dec);if(flu.label!=="均衡")sts.push(flu);if(com.label!=="均衡")sts.push(com);
+if(sts.length>0){h+='<h4 style="font-size:16px;color:#2D354A;margin:16px 0 8px">📝 提升阅读的方法</h4>';sts.forEach(s=>{let m=M[s.label];if(!m)return;h+='<div class="rc"><h4>'+s.label+' · 训练方法</h4><ul>'+m.s.map(t=>"<li>"+t+"</li>").join("")+"</ul></div>"});let pt=new Set();sts.forEach(s=>{let m=M[s.label];if(m)m.p.forEach(p=>pt.add(p))});h+='<h4 style="font-size:16px;color:#2D354A;margin:16px 0 8px">👩‍👦 家长可以这样做</h4><div class="rc"><ul>'+[...pt].slice(0,5).map(t=>"<li>"+t+"</li>").join("")+"</ul></div>"}
+
+let tm="老师您好，我给孩子做了阅读能力评估。他在「解码拼读」方面表现为"+dec.label+"，「流利度」为"+flu.label+"，「理解」为"+com.label+"。想了解一下他在学校的阅读表现，看看在家怎么配合。另外想请您帮忙推荐一些适合他当前水平的书。谢谢您！";
+h+='<h4 style="font-size:16px;color:#2D354A;margin:16px 0 8px">📩 跟老师可以这样说</h4><div class="tm"><p id="tt">'+tm+'</p><button class="cp" onclick="cpy()">📋 一键复制发给老师</button></div>';
+document.getElementById("rx").innerHTML=h;
+}
+function cpy(){let t=document.getElementById("tt").textContent;if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>{let b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(()=>b.textContent="📋 一键复制发给老师",2000)})}else{let ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.left="-9999px";document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);let b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(()=>b.textContent="📋 一键复制发给老师",2000)}}
+window.addEventListener("resize",()=>{if(document.getElementById("p2").classList.contains("on")){radar(score())}});
+</script>
+</body>
+</html>

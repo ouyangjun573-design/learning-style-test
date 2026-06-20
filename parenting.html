@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>亲子沟通测试 | 了解你自己</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#FFF5F5,#FFFBFB 30%,#FFF0F0);color:#4A2D2D;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:600px;margin:0 auto;padding:20px 20px 40px}
+.pg{display:none}.pg.on{display:block;animation:in .4s ease}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.brand{text-align:center;padding:12px 0 0;font-size:12px;color:#B89090;letter-spacing:1px}
+.hero{text-align:center;padding:28px 0 20px}
+.hero .em{font-size:44px;margin-bottom:8px}
+.hero h1{font-size:26px;font-weight:800;color:#E5464A;line-height:1.4;margin-bottom:8px}
+.hero .sub{font-size:15px;color:#A88080}
+.card{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(200,60,60,.06)}
+.card h3{font-size:16px;color:#E5464A;margin-bottom:8px}
+.card p,.card li{font-size:14px;color:#7C5A5A;line-height:1.7}
+.trust{text-align:center;padding:8px 0 20px;font-size:12px;color:#B89898}
+.btn{display:block;width:100%;padding:16px 24px;border:none;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;-webkit-tap-highlight-color:transparent;letter-spacing:.5px}
+.btn:active{transform:scale(.98)}
+.btn-go{background:linear-gradient(135deg,#F06060,#E5464A);color:white;box-shadow:0 4px 20px rgba(220,60,60,.25)}
+.qh{padding:16px 0 8px}
+.pb{height:6px;background:#F0D8D8;border-radius:3px;overflow:hidden;margin-bottom:8px}
+.pf{height:100%;background:linear-gradient(90deg,#F06060,#E5464A);border-radius:3px;transition:width .3s ease;width:10%}
+.pt{text-align:right;font-size:13px;color:#B89898}
+.qr{text-align:center;font-size:14px;color:#A88080;padding:0 0 12px}
+.qc{background:white;border-radius:16px;padding:18px 18px 4px;box-shadow:0 2px 16px rgba(200,60,60,.06);margin-bottom:14px}
+.qn{display:inline-block;background:#FFE8E8;color:#E5464A;font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.qt{font-size:17px;font-weight:600;color:#4A2D2D;margin-bottom:12px;line-height:1.5}
+.qo{display:flex;flex-direction:column;gap:8px;padding-bottom:14px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border:2px solid #F0D8D8;border-radius:12px;cursor:pointer;transition:all .2s;background:#FFFBFB;font-size:15px;color:#5A3C3C;-webkit-tap-highlight-color:transparent;user-select:none}
+.opt:hover,.opt.sel{border-color:#F06060;background:#FFF5F5}
+.rd{width:20px;height:20px;border-radius:50%;border:2px solid #E8C0C0;flex-shrink:0}
+.sel .rd{border-color:#F06060;background:#F06060}
+.sel .rd::after{content:"";display:block;width:8px;height:8px;border-radius:50%;background:white;margin:4px}
+.btn-row{display:flex;gap:12px;margin:0 0 20px}
+.btn-row .btn{flex:1;font-size:15px;padding:14px}
+.btn-pv{background:#F5EDED;color:#7C5A5A}
+.btn-nx{background:linear-gradient(135deg,#F06060,#E5464A);color:white}
+.rh{text-align:center;padding:20px 0 8px}
+.rh .hi{font-size:15px;color:#B89898}
+.rh h2{font-size:24px;font-weight:800;color:#E5464A;margin-bottom:4px}
+.rh .sm{font-size:14px;color:#7C5A5A}
+.rc{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(200,60,60,.06)}
+.rc h4{font-size:16px;color:#E5464A;margin-bottom:8px}
+.tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:12px;margin-right:4px;margin-bottom:4px;background:#FFF5F5;color:#E5464A}
+.dt{font-size:14px;color:#5A3C3C;line-height:1.8}
+.rc li{margin-left:16px;padding:2px 0;font-size:14px;color:#5A3C3C;line-height:1.9}
+.tm{background:#FFFBFB;border:1px dashed #E8C0C0;border-radius:12px;padding:16px 20px;margin:16px 0 20px}
+.tm p{font-size:14px;color:#5A3C3C;line-height:1.8}
+.cp{display:inline-block;margin-top:10px;padding:8px 20px;font-size:13px;background:#F5EDED;border:none;border-radius:8px;cursor:pointer;color:#7C5A5A}
+.surprise{background:linear-gradient(135deg,#FFF8F8,#FFEFEF);border:2px solid #F5A0A0;border-radius:16px;padding:24px 20px;margin-bottom:16px;text-align:center}
+.surprise h3{font-size:17px;color:#E5464A;margin-bottom:10px}
+.surprise ul{text-align:left;font-size:14px;color:#5A3C3C;line-height:2.2;margin-bottom:12px;padding:0 12px;list-style:none}
+.surprise ul li::before{content:"🎁 ";font-size:12px}
+.footer{text-align:center;font-size:12px;color:#B89898;padding:16px;line-height:1.8}
+.rdr{text-align:center;padding:12px 0}
+.rdr canvas{max-width:100%;height:auto}
+@media(max-width:400px){.hero h1{font-size:22px}.qt{font-size:15px}.opt{font-size:14px;padding:12px 14px}.btn{font-size:16px;padding:14px 20px}.rh h2{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="brand">💬 亲子沟通测试</div>
+<div class="c">
+
+<div class="pg on" id="p0">
+<div class="hero"><div class="em">💬</div><h1>你是哪种<br>类型的家长？</h1><p class="sub">10道题 · 3分钟 · 看见自己的教养方式</p></div>
+<div class="card"><h3>🔍 你会知道</h3><p>为什么说了三遍孩子当没听见？<br>你跟另一半教育冲突的根源在哪？<br>怎么从"吼"变成"好好说"？<br>你家孩子最需要从你身上得到什么？</p></div>
+<div class="card"><h3>📖 有科学依据的</h3><p>Baumrind 教养方式理论，发展心理学经典研究 50+ 年。不是性格测试，是教养模式分析。</p></div>
+<button class="btn btn-go" onclick="start()">开始测试（免费）</button>
+<p class="trust">选你真实的反应，不是"应该"的反应</p>
+<div class="footer">Baumrind Parenting Styles (1967) · 50年全球验证 · 好家长不是天生的，是学出来的</div>
+</div>
+
+<div class="pg" id="p1">
+<div class="qh"><div class="pb"><div class="pf" id="pf"></div></div><div class="pt" id="pt">1/10</div></div>
+<p class="qr">选你最真实的反应，不是"正确"答案 ✨</p>
+<div id="qa"></div>
+<div class="btn-row">
+<button class="btn btn-pv" id="bp" onclick="prev()">← 上一题</button>
+<button class="btn btn-nx" id="bn" onclick="next()">下一题 →</button>
+</div>
+</div>
+
+<div class="pg" id="p2">
+<div class="rh"><p class="hi">了解你自己 💡</p><h2 id="rt"></h2><p class="sm" id="rs"></p></div>
+<div class="rdr"><canvas id="cv" width="300" height="300"></canvas></div>
+<div id="rx"></div>
+<div class="surprise">
+<h3>🎁 额外送你实用沟通工具</h3>
+<p style="font-size:14px;color:#7C5A5A;margin-bottom:10px">除了测试结果，还为你准备了：</p>
+<ul><li>5 个高频亲子冲突场景的沟通话术</li><li>30天不发火挑战表</li><li>家庭会议模板（让孩子也参与进来）</li></ul>
+<a href="parenting-bonus.html" style="display:inline-block;margin:8px 0;padding:12px 24px;background:#F5A0A0;color:white;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none">📖 点我直接领取</a><p style="font-size:12px;color:#A88080;margin-top:8px">想要一对一的教养咨询？加微信 ww1987870012 备注"亲子沟通" 👩‍🏫</p>
+</div>
+<button class="btn" style="background:white;color:#E5464A;border:2px solid #E8C0C0" onclick="location.reload()">重新测试</button>
+<div class="footer">Baumrind Parenting Styles · 50年验证 · 看见自己就是改变的开始</div>
+</div>
+
+</div>
+
+<script>
+const Q=[
+{id:0,d:"DM",q:"孩子不想写作业时，你的第一反应是？",a:"坐下来说——来，我们一起看看今天有什么任务",b:"必须写，不写完别想玩"},
+{id:1,d:"DM",q:"孩子跟你顶嘴说'我不听你的'",a:"问——你为什么这样说？我想听听你的想法",b:"回——我是你妈/你爸，你必须听"},
+{id:2,d:"DM",q:"孩子想要一个新玩具，已经有类似的",a:"理解他的想法，一起商量买玩具的规则",b:"直接拒绝——不行，买那么多干嘛"},
+{id:3,d:"DM",q:"孩子做事磨蹭，说了几次都没用",a:"问——需要我帮你一起拆一下任务吗",b:"直接下最后通牒——再给你5分钟"},
+{id:4,d:"DM",q:"设定规矩时，你更像哪种？",a:"规矩是底线，但要讲清楚为什么有这条",b:"定好的规矩就是规矩，不需要解释"},
+{id:5,d:"RS",q:"孩子摔倒了在哭，你通常会？",a:"抱住他——摔疼了吧，我在",b:"说——不疼不疼，快起来"},
+{id:6,d:"RS",q:"孩子跟你说在学校被欺负了",a:"先听他说完，理解他的感受，一起想办法",b:"明天我找老师去！谁欺负你了"},
+{id:7,d:"RS",q:"孩子做了一个小手工送你，虽然歪歪扭扭",a:"好喜欢！你用了心了，来跟我说说你怎么做的",b:"谢谢宝贝（放一边继续忙自己的）"},
+{id:8,d:"RS",q:"孩子考试没考好，回家不敢跟你说",a:"没关系，我们看看错在哪——错的题是最好的老师",b:"怎么又没考好？是不是没好好复习"},
+{id:9,d:"RS",q:"孩子害怕做一件事（如上台表演）",a:"我小时候也怕，我们一起准备，我陪你练",b:"有什么好怕的，别人都不怕"}
+];
+
+const DI={
+"DM":{l:"要求性",d:"设定规矩和期待的程度",L:"高要求",R:"低要求",
+ LD:"你对孩子有清楚的期待和规矩，也愿意坚持底线。",
+ RD:"你比较随和，不太给孩子设硬性规矩，给他空间。"},
+"RS":{l:"回应性",d:"情感回应和接纳的程度",L:"高回应",R:"低回应",
+ LD:"你很会回应孩子的情绪，他愿意跟你分享内心世界。",
+ RD:"你可能不太擅长表达情感，或觉得'孩子自己会长大'。"},
+};
+
+const M={
+"高要求":{s:["保持底线清晰，同时多解释'为什么有这条规矩'","用'规则+选择'——规矩你定，范围内让他选"],
+ p:["规矩不在多在执行——定3条核心规则比30条有效","解释为什么比命令有效——孩子理解了才会内化"]},
+"低要求":{s:["设定2-3条核心家庭规则并坚持执行","用'预告+过渡'——提前说5分钟后要做什么"],
+ p:["适当设限是安全感——孩子需要知道边界在哪","从一件事开始坚持——哪怕只是每天同一时间写作业"]},
+"高回应":{s:["继续保持情绪接纳，同时帮孩子把感受变成行动","用'共情+引导'——我知道你生气，然后呢"],
+ p:["你已经做得很好了——孩子有你真幸运","注意不要过度共情变成溺爱——有回应也要有边界"]},
+"低回应":{s:["每天花5分钟只倾听不说教不纠正","用'反射式倾听'——重复他的话让他感受到被听见"],
+ p:["孩子不是不需要你——是不会表达需要","先连接再纠正——情感连接没建立，说什么都白搭"]},
+};
+
+let cur=0,ans=new Array(10).fill(null);
+function pg(n){document.querySelectorAll(".pg").forEach(e=>e.classList.remove("on"));document.getElementById("p"+n).classList.add("on");window.scrollTo({top:0,behavior:"smooth"})}
+function start(){cur=0;ans=new Array(10).fill(null);pg(1);rq();un()}
+var autoTimer=null;
+function rq(){
+let q=Q[cur],d=DI[q.d];
+document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#B89898;margin-left:6px">'+d.l+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" data-v="a"><div class="rd"></div><span>'+q.a+'</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" data-v="b"><div class="rd"></div><span>'+q.b+'</span></div></div></div>';
+let pct=Math.round((cur+1)/10*100);
+document.getElementById("pf").style.width=pct+"%";document.getElementById("pt").textContent=(cur+1)+"/10";
+document.querySelectorAll("#qa .opt").forEach(function(el){el.onclick=function(){var v=this.getAttribute("data-v");ans[cur]=v;if(autoTimer)clearTimeout(autoTimer);rq();if(cur<9){autoTimer=setTimeout(function(){cur++;rq();un()},400)}}});
+}
+function next(){if(ans[cur]===null){document.querySelectorAll(".opt").forEach(o=>{o.style.borderColor="#F0A0A0";setTimeout(()=>o.style.borderColor="#F0D8D8",600)});return}if(autoTimer)clearTimeout(autoTimer);if(cur<9){cur++;rq();un()}else{show()}}
+function prev(){if(cur>0){cur--;rq();un()}}
+function un(){document.getElementById("bp").style.visibility=cur===0?"hidden":"visible";document.getElementById("bn").textContent=cur===9?"看结果 →":"下一题 →"}
+function score(){
+let r={};["DM","RS"].forEach(dm=>{let s=0;for(let i=0;i<10;i++){if(Q[i].d===dm){if(ans[i]==="a")s++;else if(ans[i]==="b")s--}}let ab=Math.abs(s),nfo=DI[dm],lb,st;if(s>0){lb=nfo.L;st=ab>=3?"明显":"轻微"}else if(s<0){lb=nfo.R;st=ab>=3?"明显":"轻微"}else{lb="均衡";st="均衡"}r[dm]={score:s,label:lb,strength:st,abs:ab}});
+return r;
+}
+function radar(r){
+let cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+let sz=Math.min(cv.parentElement.clientWidth-16,280);cv.width=sz;cv.height=sz;
+let cx=sz/2,cy=sz/2,ra=sz*0.32;
+let ds=["DM","RS"],lbs=["要求性","回应性"];
+let vs=ds.map(d=>Math.max(0.15,Math.abs(r[d].score)/5));
+ctx.clearRect(0,0,sz,sz);
+for(let i=1;i<=5;i++){ctx.beginPath();ctx.arc(cx,cy,ra*i/5,0,Math.PI*2);ctx.strokeStyle="#F0D8D8";ctx.lineWidth=1;ctx.stroke()}
+for(let i=0;i<2;i++){let a=-Math.PI/2+(Math.PI*2/2)*i;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+ra*Math.cos(a),cy+ra*Math.sin(a));ctx.strokeStyle="#E8C0C0";ctx.stroke()}
+ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);ctx.fillStyle="#D0B0B0";ctx.fill();
+ctx.beginPath();for(let i=0;i<2;i++){let a=-Math.PI/2+(Math.PI*2/2)*i,v=vs[i],px=cx+ra*v*Math.cos(a),py=cy+ra*v*Math.sin(a);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}
+ctx.closePath();ctx.fillStyle="rgba(240,96,96,0.25)";ctx.fill();ctx.strokeStyle="#F06060";ctx.lineWidth=2.5;ctx.stroke();
+for(let i=0;i<2;i++){let a=-Math.PI/2+(Math.PI*2/2)*i,v=vs[i],px=cx+ra*v*Math.cos(a),py=cy+ra*v*Math.sin(a);ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle="#F06060";ctx.fill();ctx.strokeStyle="white";ctx.lineWidth=2;ctx.stroke()}
+ctx.fillStyle="#5A3C3C";ctx.font="bold 12px PingFang SC,Microsoft YaHei,sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+for(let i=0;i<2;i++){let a=-Math.PI/2+(Math.PI*2/2)*i,lx=cx+(ra+30)*Math.cos(a),ly=cy+(ra+30)*Math.sin(a);ctx.fillText(lbs[i],lx,ly)}
+}
+function show(){
+let r=score(),dm=r["DM"],rs=r["RS"],pn="权威型",names={"权威型":"有规矩也有爱——最好的平衡","专制型":"你可能太严厉了","宽容型":"给了很多爱但少了点规矩","忽视型":"可能需要多关注孩子的情感需求"};
+if(dm.label==="高要求"&&rs.label==="高回应")pn="权威型";
+else if(dm.label==="高要求"&&(rs.label==="低回应"||rs.label==="均衡"))pn="专制型";
+else if((dm.label==="低要求"||dm.label==="均衡")&&rs.label==="高回应")pn="宽容型";
+else if(dm.label==="低要求"&&rs.label==="低回应")pn="忽视型";
+document.getElementById("rt").textContent="你是「"+pn+"」家长";
+document.getElementById("rs").textContent=names[pn]||"";pg(2);setTimeout(()=>radar(r),150);
+
+let h="";["DM","RS"].forEach(dm=>{let rr=r[dm],nfo=DI[dm],desc=rr.label===nfo.L?nfo.LD:rr.label===nfo.R?nfo.RD:"比较平衡";h+='<div class="rc"><h4>'+nfo.l+' <span style="font-size:12px;color:#B89898;font-weight:400">— '+nfo.d+'</span></h4><span class="tag">'+rr.label+'</span><span class="tag">'+rr.strength+'</span><p class="dt">'+desc+'</p></div>'});
+
+let sts=[];if(dm.label!=="均衡")sts.push(dm);if(rs.label!=="均衡")sts.push(rs);
+if(sts.length>0){h+='<h4 style="font-size:16px;color:#4A2D2D;margin:16px 0 8px">📝 调整方向</h4>';sts.forEach(s=>{let m=M[s.label];if(!m)return;h+='<div class="rc"><h4>'+s.label+' · 怎么做</h4><ul>'+m.s.map(t=>"<li>"+t+"</li>").join("")+"</ul></div>"});let pt=new Set();sts.forEach(s=>{let m=M[s.label];if(m)m.p.forEach(p=>pt.add(p))});h+='<h4 style="font-size:16px;color:#4A2D2D;margin:16px 0 8px">💡 关键提醒</h4><div class="rc"><ul>'+[...pt].slice(0,5).map(t=>"<li>"+t+"</li>").join("")+"</ul></div>"}
+
+h+='<h4 style="font-size:16px;color:#4A2D2D;margin:16px 0 8px">📩 跟另一半分享</h4><div class="tm"><p id="tt">我做了一个亲子沟通测试，结果我是「'+pn+'」型家长。我们俩一起测一下？各测各的，对比着看——不是为了互相指责，是为了找到一起配合的方式。</p><button class="cp" onclick="cpy()">📋 一键复制发给另一半</button></div>';
+document.getElementById("rx").innerHTML=h;
+}
+function cpy(){let t=document.getElementById("tt").textContent;if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>{let b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(()=>b.textContent="📋 一键复制发给另一半",2000)})}else{let ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.left="-9999px";document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);let b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(()=>b.textContent="📋 一键复制发给另一半",2000)}}
+window.addEventListener("resize",()=>{if(document.getElementById("p2").classList.contains("on")){radar(score())}});
+</script>
+</body>
+</html>

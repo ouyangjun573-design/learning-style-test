@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>专注力评估 | 了解你的孩子</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#F5F0FF,#FBF8FF 30%,#F0EBFF);color:#3A2D4A;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:600px;margin:0 auto;padding:20px 20px 40px}
+.pg{display:none}.pg.on{display:block;animation:in .4s ease}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.brand{text-align:center;padding:12px 0 0;font-size:12px;color:#A090B8;letter-spacing:1px}
+.hero{text-align:center;padding:28px 0 20px}
+.hero .em{font-size:44px;margin-bottom:8px}
+.hero h1{font-size:26px;font-weight:800;color:#7C3AED;line-height:1.4;margin-bottom:8px}
+.hero .sub{font-size:15px;color:#9080A8}
+.card{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(100,40,200,.06)}
+.card h3{font-size:16px;color:#7C3AED;margin-bottom:8px}
+.card p,.card li{font-size:14px;color:#6A5A7C;line-height:1.7}
+.trust{text-align:center;padding:8px 0 20px;font-size:12px;color:#A898B8}
+.btn{display:block;width:100%;padding:16px 24px;border:none;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;-webkit-tap-highlight-color:transparent;letter-spacing:.5px}
+.btn:active{transform:scale(.98)}
+.btn-go{background:linear-gradient(135deg,#8B5CF6,#7C3AED);color:white;box-shadow:0 4px 20px rgba(120,60,220,.25)}
+.qh{padding:16px 0 8px}
+.pb{height:6px;background:#E8E0F0;border-radius:3px;overflow:hidden;margin-bottom:8px}
+.pf{height:100%;background:linear-gradient(90deg,#8B5CF6,#7C3AED);border-radius:3px;transition:width .3s ease;width:10%}
+.pt{text-align:right;font-size:13px;color:#A898B8}
+.qr{text-align:center;font-size:14px;color:#9080A8;padding:0 0 12px}
+.qc{background:white;border-radius:16px;padding:18px 18px 4px;box-shadow:0 2px 16px rgba(100,40,200,.06);margin-bottom:14px}
+.qn{display:inline-block;background:#F0E8FF;color:#7C3AED;font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.qt{font-size:17px;font-weight:600;color:#3A2D4A;margin-bottom:12px;line-height:1.5}
+.qo{display:flex;flex-direction:column;gap:8px;padding-bottom:14px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border:2px solid #E8E0F0;border-radius:12px;cursor:pointer;transition:all .2s;background:#FBFAFF;font-size:15px;color:#5A4A6C;-webkit-tap-highlight-color:transparent;user-select:none}
+.opt:hover,.opt.sel{border-color:#8B5CF6;background:#F5F0FF}
+.opt .rd{width:20px;height:20px;border-radius:50%;border:2px solid #D0C0E8;flex-shrink:0}
+.opt.sel .rd{border-color:#8B5CF6;background:#8B5CF6}
+.opt.sel .rd::after{content:"";display:block;width:8px;height:8px;border-radius:50%;background:white;margin:4px}
+.btn-row{display:flex;gap:12px;margin:0 0 20px}
+.btn-row .btn{flex:1;font-size:15px;padding:14px}
+.btn-pv{background:#F0EDF5;color:#6A5A7C}
+.btn-nx{background:linear-gradient(135deg,#8B5CF6,#7C3AED);color:white}
+.rh{text-align:center;padding:20px 0 8px}
+.rh .hi{font-size:15px;color:#A898B8}
+.rh h2{font-size:24px;font-weight:800;color:#7C3AED;margin-bottom:4px}
+.rh .sm{font-size:14px;color:#6A5A7C}
+.rc{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(100,40,200,.06)}
+.rc h4{font-size:16px;color:#7C3AED;margin-bottom:8px}
+.rc .tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:12px;margin-right:4px;margin-bottom:4px;background:#F5F0FF;color:#7C3AED}
+.rc .dt{font-size:14px;color:#5A4A6C;line-height:1.8}
+.rc li{margin-left:16px;padding:2px 0;font-size:14px;color:#5A4A6C;line-height:1.9}
+.tm{background:#FBFAFF;border:1px dashed #C8B8E8;border-radius:12px;padding:16px 20px;margin:16px 0 20px}
+.tm p{font-size:14px;color:#5A4A6C;line-height:1.8}
+.cp{display:inline-block;margin-top:10px;padding:8px 20px;font-size:13px;background:#F0EDF5;border:none;border-radius:8px;cursor:pointer;color:#6A5A7C}
+.surprise{background:linear-gradient(135deg,#F8F5FF,#EFE8FF);border:2px solid #A78BFA;border-radius:16px;padding:24px 20px;margin-bottom:16px;text-align:center}
+.surprise h3{font-size:17px;color:#7C3AED;margin-bottom:10px}
+.surprise ul{text-align:left;font-size:14px;color:#5A4A6C;line-height:2.2;margin-bottom:12px;padding:0 12px;list-style:none}
+.surprise ul li::before{content:"🎁 ";font-size:12px}
+.footer{text-align:center;font-size:12px;color:#A898B8;padding:16px;line-height:1.8}
+.rdr{text-align:center;padding:12px 0}
+.rdr canvas{max-width:100%;height:auto}
+@media(max-width:400px){.hero h1{font-size:22px}.qt{font-size:15px}.opt{font-size:14px;padding:12px 14px}.btn{font-size:16px;padding:14px 20px}.rh h2{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="brand">🧠 专注力评估</div>
+<div class="c">
+
+<div class="pg on" id="p0">
+<div class="hero">
+<div class="em">🎯</div>
+<h1>你家孩子<br>是真的不专注吗？</h1>
+<p class="sub">10道题 · 3分钟 · 科学区分专注类型</p>
+</div>
+<div class="card">
+<h3>🔍 你会知道</h3>
+<p>是注意力分散还是冲动控制问题？<br>为什么盯着他反而更磨蹭？<br>什么方法能让他自己坐下来专心？<br>怎么跟老师说，避免"多动症"标签？</p>
+</div>
+<div class="card">
+<h3>📖 有科学依据的</h3>
+<p>Barkley 儿童专注力量表，全球临床使用 30+ 年。不是随便猜，是科学评估。</p>
+</div>
+<button class="btn btn-go" onclick="start()">开始测试（免费）</button>
+<p class="trust">选最符合孩子日常表现的选项 · 非临床诊断</p>
+<div class="footer">Barkley ADHD Rating Scale · 全球30年临床验证 · 专注力不是态度问题是能力问题</div>
+</div>
+
+<div class="pg" id="p1">
+<div class="qh"><div class="pb"><div class="pf" id="pf"></div></div><div class="pt" id="pt">1/10</div></div>
+<p class="qr">根据孩子近半年的日常表现来选 ✨</p>
+<div id="qa"></div>
+<div class="btn-row">
+<button class="btn btn-pv" id="bp" onclick="prev()">← 上一题</button>
+<button class="btn btn-nx" id="bn" onclick="next()">下一题 →</button>
+</div>
+</div>
+
+<div class="pg" id="p2">
+<div class="rh">
+<p class="hi">了解你的孩子 💡</p>
+<h2 id="rt"></h2>
+<p class="sm" id="rs"></p>
+</div>
+<div class="rdr"><canvas id="cv" width="300" height="300"></canvas></div>
+<div id="rx"></div>
+<div class="surprise">
+<h3>🎁 额外送你实用工具</h3>
+<p style="font-size:14px;color:#6A5A7C;margin-bottom:10px">除了评估结果，还为你准备了：</p>
+<ul>
+<li>5 个在家就能做的专注力训练游戏</li>
+<li>专注时间记录表（找到孩子的黄金专注时段）</li>
+<li>给老师的沟通模板（避免"多动症"标签）</li>
+</ul>
+<a href="focus-bonus.html" style="display:inline-block;margin:8px 0;padding:12px 24px;background:#A78BFA;color:white;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none">📖 点我直接领取</a><p style="font-size:12px;color:#9080A8;margin-top:8px">想要专属专注力训练方案？加微信 ww1987870012 备注"专注力" 👩‍🏫</p>
+</div>
+<button class="btn" style="background:white;color:#7C3AED;border:2px solid #C8B8E8" onclick="location.reload()">重新测试</button>
+<div class="footer">Barkley ADHD Rating Scale · 30年临床验证 · 专注力可以训练</div>
+</div>
+
+</div>
+
+<script>
+const Q=[
+{id:0,d:"ATT",q:"做作业或任务时，经常犯粗心错误"},
+{id:1,d:"ATT",q:"学习或玩耍时，很难持续保持注意力"},
+{id:2,d:"ATT",q:"跟他说话时，他好像没在听（心不在焉）"},
+{id:3,d:"ATT",q:"经常不按指令做完事情（不是故意反抗或没听懂）"},
+{id:4,d:"ATT",q:"经常丢三落四、忘记要做的事"},
+{id:5,d:"IMP",q:"在座位上很难安静坐着，总是扭来扭去"},
+{id:6,d:"IMP",q:"不该动的时候经常跑来跑去或爬上爬下"},
+{id:7,d:"IMP",q:"很难安安静静地玩或做一件事"},
+{id:8,d:"IMP",q:"话特别多，像装了马达一样停不下来"},
+{id:9,d:"IMP",q:"问题没问完就脱口而出答案，很难等待"}
+];
+
+const DI={
+"ATT":{l:"注意力维持",d:"能否持续专注",L:"可维持型",R:"易分散型",
+ LD:"大多数时候能专心完成任务，偶尔分心但能自己拉回来。",
+ RD:"容易被外界干扰打断，做需要持续注意的事情时比较吃力。"},
+"IMP":{l:"冲动控制",d:"能否控制行为",L:"自控型",R:"易冲动型",
+ LD:"能管住自己，做事情前会想一想再行动。",
+ RD:"想到就做，很难先想再做。手脚停不下来，话也多。"},
+};
+
+const M={
+"可维持型":{s:["保持现有节奏，每天固定时间做需要专注的任务","用番茄法逐步延长专注时长（从15分钟开始）","完成任务后给予即时正向反馈","一次只做一件事，减少多任务切换"],
+ p:["继续提供安静有序的学习环境","用计时器帮他看见自己的进步","不说「认真点」——说「你看你坚持了15分钟」"]},
+"易分散型":{s:["学习前清理桌面只留当前任务所需物品","用可视化计时器让他看见时间在流逝","把大任务拆成10-15分钟的小块","用身体锚定法——手里捏个软球反而能专心"],
+ p:["不要在他分心时吼——轻轻碰他肩膀拉回来","学习区远离窗户电视和走动的人","帮他找到消耗体力的方式——运动后专注力更好"]},
+"自控型":{s:["继续保持规则和边界清晰的环境","用暂停法——想说想做之前先数5秒","用角色扮演练习等待和轮流"],
+ p:["不用管太多——他自己节奏不错","如果偶尔冲动——提醒比惩罚有效","肯定他的自控力——「我刚才看到你忍住了」"]},
+"易冲动型":{s:["用暂停角——不是惩罚是冷静空间","教他「停·想·做」三步法——停一下想一想再做","多给身体活动机会释放多余能量","用闯关游戏的方式练习等待——每等1分钟积1分"],
+ p:["不公开批评他的冲动行为——私下提醒","提前预告——「5分钟后我们就要……」","运动是最好出口——每天保证户外活动时间"]},
+};
+
+let cur=0,ans=new Array(10).fill(null);
+function pg(n){document.querySelectorAll(".pg").forEach(e=>e.classList.remove("on"));document.getElementById("p"+n).classList.add("on");window.scrollTo({top:0,behavior:"smooth"})}
+function start(){cur=0;ans=new Array(10).fill(null);pg(1);rq();un()}
+var autoTimer=null;
+function rq(){
+let q=Q[cur],d=DI[q.d];
+document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#A898B8;margin-left:6px">'+d.l+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" data-v="a"><div class="rd"></div><span>经常这样（是）</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" data-v="b"><div class="rd"></div><span>很少这样（否）</span></div></div></div>';
+let pct=Math.round((cur+1)/10*100);
+document.getElementById("pf").style.width=pct+"%";
+document.getElementById("pt").textContent=(cur+1)+"/10";
+document.querySelectorAll("#qa .opt").forEach(function(el){el.onclick=function(){var v=this.getAttribute("data-v");ans[cur]=v;if(autoTimer)clearTimeout(autoTimer);rq();if(cur<9){autoTimer=setTimeout(function(){cur++;rq();un()},400)}}});
+}
+function next(){
+if(ans[cur]===null){document.querySelectorAll(".opt").forEach(o=>{o.style.borderColor="#C0A0F0";setTimeout(()=>o.style.borderColor="#E8E0F0",600)});return}
+if(autoTimer)clearTimeout(autoTimer);if(cur<9){cur++;rq();un()}else{show()}
+}
+function prev(){if(cur>0){cur--;rq();un()}}
+function un(){
+document.getElementById("bp").style.visibility=cur===0?"hidden":"visible";
+document.getElementById("bn").textContent=cur===9?"看结果 →":"下一题 →";
+}
+function score(){
+let r={},ds=["ATT","IMP"];
+ds.forEach(dm=>{let s=0;for(let i=0;i<10;i++){if(Q[i].d===dm){if(ans[i]==="a")s++;else if(ans[i]==="b")s--}}let ab=Math.abs(s);let nfo=DI[dm],lb,st;if(s>0){lb=nfo.L;st=ab>=3?"明显":"轻微"}else if(s<0){lb=nfo.R;st=ab>=3?"明显":"轻微"}else{lb="均衡";st="均衡"}r[dm]={score:s,label:lb,strength:st,abs:ab}});
+return r;
+}
+function radar(r){
+let cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+let sz=Math.min(cv.parentElement.clientWidth-16,280);
+cv.width=sz;cv.height=sz;
+let cx=sz/2,cy=sz/2,ra=sz*0.32;
+let ds=["ATT","IMP"],lbs=["注意力维持","冲动控制"];
+let vs=ds.map(d=>Math.max(0.15,Math.abs(r[d].score)/5));
+ctx.clearRect(0,0,sz,sz);
+for(let i=1;i<=5;i++){ctx.beginPath();ctx.arc(cx,cy,ra*i/5,0,Math.PI*2);ctx.strokeStyle="#E8E0F0";ctx.lineWidth=1;ctx.stroke()}
+for(let i=0;i<2;i++){let a=-Math.PI/2+(Math.PI*2/2)*i;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+ra*Math.cos(a),cy+ra*Math.sin(a));ctx.strokeStyle="#D8C8E8";ctx.stroke()}
+ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);ctx.fillStyle="#C0B0D8";ctx.fill();
+ctx.beginPath();
+for(let i=0;i<2;i++){let a=-Math.PI/2+(Math.PI*2/2)*i,v=vs[i],px=cx+ra*v*Math.cos(a),py=cy+ra*v*Math.sin(a);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}
+ctx.closePath();ctx.fillStyle="rgba(139,92,246,0.25)";ctx.fill();ctx.strokeStyle="#8B5CF6";ctx.lineWidth=2.5;ctx.stroke();
+for(let i=0;i<2;i++){let a=-Math.PI/2+(Math.PI*2/2)*i,v=vs[i],px=cx+ra*v*Math.cos(a),py=cy+ra*v*Math.sin(a);ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle="#8B5CF6";ctx.fill();ctx.strokeStyle="white";ctx.lineWidth=2;ctx.stroke()}
+ctx.fillStyle="#6A5A7C";ctx.font="bold 12px PingFang SC,Microsoft YaHei,sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+for(let i=0;i<2;i++){let a=-Math.PI/2+(Math.PI*2/2)*i,lx=cx+(ra+30)*Math.cos(a),ly=cy+(ra+30)*Math.sin(a);ctx.fillText(lbs[i],lx,ly)}
+}
+function show(){
+let r=score(),ds=["ATT","IMP"];
+let att=r["ATT"],imp=r["IMP"],pn="";
+if(att.label==="可维持型"&&imp.label==="自控型")pn="专注稳定型";
+else if(att.label==="易分散型"&&imp.label==="自控型")pn="注意力分散型";
+else if(att.label==="可维持型"&&imp.label==="易冲动型")pn="冲动多动型";
+else if(att.label==="易分散型"&&imp.label==="易冲动型")pn="混合型";
+else pn="专注稳定型";
+document.getElementById("rt").textContent="是「"+pn+"」";
+document.getElementById("rs").textContent="注意力维持："+att.label+" | 冲动控制："+imp.label;
+pg(2);setTimeout(()=>radar(r),150);
+
+let h="";
+ds.forEach(dm=>{
+let rr=r[dm],nfo=DI[dm];
+let desc=rr.label===nfo.L?nfo.LD:rr.label===nfo.R?nfo.RD:"两边都能适应，比较灵活";
+h+='<div class="rc"><h4>'+nfo.l+' <span style="font-size:12px;color:#A898B8;font-weight:400">— '+nfo.d+'</span></h4><span class="tag">'+rr.label+'</span><span class="tag">'+rr.strength+'</span><p class="dt">'+desc+'</p></div>';
+});
+
+let sts=[];
+if(att.label!=="均衡")sts.push(att);
+if(imp.label!=="均衡")sts.push(imp);
+
+if(sts.length>0){
+h+='<h4 style="font-size:16px;color:#3A2D4A;margin:16px 0 8px">📝 提升专注力的方法</h4>';
+sts.forEach(s=>{
+let m=M[s.label];if(!m)return;
+h+='<div class="rc"><h4>'+s.label+' · 训练方法</h4><ul>'+m.s.map(t=>"<li>"+t+"</li>").join("")+"</ul></div>";
+});
+
+let pt=new Set();sts.forEach(s=>{let m=M[s.label];if(m)m.p.forEach(p=>pt.add(p))});
+let ta=[...pt].slice(0,5);
+h+='<h4 style="font-size:16px;color:#3A2D4A;margin:16px 0 8px">👩‍👦 家长可以这样做</h4><div class="rc"><ul>'+ta.map(t=>"<li>"+t+"</li>").join("")+"</ul></div>";
+}
+
+let tm="老师您好，我是孩子的家长。最近带孩子做了专注力评估，他在「注意力维持」方面表现为"+att.label+"，在「冲动控制」方面表现为"+imp.label+"。想跟您了解一下他在课堂上的状态，看看我们在家怎么配合。谢谢您！";
+h+='<h4 style="font-size:16px;color:#3A2D4A;margin:16px 0 8px">📩 跟老师可以这样说</h4><div class="tm"><p id="tt">'+tm+'</p><button class="cp" onclick="cpy()">📋 一键复制发给老师</button></div>';
+
+document.getElementById("rx").innerHTML=h;
+}
+function cpy(){
+let t=document.getElementById("tt").textContent;
+if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>{let b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(()=>b.textContent="📋 一键复制发给老师",2000)})}else{
+let ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.left="-9999px";document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);
+let b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(()=>b.textContent="📋 一键复制发给老师",2000)}
+}
+window.addEventListener("resize",()=>{if(document.getElementById("p2").classList.contains("on")){radar(score())}});
+</script>
+</body>
+</html>

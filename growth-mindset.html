@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>成长型思维 | 了解你的孩子</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#FFF8F0,#FFFDF8 30%,#FFF5EB);color:#4A3520;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:600px;margin:0 auto;padding:20px 20px 40px}
+.pg{display:none}.pg.on{display:block;animation:in .4s ease}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.brand{text-align:center;padding:12px 0 0;font-size:12px;color:#B89870;letter-spacing:1px}
+.hero{text-align:center;padding:28px 0 20px}
+.hero .em{font-size:44px;margin-bottom:8px}
+.hero h1{font-size:26px;font-weight:800;color:#D97706;line-height:1.4;margin-bottom:8px}
+.hero .sub{font-size:15px;color:#A89070}
+.card{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(180,100,20,.06)}
+.card h3{font-size:16px;color:#D97706;margin-bottom:8px}
+.card p,.card li{font-size:14px;color:#7C6A4A;line-height:1.7}
+.trust{text-align:center;padding:8px 0 20px;font-size:12px;color:#B8A080}
+.btn{display:block;width:100%;padding:16px 24px;border:none;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;-webkit-tap-highlight-color:transparent;letter-spacing:.5px}
+.btn:active{transform:scale(.98)}
+.btn-go{background:linear-gradient(135deg,#F59E0B,#D97706);color:white;box-shadow:0 4px 20px rgba(200,130,20,.25)}
+.qh{padding:16px 0 8px}
+.pb{height:6px;background:#F0E0C8;border-radius:3px;overflow:hidden;margin-bottom:8px}
+.pf{height:100%;background:linear-gradient(90deg,#F59E0B,#D97706);border-radius:3px;transition:width .3s ease;width:12.5%}
+.pt{text-align:right;font-size:13px;color:#B8A080}
+.qr{text-align:center;font-size:14px;color:#A89070;padding:0 0 12px}
+.qc{background:white;border-radius:16px;padding:18px 18px 4px;box-shadow:0 2px 16px rgba(180,100,20,.06);margin-bottom:14px}
+.qn{display:inline-block;background:#FFF0D8;color:#D97706;font-size:13px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.qt{font-size:17px;font-weight:600;color:#4A3520;margin-bottom:12px;line-height:1.5}
+.qo{display:flex;flex-direction:column;gap:8px;padding-bottom:14px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border:2px solid #F0E0C8;border-radius:12px;cursor:pointer;transition:all .2s;background:#FFFDF8;font-size:15px;color:#5A4A30;-webkit-tap-highlight-color:transparent;user-select:none}
+.opt:hover,.opt.sel{border-color:#F59E0B;background:#FFF8F0}
+.rd{width:20px;height:20px;border-radius:50%;border:2px solid #E8D0A0;flex-shrink:0}
+.sel .rd{border-color:#F59E0B;background:#F59E0B}
+.sel .rd::after{content:"";display:block;width:8px;height:8px;border-radius:50%;background:white;margin:4px}
+.btn-row{display:flex;gap:12px;margin:0 0 20px}
+.btn-row .btn{flex:1;font-size:15px;padding:14px}
+.btn-pv{background:#F5EDE0;color:#7C6A4A}
+.btn-nx{background:linear-gradient(135deg,#F59E0B,#D97706);color:white}
+.rh{text-align:center;padding:20px 0 8px}
+.rh .hi{font-size:15px;color:#B8A080}
+.rh h2{font-size:24px;font-weight:800;color:#D97706;margin-bottom:4px}
+.rh .sm{font-size:14px;color:#7C6A4A}
+.rc{background:white;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(180,100,20,.06)}
+.rc h4{font-size:16px;color:#D97706;margin-bottom:8px}
+.tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:12px;margin-right:4px;margin-bottom:4px;background:#FFF8F0;color:#D97706}
+.dt{font-size:14px;color:#5A4A30;line-height:1.8}
+.rc li{margin-left:16px;padding:2px 0;font-size:14px;color:#5A4A30;line-height:1.9}
+.gauge-wrap{text-align:center;padding:10px 0}
+.gauge{position:relative;width:200px;height:100px;margin:0 auto;overflow:hidden}
+.gauge-bg{width:200px;height:100px;border-radius:100px 100px 0 0;background:linear-gradient(90deg,#EF4444,#F59E0B,#FBBF24,#34D399,#10B981)}
+.gauge-mask{position:absolute;bottom:0;left:10px;width:180px;height:90px;background:linear-gradient(180deg,#FFF8F0,#FFFDF8 30%,#FFF5EB);border-radius:90px 90px 0 0}
+.gauge-needle{position:absolute;bottom:0;left:50%;width:3px;height:85px;background:#4A3520;transform-origin:bottom center;border-radius:2px;transition:transform .8s ease}
+.gauge-score{text-align:center;font-size:36px;font-weight:800;color:#D97706;margin-top:-10px}
+.tm{background:#FFFDF8;border:1px dashed #E8D0A0;border-radius:12px;padding:16px 20px;margin:16px 0 20px}
+.tm p{font-size:14px;color:#5A4A30;line-height:1.8}
+.cp{display:inline-block;margin-top:10px;padding:8px 20px;font-size:13px;background:#F5EDE0;border:none;border-radius:8px;cursor:pointer;color:#7C6A4A}
+.surprise{background:linear-gradient(135deg,#FFFDF8,#FFF5EB);border:2px solid #FBBF24;border-radius:16px;padding:24px 20px;margin-bottom:16px;text-align:center}
+.surprise h3{font-size:17px;color:#D97706;margin-bottom:10px}
+.surprise ul{text-align:left;font-size:14px;color:#5A4A30;line-height:2.2;margin-bottom:12px;padding:0 12px;list-style:none}
+.surprise ul li::before{content:"🎁 ";font-size:12px}
+.footer{text-align:center;font-size:12px;color:#B8A080;padding:16px;line-height:1.8}
+@media(max-width:400px){.hero h1{font-size:22px}.qt{font-size:15px}.opt{font-size:14px;padding:12px 14px}.btn{font-size:16px;padding:14px 20px}.rh h2{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="brand">🌱 成长型思维</div>
+<div class="c">
+
+<div class="pg on" id="p0">
+<div class="hero"><div class="em">🌱</div><h1>你家孩子<br>是哪种思维模式？</h1><p class="sub">8道题 · 2分钟 · 从"我不会"到"我还没会"</p></div>
+<div class="card"><h3>🔍 你会知道</h3><p>为什么有的孩子越挫越勇，有的一挫就躺平？<br>"我不会"和"我还没会"就差一个字——差在哪？<br>怎么夸孩子才对？<br>如何帮他从不挑战变成主动迎战？</p></div>
+<div class="card"><h3>📖 有科学依据的</h3><p>Carol Dweck 成长型思维理论，斯坦福研究 30+ 年。思维模式可以重塑。</p></div>
+<button class="btn btn-go" onclick="start()">开始测试（免费）</button>
+<p class="trust">选最真实的反应 · 没有对错，只有看见</p>
+<div class="footer">Dweck Mindset Theory (2006) · 斯坦福30年研究 · 思维模式决定成长轨迹</div>
+</div>
+
+<div class="pg" id="p1">
+<div class="qh"><div class="pb"><div class="pf" id="pf"></div></div><div class="pt" id="pt">1/8</div></div>
+<p class="qr">选最符合孩子日常反应的那个 ✨</p>
+<div id="qa"></div>
+<div class="btn-row">
+<button class="btn btn-pv" id="bp" onclick="prev()">← 上一题</button>
+<button class="btn btn-nx" id="bn" onclick="next()">下一题 →</button>
+</div>
+</div>
+
+<div class="pg" id="p2">
+<div class="rh"><p class="hi">了解你的孩子 💡</p><h2 id="rt"></h2><p class="sm" id="rs"></p></div>
+<div id="rx"></div>
+<div class="surprise">
+<h3>🎁 额外送你实用工具</h3>
+<p style="font-size:14px;color:#5A4A30;margin-bottom:10px">除了测评结果，还为你准备了：</p>
+<ul><li>固定→成长话术转换表</li><li>努力日记模板（记录进步而非分数）</li><li>"还没的力量"手机壁纸文案</li></ul>
+<a href="growth-bonus.html" style="display:inline-block;margin:8px 0;padding:12px 24px;background:#FBBF24;color:#4A3520;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none">📖 点我直接领取</a><p style="font-size:12px;color:#A89070;margin-top:8px">想要完整思维训练方案？加微信 ww1987870012 备注"成长思维" 👩‍🏫</p>
+</div>
+<button class="btn" style="background:white;color:#D97706;border:2px solid #E8D0A0" onclick="location.reload()">重新测试</button>
+<div class="footer">Dweck Mindset Theory · 斯坦福30年研究 · 改变从看见开始</div>
+</div>
+
+</div>
+
+<script>
+const Q=[
+  {id:0,s:"困难",q:"遇到没见过的题型时，孩子？",a:"想——「这题我没学过，试试看」",b:"想——「这题我没学过，肯定不行」"},
+  {id:1,s:"困难",q:"学新东西时比较难，孩子？",a:"更努力去学，觉得难说明在进步",b:"想放弃，觉得太难了说明自己不行"},
+  {id:2,s:"失败",q:"考试没考好，孩子通常？",a:"觉得——「下次找到方法就能考好」",b:"觉得——「我就是学不好这门课」"},
+  {id:3,s:"失败",q:"做错了一道题，孩子通常？",a:"把错题记下来，觉得错了才能进步",b:"很沮丧，觉得自己笨"},
+  {id:4,s:"挑战",q:"面对一个有点难的挑战，孩子？",a:"兴奋想试试，觉得挑战好玩",b:"回避，怕失败丢脸"},
+  {id:5,s:"挑战",q:"老师问了一个有点难的问题，孩子？",a:"举手试试，答错了也没关系",b:"低头祈祷别被叫到"},
+  {id:6,s:"评价",q:"别人说他聪明时，孩子？",a:"开心但觉得——「是我努力的结果」",b:"很开心，觉得——「我聪明所以不用太努力」"},
+  {id:7,s:"评价",q:"看到别人比他做得好，孩子？",a:"觉得——「看看他是怎么做的，我也能学」",b:"觉得——「他真聪明，我不行」"}
+];
+
+const LV=["固定型思维","偏固定型","偏成长型","成长型思维"];
+const LD=["孩子目前倾向于认为能力是固定的。好消息是：思维模式可以重塑。","孩子在某些场景下有固定型倾向。调整空间很大，从一句话的改变开始。","孩子大部分时候是成长型思维。继续强化，让韧性成为底层能力。","孩子是典型的成长型思维！他把困难看成学习机会。继续保护这种心态。"];
+
+const METHODS=["把「我不会」改成「我还没会」——就加一个字，意思全变了","夸奖时强调努力和策略，不说「你真聪明」","分享你自己失败后学会的经历——做榜样","把错误包装成「发现」——「这个错有意思」","用「还没」来回应他的放弃——「你不是不会，是还没会」","帮他看见自己的进步——「上周你还不会这个呢」","让他教别人——教会别人是最好的成长证明","允许他选择挑战难度——「想试试简单的还是难的？」"];
+
+const PTIPS=["永远不说「你真聪明」——说「你用了什么方法做到的？」","孩子失败时不说「没关系」——说「这次知道了什么下次可以不一样？」","看到努力就肯定——「我看到你试了3种方法还没放弃」","不过度保护——让他经历适度的失败并自己爬起来","自己先做成长型家长——在孩子面前说「我还在学」而不是「我不行」"];
+
+let cur=0,ans=new Array(8).fill(null);
+function pg(n){document.querySelectorAll(".pg").forEach(function(e){e.classList.remove("on")});document.getElementById("p"+n).classList.add("on");window.scrollTo({top:0,behavior:"smooth"})}
+function start(){cur=0;ans=new Array(8).fill(null);pg(1);rq();un()}
+var autoTimer=null;
+function rq(){
+  var q=Q[cur];
+  document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#B8A080;margin-left:6px">'+q.s+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" data-v="a"><div class="rd"></div><span>'+q.a+'</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" data-v="b"><div class="rd"></div><span>'+q.b+'</span></div></div></div>';
+  var pct=Math.round((cur+1)/8*100);document.getElementById("pf").style.width=pct+"%";document.getElementById("pt").textContent=(cur+1)+"/8";
+  document.querySelectorAll("#qa .opt").forEach(function(el){el.onclick=function(){var v=this.getAttribute("data-v");ans[cur]=v;if(autoTimer){clearTimeout(autoTimer)}rq();if(cur<7){autoTimer=setTimeout(function(){cur++;rq();un()},400)}}});
+}
+function next(){if(ans[cur]===null){document.querySelectorAll(".opt").forEach(function(o){o.style.borderColor="#F0C880";setTimeout(function(){o.style.borderColor="#F0E0C8"},600)});return}if(autoTimer){clearTimeout(autoTimer)}if(cur<7){cur++;rq();un()}else{show()}}
+function prev(){if(cur>0){cur--;rq();un()}}
+function un(){document.getElementById("bp").style.visibility=cur===0?"hidden":"visible";document.getElementById("bn").textContent=cur===7?"看结果 →":"下一题 →"}
+
+function gauge(sc){
+  var h='<div class="gauge-wrap"><div class="gauge"><div class="gauge-bg"></div><div class="gauge-mask"></div><div class="gauge-needle" id="gn" style="transform:rotate('+(-90+sc/8*180)+'deg)"></div></div><div class="gauge-score">'+sc+'/8</div>';
+  var labels=["固定型","偏固定","偏成长","成长型"];
+  h+='<div style="display:flex;justify-content:space-between;padding:0 20px;font-size:12px;color:#B8A080">'+labels.map(function(l){return"<span>"+l+"</span>"}).join("")+"</div></div>";
+  return h;
+}
+
+function show(){
+  var sc=ans.filter(function(v){return v==="a"}).length;
+  var lv=sc<=1?0:sc<=3?1:sc<=5?2:3;
+  document.getElementById("rt").textContent="是「"+LV[lv]+"」";
+  document.getElementById("rs").textContent=LD[lv];pg(2);
+
+  var h='<div class="rc"><h4>🧭 思维模式仪表盘</h4>'+gauge(sc)+'<p class="dt" style="margin-top:8px">'+LD[lv]+'</p></div>';
+  h+='<h4 style="font-size:16px;color:#4A3520;margin:16px 0 8px">📝 帮孩子建立成长型思维</h4><div class="rc"><ul>'+METHODS.slice(0,5).map(function(t){return"<li>"+t+"</li>"}).join("")+"</ul></div>";
+  h+='<h4 style="font-size:16px;color:#4A3520;margin:16px 0 8px">👩‍👦 家长自己要注意</h4><div class="rc"><ul>'+PTIPS.map(function(t){return"<li>"+t+"</li>"}).join("")+"</ul></div>";
+
+  var msg="我给孩子做了一个成长型思维测评，他目前是「"+LV[lv]+"」。原来不是我孩子不行，是我们平时夸「你真聪明」夸错了。改一句说法让孩子的态度完全不一样。你也给孩子测测？";
+  h+='<h4 style="font-size:16px;color:#4A3520;margin:16px 0 8px">📩 跟朋友分享</h4><div class="tm"><p id="tt">'+msg+'</p><button class="cp" onclick="cpy()">📋 一键复制发朋友圈</button></div>';
+  document.getElementById("rx").innerHTML=h;
+  setTimeout(function(){var n=document.getElementById("gn");if(n){n.style.transform='rotate('+(-90+sc/8*180)+'deg)'}},100);
+}
+function cpy(){var t=document.getElementById("tt").textContent;if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){var b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(function(){b.textContent="📋 一键复制发朋友圈"},2000)})}else{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.left="-9999px";document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);var b=document.querySelector(".cp");b.textContent="✅ 已复制！";setTimeout(function(){b.textContent="📋 一键复制发朋友圈"},2000)}}
+window.addEventListener("resize",function(){if(document.getElementById("p2").classList.contains("on")){show()}});
+</script>
+</body>
+</html>

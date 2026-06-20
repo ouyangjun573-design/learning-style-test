@@ -201,7 +201,6 @@ document.getElementById("pf").style.width=pct+"%";
 document.getElementById("pt").textContent=(cur+1)+"/20"; document.querySelectorAll("#qa .opt").forEach(function(el){el.onclick=function(){var v=this.getAttribute("data-v");ans[cur]=v;if(autoTimer)clearTimeout(autoTimer);rq();if(cur<19){autoTimer=setTimeout(function(){cur++;rq();un()},400)}}});
 }
 
-function sel(v){ans[cur]=v;if(autoTimer)clearTimeout(autoTimer);rq();if(cur<19){autoTimer=setTimeout(function(){cur++;rq();un()},400)}}
 
 function next(){
 if(ans[cur]===null){document.querySelectorAll(".opt").forEach(o=>{o.style.borderColor="#F0C0A0";setTimeout(()=>o.style.borderColor="#F0E0D5",600)});return}
