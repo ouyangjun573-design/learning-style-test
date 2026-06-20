@@ -194,7 +194,7 @@ function start(){cur=0;ans=new Array(20).fill(null);pg(1);rq();un()}
 
 function rq(){
 let q=Q[cur],d=DI[q.d];
-document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#B8A090;margin-left:6px">'+d.l+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" onclick="sel(\"a\")"><div class="rd"></div><span>'+q.a+'</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" onclick="sel(\"b\")"><div class="rd"></div><span>'+q.b+'</span></div></div></div>';
+document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#B8A090;margin-left:6px">'+d.l+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" onclick="sel(&quot;a&quot;)"><div class="rd"></div><span>'+q.a+'</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" onclick="sel(&quot;b&quot;)"><div class="rd"></div><span>'+q.b+'</span></div></div></div>';
 let pct=Math.round((cur+1)/20*100);
 document.getElementById("pf").style.width=pct+"%";
 document.getElementById("pt").textContent=(cur+1)+"/20";
