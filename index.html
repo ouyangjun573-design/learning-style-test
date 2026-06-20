@@ -192,19 +192,20 @@ function pg(n){document.querySelectorAll(".pg").forEach(e=>e.classList.remove("o
 
 function start(){cur=0;ans=new Array(20).fill(null);pg(1);rq();un()}
 
+var autoTimer=null;
 function rq(){
 let q=Q[cur],d=DI[q.d];
-document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#B8A090;margin-left:6px">'+d.l+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" onclick="sel(&quot;a&quot;)"><div class="rd"></div><span>'+q.a+'</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" onclick="sel(&quot;b&quot;)"><div class="rd"></div><span>'+q.b+'</span></div></div></div>';
+document.getElementById("qa").innerHTML='<div class="qc"><span class="qn">第'+(cur+1)+'题</span> <span style="font-size:12px;color:#B8A090;margin-left:6px">'+d.l+'</span><div class="qt">'+q.q+'</div><div class="qo"><div class="opt'+(ans[cur]==="a"?" sel":"")+'" data-v="a"><div class="rd"></div><span>'+q.a+'</span></div><div class="opt'+(ans[cur]==="b"?" sel":"")+'" data-v="b"><div class="rd"></div><span>'+q.b+'</span></div></div></div>';
 let pct=Math.round((cur+1)/20*100);
 document.getElementById("pf").style.width=pct+"%";
-document.getElementById("pt").textContent=(cur+1)+"/20";
+document.getElementById("pt").textContent=(cur+1)+"/20"; document.querySelectorAll("#qa .opt").forEach(function(el){el.onclick=function(){var v=this.getAttribute("data-v");ans[cur]=v;if(autoTimer)clearTimeout(autoTimer);rq();if(cur<19){autoTimer=setTimeout(function(){cur++;rq();un()},400)}}});
 }
 
-function sel(v){ans[cur]=v;rq();setTimeout(()=>{if(cur<19){cur++;rq();un()}},350)}
+function sel(v){ans[cur]=v;if(autoTimer)clearTimeout(autoTimer);rq();if(cur<19){autoTimer=setTimeout(function(){cur++;rq();un()},400)}}
 
 function next(){
 if(ans[cur]===null){document.querySelectorAll(".opt").forEach(o=>{o.style.borderColor="#F0C0A0";setTimeout(()=>o.style.borderColor="#F0E0D5",600)});return}
-if(cur<19){cur++;rq();un()}else{show()}
+if(autoTimer)clearTimeout(autoTimer);if(cur<19){cur++;rq();un()}else{show()}
 }
 
 function prev(){if(cur>0){cur--;rq();un()}}
