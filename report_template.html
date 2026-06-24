@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>儿童学习发展测评解读报告</title>
+<style>
+  /* ========== 全局变量：莫兰迪色系 ========== */
+  :root {
+    --cover-bg: #f2ede8;
+    --cover-accent: #b8a99a;
+    --page-bg: #faf8f5;
+    --text-primary: #4a403a;
+    --text-secondary: #7a7068;
+    --text-muted: #a09890;
+    --border-light: #e0d8cf;
+    --border-medium: #c8bfb5;
+    --accent-1: #bfa094; /* 学习风格 - 暖驼 */
+    --accent-2: #a8b5a0; /* 专注力 - 鼠尾草绿 */
+    --accent-3: #b0a4b8; /* 亲子沟通 - 紫灰 */
+    --accent-4: #c4b090; /* 天赋发现 - 麦色 */
+    --accent-5: #a0b0b8; /* 成长型思维 - 雾蓝 */
+    --accent-6: #b8a4a0; /* 阅读能力 - 藕粉灰 */
+    --score-high: #8a9a7a;
+    --score-mid: #c4b090;
+    --score-low: #c0a0a0;
+    --card-bg: #fffefb;
+    --shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  /* ========== 重置与打印基础 ========== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 14px; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--page-bg);
+    color: var(--text-primary);
+    line-height: 1.75;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ========== A4 分页布局 ========== */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 8mm;
+    padding: 20mm 18mm 22mm;
+    background: #fff;
+    box-shadow: var(--shadow);
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-of-type { page-break-after: auto; }
+
+  /* ========== 封面 ========== */
+  .page-cover {
+    background: var(--cover-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 50mm;
+    position: relative;
+  }
+  .page-cover::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6mm;
+    background: var(--cover-accent);
+  }
+  .cover-icon {
+    width: 28mm;
+    height: 28mm;
+    border: 2px solid var(--cover-accent);
+    border-radius: 50%;
+    margin-bottom: 10mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--cover-accent);
+  }
+  .cover-title {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--text-primary);
+    margin-bottom: 6mm;
+  }
+  .cover-subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    margin-bottom: 16mm;
+  }
+  .cover-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+  .cover-qr-placeholder {
+    width: 32mm;
+    height: 32mm;
+    border: 1.5px dashed var(--border-medium);
+    border-radius: 3px;
+    margin-top: 14mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 11px;
+    background: #faf8f5;
+  }
+
+  /* ========== 标题体系 ========== */
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 5mm; letter-spacing: 1px; }
+  h2 { font-size: 16px; font-weight: 600; margin: 8mm 0 4mm; padding-bottom: 2mm; border-bottom: 1.5px solid var(--border-light); }
+  h3 { font-size: 14px; font-weight: 600; margin: 5mm 0 3mm; color: var(--text-primary); }
+  h4 { font-size: 13px; font-weight: 500; margin: 4mm 0 2mm; color: var(--text-secondary); }
+
+  /* ========== 得分总览 ========== */
+  .overview-intro { font-size: 13px; color: var(--text-secondary); margin-bottom: 6mm; line-height: 1.8; }
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4mm;
+    margin-bottom: 8mm;
+  }
+  .score-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 5mm 6mm;
+    text-align: center;
+    border-top: 4px solid transparent;
+  }
+  .score-card:nth-child(1) { border-top-color: var(--accent-1); }
+  .score-card:nth-child(2) { border-top-color: var(--accent-2); }
+  .score-card:nth-child(3) { border-top-color: var(--accent-3); }
+  .score-card:nth-child(4) { border-top-color: var(--accent-4); }
+  .score-card:nth-child(5) { border-top-color: var(--accent-5); }
+  .score-card:nth-child(6) { border-top-color: var(--accent-6); }
+  .score-card-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 2mm;
+  }
+  .score-card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+  }
+  .score-card-unit { font-size: 12px; color: var(--text-muted); }
+
+  /* 雷达图占位 */
+  .chart-placeholder {
+    width: 100%;
+    height: 55mm;
+    border: 1px dashed var(--border-medium);
+    border-radius: 4px;
+    margin: 6mm 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    background: #faf8f5;
+  }
+
+  /* ========== 维度解读区 ========== */
+  .dimension-header {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    margin-bottom: 3mm;
+  }
+  .dimension-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dimension-name { font-size: 17px; font-weight: 600; }
+  .dimension-score-tag {
+    font-size: 12px;
+    padding: 1mm 4mm;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 3mm;
+  }
+  .tag-high { background: var(--score-high); }
+  .tag-mid { background: var(--score-mid); }
+  .tag-low { background: var(--score-low); }
+
+  .dimension-concept {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 2mm 0 4mm;
+    padding-left: 6mm;
+    border-left: 3px solid var(--border-light);
+    line-height: 1.8;
+  }
+
+  .raw-score-info {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 3mm;
+  }
+
+  /* 4档解读卡片 */
+  .interpretation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3mm;
+    margin-bottom: 5mm;
+  }
+  .interp-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 4mm 5mm;
+    font-size: 12.5px;
+    line-height: 1.75;
+    position: relative;
+  }
+  .interp-card .range-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 8px;
+    margin-bottom: 2mm;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .badge-high { background: #e6efe0; color: #5a7a4a; }
+  .badge-mid-high { background: #f0ebe0; color: #8a7050; }
+  .badge-mid-low { background: #f0e8e0; color: #8a6050; }
+  .badge-low { background: #f0e0e0; color: #8a5050; }
+  .interp-card .highlight-card {
+    border-left: 4px solid var(--score-high);
+    padding-left: 3mm;
+    margin-top: 2mm;
+  }
+
+  /* ========== 建议方案 ========== */
+  .suggestion-list { counter-reset: sug; list-style: none; }
+  .suggestion-list li {
+    counter-increment: sug;
+    margin-bottom: 4mm;
+    padding: 4mm 6mm;
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    position: relative;
+  }
+  .suggestion-list li::before {
+    content: "建议 " counter(sug);
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 2mm;
+    text-transform: uppercase;
+  }
+  .suggestion-list li strong { color: var(--text-primary); }
+  .suggestion-list li .sub-list {
+    margin: 2mm 0 0 4mm;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.85;
+  }
+  .suggestion-list li table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 2mm;
+  }
+  .suggestion-list li table th,
+  .suggestion-list li table td {
+    border: 1px solid var(--border-light);
+    padding: 2mm 3mm;
+    text-align: left;
+  }
+  .suggestion-list li table th {
+    background: #f5f2ed;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 12px;
+  }
+
+  /* ========== 页脚 ========== */
+  .page-footer {
+    position: absolute;
+    bottom: 12mm;
+    left: 18mm;
+    right: 18mm;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-light);
+    padding-top: 3mm;
+    line-height: 1.7;
+  }
+  .page-footer .wechat {
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    margin-bottom: 1mm;
+  }
+
+  /* ========== 辅助样式 ========== */
+  .highlight-box {
+    background: #f8f5f0;
+    border-radius: 4px;
+    padding: 4mm 6mm;
+    margin: 4mm 0;
+    font-size: 13px;
+    border-left: 4px solid var(--cover-accent);
+  }
+  .page-number {
+    position: absolute;
+    bottom: 10mm;
+    right: 18mm;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ========== 打印优化 ========== */
+  @media print {
+    body { background: #fff; }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0;
+      box-shadow: none;
+      padding: 18mm 15mm 20mm;
+    }
+    .page-cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    @page { size: A4; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== 封面 ==================== -->
+<div class="page page-cover">
+  <div class="cover-icon">&#9733;</div>
+  <div class="cover-title">儿童学习发展测评解读报告</div>
+  <div class="cover-subtitle">了解孩子，比改变孩子更重要</div>
+  <div class="cover-meta">
+    测评对象：<span class="placeholder">【孩子姓名】</span><br>
+    测评日期：<span class="placeholder">YYYY-MM-DD</span><br>
+    报告生成：<span class="placeholder">YYYY-MM-DD</span>
+  </div>
+  <div class="cover-qr-placeholder">[ 扫码关注获取更多育儿资源 ]</div>
+</div>
+
+<!-- ==================== 得分总览 ==================== -->
+<div class="page">
+  <h1>得分总览</h1>
+  <p class="overview-intro">
+    本报告基于 <strong>Felder-Soloman ILS</strong>、<strong>Barkley ADHD Rating</strong>、<strong>Baumrind Parenting</strong>、<strong>Gardner Multiple Intelligence</strong>、<strong>Dweck Mindset</strong> 和 <strong>NRP 5 Components</strong> 六大理论框架，
+    对孩子的学习风格、专注力、亲子沟通、天赋智能、思维模式和阅读能力进行系统性评估。每个维度采用百分制计分，得分越高代表该维度表现越优。
+  </p>
+
+  <!-- 六维度得分卡片 -->
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-card-label">学习风格</div>
+      <div class="score-card-value"><span class="placeholder">--</span></div>
+      <div class="score-card-unit">ILS 匹配度</div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-label">专注力</div>
+      <div class="score-card-value"><span class="placeholder">--</span></div>
+      <div class="score-card-unit">Barkley 评估</div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-label">亲子沟通</div>
+      <div class="score-card-value"><span class="placeholder">--</span></div>
+      <div class="score-card-unit">Baumrind 评估</div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-label">天赋发现</div>
+      <div class="score-card-value"><span class="placeholder">--</span></div>
+      <div class="score-card-unit">Gardner MI 评估</div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-label">成长型思维</div>
+      <div class="score-card-value"><span class="placeholder">--</span></div>
+      <div class="score-card-unit">Dweck 评估</div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-label">阅读能力</div>
+      <div class="score-card-value"><span class="placeholder">--</span></div>
+      <div class="score-card-unit">NRP 5C 评估</div>
+    </div>
+  </div>
+
+  <!-- 雷达图占位 -->
+  <div class="chart-placeholder">
+    [ 六维度雷达图 — 数据可视化待渲染 ]
+  </div>
+
+  <div class="highlight-box">
+    <strong>阅读提示</strong>：得分反映的是孩子在特定维度上的相对位置，而非绝对"好"与"坏"。每个孩子都是独特的，报告的真正价值在于帮您理解孩子的底层模式，从而做出更有针对性的教育选择。
+  </div>
+
+  <div class="page-footer">
+    <div class="wechat">微信号：ww1987870012</div>
+    如需深度 1v1 报告解读，请添加微信预约。每个孩子都值得被真正看见。
+  </div>
+</div>
+
+<!-- ==================== 维度一：学习风格 ==================== -->
+<div class="page">
+  <div class="dimension-header">
+    <div class="dimension-dot" style="background: var(--accent-1);"></div>
+    <div class="dimension-name">一、学习风格</div>
+    <div class="dimension-score-tag tag-mid"><span class="placeholder">XX分</span></div>
+  </div>
+  <p class="dimension-concept">
+    <strong>理论框架：Felder-Soloman ILS（学习风格量表）</strong><br>
+    学习风格是指个体在学习过程中偏好的信息接收与加工方式。ILS 从信息加工、信息感知、信息输入、信息理解四个维度评估孩子的学习风格倾向。学习风格无优劣之分，关键在"匹配"而非"纠正"。
+  </p>
+  <p class="raw-score-info">子维度得分：活跃型 <span class="placeholder">--</span>% | 感知型 <span class="placeholder">--</span>% | 视觉型 <span class="placeholder">--</span>% | 序列型 <span class="placeholder">--</span>%</p>
+
+  <!-- 4档解读 -->
+  <h3>得分段解读（素材库标准话术）</h3>
+  <div class="interpretation-grid">
+    <div class="interp-card">
+      <span class="range-badge badge-high">得分高（≥85%）</span>
+      <div class="highlight-card">
+        <span class="placeholder">【根据优势维度自动匹配话术，例如：</span>
+        您的孩子是一个"动中学"的学习者——他需要通过实际操作、讨论互动来真正理解知识。建议为他创造更多"做中学"的机会，而非一味要求安静端坐。
+      </div>
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-high">中等偏高（70%-84%）</span>
+      <span class="placeholder">【根据得分自动匹配对应档位话术】</span>
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-low">中等偏低（50%-69%）</span>
+      <span class="placeholder">【根据得分自动匹配对应档位话术】</span>
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-low">得分低（＜50%）</span>
+      <span class="placeholder">【根据得分自动匹配对应档位话术】</span>
+    </div>
+  </div>
+  <p style="font-size:12px; color: var(--text-muted); margin-bottom: 4mm;">
+    注：以上4档话术均来自测评解读素材库，实际报告中将根据孩子在该维度的得分自动匹配对应段位的标准化解读。
+  </p>
+
+  <h3>针对性建议方案（本维度 3-5 条）</h3>
+  <ol class="suggestion-list">
+    <li>
+      <strong>匹配学习通道，而非"改造"孩子</strong>
+      <div class="sub-list">
+        · 视觉型：多使用思维导图、流程图、视频教程<br>
+        · 言语型：鼓励把所学内容讲给别人听（学习金字塔显示教授他人可记住90%）<br>
+        · 活跃型：设置动手实验、角色扮演、项目式学习任务<br>
+        · 反思型：预留"消化时间"，学习后给10-15分钟安静反思
+      </div>
+    </li>
+    <li>
+      <strong>用"具象化"桥接抽象知识</strong>
+      <div class="sub-list">
+        · 对感知型孩子：数学公式配生活实例（如"分数"用切蛋糕演示）<br>
+        · 对直觉型孩子：先给大框架再填细节（如先讲"这一章要解决什么问题"再展开）<br>
+        · 把抽象问题做出形象设计再分享给孩子，孩子才能听得懂
+      </div>
+    </li>
+    <li>
+      <strong>多感官组合学习法</strong>
+      <div class="sub-list">
+        · 同一知识点通过"看+听+动手"三通道输入，显著提升记忆保持率<br>
+        · 例：学习新单词 → 看卡片(视觉) + 大声朗读(言语) + 写一遍(动觉)
+      </div>
+    </li>
+    <li>
+      <strong>创建"学习风格友好的作业环境"</strong>
+      <div class="sub-list">
+        · 序列型：用清单把任务拆成小步骤，完成一项打勾一项<br>
+        · 综合型：先快速浏览全章，建立整体认知地图，再逐个击破<br>
+        · 保证学习前5分钟情绪稳定——指责性语言会直接破坏学习效率
+      </div>
+    </li>
+    <li>
+      <strong>家长要区分"风格"与"问题"</strong>
+      <div class="sub-list">
+        · 孩子不喜欢朗读 ≠ 不爱学习，可能是言语型偏弱、视觉型偏强<br>
+        · 孩子坐不住 ≠ 专注力差，可能是活跃型学习者需要身体参与<br>
+        · 用战略性的眼光去看待孩子一生的成长
+      </div>
+    </li>
+  </ol>
+
+  <div class="page-footer">
+    <div class="wechat">微信号：ww1987870012</div>
+    如需深度 1v1 报告解读，请添加微信预约。每个孩子都值得被真正看见。
+  </div>
+</div>
+
+<!-- ==================== 维度二：专注力 ==================== -->
+<div class="page">
+  <div class="dimension-header">
+    <div class="dimension-dot" style="background: var(--accent-2);"></div>
+    <div class="dimension-name">二、专注力</div>
+    <div class="dimension-score-tag tag-mid"><span class="placeholder">XX分</span></div>
+  </div>
+  <p class="dimension-concept">
+    <strong>理论框架：Barkley ADHD Rating（巴克利注意缺陷评估模型）</strong><br>
+    专注力是大脑执行功能的核心组成部分，涉及持续注意、选择性注意、冲动控制和执行功能。每个孩子的专注力发展节奏不同，三年级以下建议每30分钟休息5分钟。
+  </p>
+
+  <h3>得分段解读（素材库标准话术）</h3>
+  <div class="interpretation-grid">
+    <div class="interp-card">
+      <span class="range-badge badge-high">得分高（≥85%）</span>
+      <div class="highlight-card">
+        您的孩子在持续注意和抗干扰方面表现出色。他能较好地屏蔽环境干扰，锁定学习任务。这是学业成功的核心基础能力之一。建议继续保持规律作息和良好的学习环境，不要因为"学得快"而过度加码任务。
+      </div>
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-high">中等偏高（70%-84%）</span>
+      您的孩子具备基本的专注力水平，但在长时间或高难度任务中可能出现注意力波动。他的专注力像一个需要预热的引擎——前5分钟最关键。建议用"学习前静心仪式"帮助他平稳过渡到专注状态。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-low">中等偏低（50%-69%）</span>
+      您的孩子在专注力方面存在一定发展空间。他容易受到视觉和听觉环境干扰，注意力转移后难以自行回到任务。这并非"态度问题"，而是大脑执行功能还在发育中。建议从环境整理和分段任务入手，系统性训练专注力。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-low">得分低（＜50%）</span>
+      测评显示您的孩子可能在持续注意和冲动控制方面面临较大挑战。请以"发育视角"而非"纪律视角"来看待——专注力是可以通过科学训练逐步提升的。建议：①排除生理因素；②简化学习环境；③引入专注力游戏训练；④必要时寻求专业评估。
+    </div>
+  </div>
+
+  <h3>针对性建议方案（本维度 5 条）</h3>
+  <ol class="suggestion-list">
+    <li>
+      <strong>营造"低干扰"学习环境</strong>
+      <div class="sub-list">
+        · 书桌上只放当前任务必需物品，玩具、多余文具、电子产品全部收走<br>
+        · 家长在孩子写作业时避免"错上纠错"——随时打断指出错误会严重破坏专注力<br>
+        · 孩子学习时家长不看电视，音量调小，或让孩子在隔音较好的房间
+      </div>
+    </li>
+    <li>
+      <strong>番茄工作法 + 分段学习</strong>
+      <div class="sub-list">
+        · 低年级（1-3年级）：20-25分钟专注 + 5分钟休息<br>
+        · 中年级（4-6年级）：30-35分钟专注 + 5分钟休息<br>
+        · 休息期间做身体活动——运动让大脑分泌多巴胺回到亢奋状态<br>
+        · 使用计时器可视化时间，增强孩子的时间观念
+      </div>
+    </li>
+    <li>
+      <strong>专注力训练小游戏（每日选1-2个）</strong>
+      <table>
+        <tr><th>游戏</th><th>训练目标</th><th>操作要点</th></tr>
+        <tr><td>舒尔特方格</td><td>视觉搜索速度</td><td>25格数字乱序，按顺序指读计时</td></tr>
+        <tr><td>听觉复述</td><td>听觉注意力</td><td>家长说一串数字/词语，孩子倒序复述</td></tr>
+        <tr><td>盯点训练</td><td>持续注意</td><td>盯墙上的点1分钟不走神，逐步延长时间</td></tr>
+        <tr><td>找不同/走迷宫</td><td>选择性注意</td><td>对比两图找出差异，训练视觉辨识</td></tr>
+        <tr><td>静止练习法</td><td>肢体控制</td><td>坐凳子前1/3，看指针走1分钟，逐步延长</td></tr>
+        <tr><td>观察呼吸法</td><td>身体觉知</td><td>闭眼手放胸前，感受呼吸和心跳1分钟</td></tr>
+      </table>
+    </li>
+    <li>
+      <strong>保护孩子的专注力不被打断</strong>
+      <div class="sub-list">
+        · 孩子在专注做任何事（哪怕是在玩）时，不随意打断、不送水果、不提醒喝水<br>
+        · 探索期（18个月-3岁）被打断过的孩子，专注力容易被破坏<br>
+        · 全家建立"不打断公约"——看到孩子在专注状态，等他自己停下来再沟通
+      </div>
+    </li>
+    <li>
+      <strong>关注生理基础</strong>
+      <div class="sub-list">
+        · 充足睡眠：睡眠不足直接导致次日注意力涣散<br>
+        · 规律运动：每天至少30分钟中高强度身体活动<br>
+        · 营养支持：早餐吃鸡蛋补充卵磷脂——卵磷脂是神经传导的物质基础<br>
+        · 控制屏幕时间：电子产品过度刺激会降低对"低刺激"任务的耐受度
+      </div>
+    </li>
+  </ol>
+
+  <div class="page-footer">
+    <div class="wechat">微信号：ww1987870012</div>
+    如需深度 1v1 报告解读，请添加微信预约。每个孩子都值得被真正看见。
+  </div>
+</div>
+
+<!-- ==================== 维度三：亲子沟通 ==================== -->
+<div class="page">
+  <div class="dimension-header">
+    <div class="dimension-dot" style="background: var(--accent-3);"></div>
+    <div class="dimension-name">三、亲子沟通</div>
+    <div class="dimension-score-tag tag-mid"><span class="placeholder">XX分</span></div>
+  </div>
+  <p class="dimension-concept">
+    <strong>理论框架：Baumrind Parenting（鲍姆林德教养方式理论）</strong><br>
+    亲子沟通是家庭教育中情感传递与行为引导的核心机制。从"回应性"和"要求性"两个维度评估家长的教育风格，理想型态为"权威型"——既有规则又有温度，解释原因而非命令。
+  </p>
+
+  <h3>得分段解读（素材库标准话术）</h3>
+  <div class="interpretation-grid">
+    <div class="interp-card">
+      <span class="range-badge badge-high">得分高（≥85%）</span>
+      <div class="highlight-card">
+        您的亲子沟通模式接近"权威型教养"的理想状态——既有高回应又有高要求。您在情感支持和行为引导之间取得了良好平衡。孩子能在您的家庭中感受到安全感，同时也有清晰的边界意识。
+      </div>
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-high">中等偏高（70%-84%）</span>
+      您在亲子沟通中有较高的情感回应意识，但可能在"要求性"或"一致性"方面存在波动——时而严格、时而妥协。建议在"温和而坚定"的方向上继续优化。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-low">中等偏低（50%-69%）</span>
+      您的亲子沟通中存在一些需要关注的模式。可能是"说得多、听得少"——孩子觉得不被真正理解；也可能是"要求多、情感少"——规则压过了关系。亲子沟通的质量决定了孩子是否"愿意听"。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-low">得分低（＜50%）</span>
+      本次测评提示您在亲子沟通中可能存在较明显的"单向输出"模式——命令、指责、盘问的比例偏高。这可能导致孩子关闭"心门"，出现"你越说他越不听"的恶性循环。沟通模式是习得的，完全可以通过刻意练习来改善。
+    </div>
+  </div>
+
+  <h3>针对性建议方案（本维度 5 条）</h3>
+  <ol class="suggestion-list">
+    <li>
+      <strong>"是情绪"——先处理情绪，再处理事情</strong>
+      <div class="sub-list">
+        · 当孩子情绪激动时，不要急于讲道理<br>
+        · 第一步：帮助孩子识别和命名情绪（"我看到你现在很生气/很委屈"）<br>
+        · 第二步：接纳情绪，不做评判（"如果是我遇到这样的事，也会很难过"）<br>
+        · 第三步：情绪平复后再讨论解决问题
+      </div>
+    </li>
+    <li>
+      <strong>"一听二问三夸"沟通三步法</strong>
+      <div class="sub-list">
+        · <strong>一听</strong>：专心听、不打断、听完后确认理解（"你刚才说的是不是这个意思……"）<br>
+        · <strong>二问</strong>：引导式提问而非审问（"这件事你是怎么想的？"）<br>
+        · <strong>三夸</strong>：具体描述行为 + 表达感受（"我看到你主动整理了书桌，妈妈特别欣慰"）
+      </div>
+    </li>
+    <li>
+      <strong>把"你信息"转换为"我信息"</strong>
+      <table>
+        <tr><th>不当表达（你信息）</th><th>建议替换（我信息）</th></tr>
+        <tr><td>"你怎么又磨蹭！"</td><td>"我看到作业还剩很多，我有点担心时间不够"</td></tr>
+        <tr><td>"你从来都不努力！"</td><td>"我希望能看到你为这件事付出的过程"</td></tr>
+        <tr><td>"你太马虎了！"</td><td>"这三道题里有两道是计算错误，我们一起看看怎么避免"</td></tr>
+      </table>
+    </li>
+    <li>
+      <strong>青春期沟通破冰法</strong>
+      <div class="sub-list">
+        · 尊重边界：孩子关门不一定是"搞小动作"，可能是需要独处空间<br>
+        · 减少命令式语言："不许……"、"你必须……"会激活对抗模式<br>
+        · 增加选择权：把"赶快写作业"换成"你想先写数学还是先写语文？"<br>
+        · 创造非对抗性沟通场景：并排沟通比面对面沟通压力更小
+      </div>
+    </li>
+    <li>
+      <strong>保护亲子关系的"情感账户"</strong>
+      <div class="sub-list">
+        · 每天至少有一次纯粹的正面互动（不涉及学习、不说教）<br>
+        · 每周安排"一对一专属时间"（每个孩子单独和爸爸或妈妈独处30分钟）<br>
+        · 孩子内心的幸福感来自回家有父母的聆听和治愈
+      </div>
+    </li>
+  </ol>
+
+  <div class="page-footer">
+    <div class="wechat">微信号：ww1987870012</div>
+    如需深度 1v1 报告解读，请添加微信预约。每个孩子都值得被真正看见。
+  </div>
+</div>
+
+<!-- ==================== 维度四：天赋发现 ==================== -->
+<div class="page">
+  <div class="dimension-header">
+    <div class="dimension-dot" style="background: var(--accent-4);"></div>
+    <div class="dimension-name">四、天赋发现</div>
+    <div class="dimension-score-tag tag-mid"><span class="placeholder">XX分</span></div>
+  </div>
+  <p class="dimension-concept">
+    <strong>理论框架：Gardner Multiple Intelligence（加德纳多元智能理论）</strong><br>
+    智能不是单一的而是多元的，涵盖语言、逻辑数学、空间、音乐、身体运动、人际、内省、自然观察八种智能。每个孩子都有自己独特的智能光谱，选兴趣班应靠"长板"而非"补短板"。
+  </p>
+
+  <h3>得分段解读（素材库标准话术）</h3>
+  <div class="interpretation-grid">
+    <div class="interp-card">
+      <span class="range-badge badge-high">得分高（≥85%）</span>
+      <div class="highlight-card">
+        测评显示您的孩子在<span class="placeholder">【优势智能领域】</span>展现出明显优势。这不是偶然的——这些智能倾向往往在学龄前就已显现。建议将优势智能作为"领跑智能"，用它来带动其他领域的发展。
+      </div>
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-high">中等偏高（70%-84%）</span>
+      您的孩子呈现出均衡发展的智能光谱。这种"通才型"特征意味着他适应多种学习场景的能力较强。建议在保持全面的基础上，留心观察哪些领域他投入时最开心、最忘我——那往往就是潜在的天赋方向。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-low">中等偏低（50%-69%）</span>
+      测评发现您的孩子在<span class="placeholder">【弱势智能领域】</span>存在相对弱势。请注意这完全正常——Gardner 理论的核心思想就是"没有人所有智能都强"。弱势智能不是缺陷，而是提醒我们：这些领域需要更匹配的教学方法和更多的耐心。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-low">得分低（＜50%）</span>
+      本次测评中多个智能维度得分偏低。这可能反映两种情况：①孩子尚未在正式测评场景中充分展现优势；②测评工具存在一定的适配局限。建议以日常观察为主、测评为辅，在孩子最自然的状态下捕捉天赋信号。
+    </div>
+  </div>
+
+  <h3>针对性建议方案（本维度 5 条）</h3>
+  <ol class="suggestion-list">
+    <li>
+      <strong>观察而非测试——在日常生活中发现天赋信号</strong>
+      <table>
+        <tr><th>观察维度</th><th>天赋信号</th></tr>
+        <tr><td>自发行为</td><td>没人要求时他主动做什么？</td></tr>
+        <tr><td>时间感</td><td>做什么事时他感觉时间过得特别快？</td></tr>
+        <tr><td>抗疲劳</td><td>做什么事时他精力充沛，不容易累？</td></tr>
+        <tr><td>学习速度</td><td>什么类型的技能他一学就会、进步飞快？</td></tr>
+        <tr><td>分享意愿</td><td>他最喜欢跟人聊什么话题？</td></tr>
+      </table>
+    </li>
+    <li>
+      <strong>靠"长板"带动"短板"</strong>
+      <div class="sub-list">
+        · 给孩子选兴趣班，优先发展"长板"而非死磕"短板"<br>
+        · 让孩子在自己擅长的领域建立自信，这种"我能行"的心态会迁移到其他领域<br>
+        · 例：数学强但作文弱 → 让他先写"数学日记"，再逐步过渡到叙事写作
+      </div>
+    </li>
+    <li>
+      <strong>天赋确认需要"等待—观察—验证"三步骤</strong>
+      <div class="sub-list">
+        · 发现孩子对某领域感兴趣 → 不立刻报班 → 持续观察一段时间<br>
+        · 确认是"真爱"而非"三分钟热度" → 再投入资源<br>
+        · 选择快往往放弃也快，让孩子经历"渴望→等待→获得"的过程本身就是教育
+      </div>
+    </li>
+    <li>
+      <strong>警惕"过度开发"——天赋需要空间成长</strong>
+      <div class="sub-list">
+        · 天赋是种子，不是已经长成的树。不要因为孩子在某个领域有潜力就塞满课程<br>
+        · 兴趣班数量的控制，才能充分发挥孩子特长<br>
+        · 留白时间（不安排任何结构化活动）是天赋萌芽的土壤
+      </div>
+    </li>
+    <li>
+      <strong>建立"多元智能视角"的家庭对话方式</strong>
+      <div class="sub-list">
+        · 不说"你怎么数学这么差" → 说"你的语言表达特别有感染力，数学上我们把这种表达能力用起来试试"<br>
+        · 不说"你怎么什么都学不好" → 说"每个人都有自己的超能力，妈妈发现你的超能力是……"<br>
+        · 我们要去发现孩子的优势，也要看TA是否坚定和执着
+      </div>
+    </li>
+  </ol>
+
+  <div class="page-footer">
+    <div class="wechat">微信号：ww1987870012</div>
+    如需深度 1v1 报告解读，请添加微信预约。每个孩子都值得被真正看见。
+  </div>
+</div>
+
+<!-- ==================== 维度五：成长型思维 ==================== -->
+<div class="page">
+  <div class="dimension-header">
+    <div class="dimension-dot" style="background: var(--accent-5);"></div>
+    <div class="dimension-name">五、成长型思维</div>
+    <div class="dimension-score-tag tag-mid"><span class="placeholder">XX分</span></div>
+  </div>
+  <p class="dimension-concept">
+    <strong>理论框架：Dweck Mindset（德韦克思维模式理论）</strong><br>
+    成长型思维是指个体相信自己的能力可以通过努力、学习和坚持来发展的信念系统。与固定型思维相对。Dweck 的经典实验表明：被夸"努力"的孩子94%选择了更难的挑战任务，而被夸"聪明"的孩子更倾向选择简单任务。
+  </p>
+
+  <h3>得分段解读（素材库标准话术）</h3>
+  <div class="interpretation-grid">
+    <div class="interp-card">
+      <span class="range-badge badge-high">得分高（≥85%）</span>
+      <div class="highlight-card">
+        您的孩子展现出极强的成长型思维模式。他相信努力的价值、敢于迎接挑战、不被失败定义。这是比任何一次考试分数都更重要的"底层操作系统"。他身上的这份韧性和积极归因方式，将成为终身学习的核心动力。
+      </div>
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-high">中等偏高（70%-84%）</span>
+      您的孩子整体倾向于成长型思维，但在某些特定情境下（如反复失败、与他人比较时）可能会切换到固定思维模式。这完全正常——Dweck 的研究表明，没有人是纯粹的成长型思维，我们都是在特定情境中波动的。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-low">中等偏低（50%-69%）</span>
+      您的孩子在思维模式上存在一定的固定化倾向。他可能更关注"我聪不聪明"而非"我有没有努力"，遇到困难时容易归因于"我不行"而非"方法不对"。这种思维模式往往是后天习得的——它可以通过改变家庭的表扬方式来调整。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-low">得分低（＜50%）</span>
+      测评显示您的孩子可能受到较强的固定型思维影响。他可能回避有挑战性的任务、过度在意结果评价、失败后容易自我否定。请重点关注：孩子在成长过程中是否频繁接收到"你真聪明"这类天赋型表扬？夸"聪明"会让孩子为了维护聪明形象而逃避挑战。
+    </div>
+  </div>
+
+  <h3>针对性建议方案（本维度 5 条）</h3>
+  <ol class="suggestion-list">
+    <li>
+      <strong>把"聪明型表扬"替换为"过程型表扬"</strong>
+      <table>
+        <tr><th>不当表扬（固定型）</th><th>建议替换（成长型）</th></tr>
+        <tr><td>"你真聪明！"</td><td>"我看到你用了新方法解题，这个思路很有创意"</td></tr>
+        <tr><td>"你考了100分，太棒了！"</td><td>"这次考试你准备了整整两周，你的努力得到了回报"</td></tr>
+        <tr><td>"这孩子天生就是学数学的料"</td><td>"你每天坚持做30分钟数学练习，进步就是这样积累的"</td></tr>
+        <tr><td>"这么难的题都会做，太厉害了！"</td><td>"这道题你做错了三次才做对，这种不放弃的精神最珍贵"</td></tr>
+      </table>
+    </li>
+    <li>
+      <strong>用"还没"（Yet）重构失败叙事</strong>
+      <div class="sub-list">
+        · 孩子说"我学不会" → 回应"你只是<strong>还没</strong>学会，我们一起看看卡在哪里"<br>
+        · 孩子说"我就是数学不行" → 回应"你在这道题上<strong>暂时</strong>遇到了困难，不代表数学永远不行"<br>
+        · 把失败归因于"努力不够/方法不对"（可改变），而非"能力不足"（不可改变）
+      </div>
+    </li>
+    <li>
+      <strong>设定"最近发展区"目标——跳一跳够得着</strong>
+      <div class="sub-list">
+        · 从30分→50分而非30分→80分<br>
+        · 特别大的目标会把自己吓坏，实现不了就不去努力了<br>
+        · 每实现一个小目标，孩子会积累"我能通过努力实现进步"的实证经验<br>
+        · 完成后庆祝的是"克服困难的过程"而非"聪明"
+      </div>
+    </li>
+    <li>
+      <strong>让孩子看见大脑的"可塑性"</strong>
+      <div class="sub-list">
+        · "大脑像肌肉，越锻炼越强壮。每次学习新东西，大脑里的神经元就在建立新的连接"<br>
+        · 给孩子看：你小时候不会走路、不会说话，现在都会了——这就是大脑成长的最好证明<br>
+        · 思维处在活跃期，帮助孩子学会爱上思考、思维开窍
+      </div>
+    </li>
+    <li>
+      <strong>家长自身践行成长型思维</strong>
+      <div class="sub-list">
+        · 在孩子面前分享你遇到的困难和你应对的方法<br>
+        · 用"我最近也在学……"的句式，让孩子看到"大人也在成长"<br>
+        · 孩子每一次犯错，其实都是你提高他的机会——当你大脑里有科学系统化的家庭教育方法时
+      </div>
+    </li>
+  </ol>
+
+  <div class="page-footer">
+    <div class="wechat">微信号：ww1987870012</div>
+    如需深度 1v1 报告解读，请添加微信预约。每个孩子都值得被真正看见。
+  </div>
+</div>
+
+<!-- ==================== 维度六：阅读能力 ==================== -->
+<div class="page">
+  <div class="dimension-header">
+    <div class="dimension-dot" style="background: var(--accent-6);"></div>
+    <div class="dimension-name">六、阅读能力</div>
+    <div class="dimension-score-tag tag-mid"><span class="placeholder">XX分</span></div>
+  </div>
+  <p class="dimension-concept">
+    <strong>理论框架：NRP 5 Components（美国国家阅读委员会五要素模型）</strong><br>
+    阅读能力由语音意识、自然拼读、阅读流畅度、词汇和阅读理解五个核心要素构成，形成从"识字"到"理解"的完整阅读链。0-10岁是阅读习惯培养的关键期，二年级左右应建立自主阅读习惯。
+  </p>
+
+  <h3>得分段解读（素材库标准话术）</h3>
+  <div class="interpretation-grid">
+    <div class="interp-card">
+      <span class="range-badge badge-high">得分高（≥85%）</span>
+      <div class="highlight-card">
+        您的孩子在阅读的五个核心要素上发展良好。他很可能已经建立了自主阅读习惯，能流畅地从文本中提取信息并进行深层理解。这是一个宝贵的认知资产——阅读能力强的孩子，在各学科的学习中都有"隐形加速度"。
+      </div>
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-high">中等偏高（70%-84%）</span>
+      您的孩子具备基本的阅读能力，但在某些要素上（如阅读流畅度或深层理解）可能还有提升空间。他可能能读但不够快，或者能理解字面意思但缺乏推理深度。建议通过"精读+泛读"组合来提升阅读深度和广度。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-mid-low">中等偏低（50%-69%）</span>
+      测评显示您的孩子在阅读的某些核心环节可能存在薄弱点。常见表现为：朗读磕巴（流畅度不足）、阅读后说不出主要内容（理解深度不够）、遇到生词就不想读了（词汇量有缺口）。建议回到对应的基础要素进行针对性训练。
+    </div>
+    <div class="interp-card">
+      <span class="range-badge badge-low">得分低（＜50%）</span>
+      您的孩子在阅读能力上可能存在较明显的困难，需要系统性评估和干预。请先排查：①语音意识——能否准确听出和分辨音素？②识字量——是否因为字不认识导致阅读断链？③阅读环境——家中是否有触手可及的适龄读物？④阅读体验——是否有过因"读不好"被批评的负面经历？
+    </div>
+  </div>
+
+  <h3>针对性建议方案（本维度 5 条）</h3>
+  <ol class="suggestion-list">
+    <li>
+      <strong>阅读习惯建立的黄金阶梯</strong>
+      <table>
+        <tr><th>阶段</th><th>目标</th><th>具体操作</th></tr>
+        <tr><td>0-3岁</td><td>建立"书=快乐"的联结</td><td>每天抱着读绘本10-15分钟</td></tr>
+        <tr><td>3-6岁</td><td>培养自主绘本阅读</td><td>图多字少绘本，鼓励孩子自己翻看、讲述</td></tr>
+        <tr><td>一年级</td><td>拼音桥梁书过渡</td><td>选择带拼音的读物，建立"字→音→义"通路</td></tr>
+        <tr><td>二年级</td><td>建立自主阅读习惯</td><td>必须脱离拼音，每天固定阅读时间</td></tr>
+      </table>
+    </li>
+    <li>
+      <strong>三步阅读法</strong>
+      <div class="sub-list">
+        · <strong>看一看</strong>：快速浏览目录和大纲，判断书类型，确定阅读目的<br>
+        · <strong>画一画</strong>：用符号标记段落结构、核心句子、关键词<br>
+        · <strong>写一写</strong>：读完后再记笔记，写关键词并梳理联系，用白纸画出全文重点关系图
+      </div>
+    </li>
+    <li>
+      <strong>"精读+泛读"双轨制</strong>
+      <div class="sub-list">
+        · <strong>精读</strong>（每天15-20分钟）：选1篇短文，用三步法深度处理，训练归纳中心思想和推理能力<br>
+        · <strong>泛读</strong>（每周2-3次，每次30分钟+）：选孩子自选的"闲书"，不设任务、不提问、纯粹享受阅读<br>
+        · 杂志里的短文非常适合体验中心思想，看完后故事会升华，直接训练阅读理解
+      </div>
+    </li>
+    <li>
+      <strong>把阅读和表达绑定——最好的输入需要输出来巩固</strong>
+      <div class="sub-list">
+        · 读完让孩子"说来听听"——用自己的话复述，不必追求完美<br>
+        · 口头作文法：低龄孩子讲一件事，家长一字不差记下来，然后读给孩子听<br>
+        · 建立"家庭阅读分享时间"：每周一次，每人分享本周读到的最有意思的内容
+      </div>
+    </li>
+    <li>
+      <strong>治"阅读厌食症"——十个孩子九个的问题是"没遇到对的书"</strong>
+      <div class="sub-list">
+        · 选书权还给孩子：漫画、科幻、恐龙、公主……只要他愿意读，什么类型起步都可以<br>
+        · 不要追求数量——书买太多，孩子感觉书在家里就是装饰品，更不愿意读<br>
+        · 创造"书的曝光"：家里设阅读角、常逛书店/图书馆<br>
+        · 不要边看边纠正——不要在孩子阅读时不断纠正发音、解释词义、问理解没有
+      </div>
+    </li>
+  </ol>
+
+  <div class="page-footer">
+    <div class="wechat">微信号：ww1987870012</div>
+    如需深度 1v1 报告解读，请添加微信预约。每个孩子都值得被真正看见。
+  </div>
+</div>
+
+</body>
+</html>

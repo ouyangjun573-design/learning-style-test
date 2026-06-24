@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>马维斯 · 发布执行看板</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+
+  /* ── Header ── */
+  .header {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    margin-bottom: 20px; gap: 12px;
+  }
+  .header h1 {
+    font-size: 22px; font-weight: 700; letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header h1 small {
+    font-size: 13px; font-weight: 400; -webkit-text-fill-color: #888;
+    color: #888; margin-left: 8px;
+  }
+  .date-selector {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .date-selector label {
+    font-size: 13px; color: #666; white-space: nowrap;
+  }
+  .date-selector select {
+    padding: 6px 12px; border: 1px solid #d0d5dd; border-radius: 8px;
+    font-size: 14px; background: #fff; color: #1a1a2e;
+    appearance: auto; cursor: pointer;
+  }
+
+  /* ── Summary Cards ── */
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: #fff; border-radius: 12px; padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: transform 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card .label { font-size: 12px; color: #888; margin-bottom: 4px; }
+  .card .value { font-size: 26px; font-weight: 700; line-height: 1.2; }
+  .card .sub { font-size: 12px; color: #999; margin-top: 2px; }
+  .card-total .value { color: #1a1a2e; }
+  .card-published .value { color: #16a34a; }
+  .card-failed .value { color: #dc2626; }
+  .card-engagement .value { color: #2563eb; }
+
+  /* ── Chart Rows ── */
+  .chart-row { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+  .chart-card {
+    background: #fff; border-radius: 12px; padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .chart-card h3 {
+    font-size: 14px; font-weight: 600; color: #444; margin-bottom: 12px;
+  }
+  .chart-card .chart-wrap { width: 100%; }
+
+  /* ── Platform Bar + Timeline side by side on wide screens ── */
+  .chart-pair {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+  }
+
+  /* ── Error Log ── */
+  .error-card {
+    background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px;
+    margin-bottom: 16px;
+  }
+  .error-card h3 {
+    font-size: 14px; font-weight: 600; color: #991b1b; margin-bottom: 8px;
+  }
+  .error-card .error-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 8px 10px; background: #fff; border-radius: 8px; margin-bottom: 6px;
+    font-size: 13px; border-left: 3px solid #dc2626;
+  }
+  .error-card .error-item:last-child { margin-bottom: 0; }
+  .error-card .error-time { color: #888; white-space: nowrap; min-width: 72px; font-size: 12px; }
+  .error-card .error-msg { color: #555; }
+  .error-card .no-errors { color: #16a34a; font-size: 14px; padding: 4px 0; }
+
+  /* ── Trend Chart ── */
+  .trend-card {
+    background: #fff; border-radius: 12px; padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 16px;
+  }
+  .trend-card h3 {
+    font-size: 14px; font-weight: 600; color: #444; margin-bottom: 12px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center; font-size: 12px; color: #aaa; padding: 24px 0 8px;
+    line-height: 1.6;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .header h1 { font-size: 18px; }
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .chart-pair { grid-template-columns: 1fr; }
+    .card .value { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>📊 马维斯发布看板 <small>Marvis Execution Dashboard</small></h1>
+    <div class="date-selector">
+      <label for="datePicker">日期</label>
+      <select id="datePicker"></select>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid" id="summaryGrid">
+    <div class="card card-total">
+      <div class="label">总任务</div>
+      <div class="value" id="valTotal">--</div>
+      <div class="sub" id="subTotal"></div>
+    </div>
+    <div class="card card-published">
+      <div class="label">已发布</div>
+      <div class="value" id="valPublished">--</div>
+      <div class="sub" id="subPublished"></div>
+    </div>
+    <div class="card card-failed">
+      <div class="label">失败</div>
+      <div class="value" id="valFailed">--</div>
+      <div class="sub" id="subFailed"></div>
+    </div>
+    <div class="card card-engagement">
+      <div class="label">互动量</div>
+      <div class="value" id="valEngagement">--</div>
+      <div class="sub" id="subEngagement"></div>
+    </div>
+  </div>
+
+  <!-- Platform Bar + Timeline -->
+  <div class="chart-pair">
+    <div class="chart-card">
+      <h3>平台发布 vs 失败</h3>
+      <div class="chart-wrap"><canvas id="platformChart" height="200"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>发布时间线</h3>
+      <div class="chart-wrap"><canvas id="timelineChart" height="200"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Error Log -->
+  <div class="error-card" id="errorCard">
+    <h3>⚠️ 错误日志</h3>
+    <div id="errorList"></div>
+  </div>
+
+  <!-- Trend -->
+  <div class="trend-card">
+    <h3>近 7 天趋势</h3>
+    <canvas id="trendChart" height="180"></canvas>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    数据由马维斯每日自动回写。Claude 每周读取分析，优化下周内容策略。
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  Demo Data — last 7 days
+// ═══════════════════════════════════════════════════
+
+const PLATFORMS = ['抖音', '小红书', 'B站', '快手', '视频号'];
+
+// Helper: pick a random-ish time string in a range
+function rtime(h1, m1, h2, m2) {
+  const t = Math.floor(Math.random() * ((h2-h1)*60 + (m2-m1))) + h1*60 + m1;
+  const h = String(Math.floor(t/60)).padStart(2,'0');
+  const m = String(t%60).padStart(2,'0');
+  return `${h}:${m}`;
+}
+
+const DAYS = [];
+const today = new Date();
+for (let i = 6; i >= 0; i--) {
+  const d = new Date(today);
+  d.setDate(d.getDate() - i);
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  DAYS.push(`${y}-${m}-${day}`);
+}
+
+// Generate random report per day
+const reportData = {};
+DAYS.forEach((date, idx) => {
+  const dayFactor = 1 + (idx === 5 ? 0.3 : idx === 6 ? -0.2 : 0); // weekend-ish
+  const platforms = PLATFORMS.map((name, pi) => {
+    const base = Math.floor(Math.random() * 6 + 3 * dayFactor);
+    const published = Math.floor(base * (0.7 + Math.random() * 0.25));
+    const failed = base - published;
+    const engagement = Math.floor(published * (20 + Math.random() * 80));
+    const times = [];
+    for (let t = 0; t < published; t++) {
+      times.push(rtime(8, 0, 12, 30));
+    }
+    return { name, published, failed, engagement, times };
+  });
+
+  const totalTasks = platforms.reduce((s, p) => s + p.published + p.failed, 0);
+  const totalPub = platforms.reduce((s, p) => s + p.published, 0);
+  const totalFail = platforms.reduce((s, p) => s + p.failed, 0);
+  const totalEng = platforms.reduce((s, p) => s + p.engagement, 0);
+
+  // Some days have errors
+  const errors = [];
+  if (totalFail > 0 && Math.random() > 0.3) {
+    platforms.forEach(p => {
+      if (p.failed > 0) {
+        const n = Math.min(p.failed, 1 + Math.floor(Math.random() * 2));
+        for (let e = 0; e < n; e++) {
+          const reasons = [
+            `${p.name}: 视频审核不通过 (违规内容)`,
+            `${p.name}: API 限流超时`,
+            `${p.name}: 文件上传失败 (网络错误)`,
+            `${p.name}: 标题包含敏感词，拒绝发布`,
+            `${p.name}: 封面图尺寸不符合要求`,
+          ];
+          errors.push({
+            time: rtime(8, 0, 14, 0),
+            msg: reasons[Math.floor(Math.random() * reasons.length)],
+          });
+        }
+      }
+    });
+  }
+
+  reportData[date] = { platforms, totalTasks, totalPub, totalFail, totalEng, errors };
+});
+
+// ═══════════════════════════════════════════════════
+//  Render
+// ═══════════════════════════════════════════════════
+
+const datePicker = document.getElementById('datePicker');
+let platformChart, timelineChart, trendChart;
+
+// Populate date picker
+DAYS.forEach(d => {
+  const opt = document.createElement('option');
+  opt.value = d;
+  opt.textContent = d;
+  datePicker.appendChild(opt);
+});
+datePicker.value = DAYS[DAYS.length - 1];
+datePicker.addEventListener('change', render);
+
+function render() {
+  const date = datePicker.value;
+  const data = reportData[date];
+  if (!data) return;
+
+  // ── Summary ──
+  document.getElementById('valTotal').textContent = data.totalTasks;
+  document.getElementById('valPublished').textContent = data.totalPub;
+  document.getElementById('valFailed').textContent = data.totalFail;
+  document.getElementById('valEngagement').textContent = data.totalEng;
+
+  const rate = data.totalTasks > 0 ? (data.totalPub / data.totalTasks * 100).toFixed(1) : '0.0';
+  document.getElementById('subTotal').textContent = `${PLATFORMS.length} 个平台`;
+  document.getElementById('subPublished').textContent = `成功率 ${rate}%`;
+  document.getElementById('subFailed').textContent = data.totalFail > 0 ? `需关注` : `无故障`;
+  document.getElementById('subEngagement').textContent = `平均 ${data.totalPub > 0 ? Math.round(data.totalEng / data.totalPub) : 0}/篇`;
+
+  // ── Platform Bar ──
+  const ctx1 = document.getElementById('platformChart').getContext('2d');
+  if (platformChart) platformChart.destroy();
+  platformChart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: data.platforms.map(p => p.name),
+      datasets: [
+        {
+          label: '已发布',
+          data: data.platforms.map(p => p.published),
+          backgroundColor: 'rgba(22, 163, 74, 0.75)',
+          borderColor: '#16a34a',
+          borderWidth: 1,
+          borderRadius: 4,
+        },
+        {
+          label: '失败',
+          data: data.platforms.map(p => p.failed),
+          backgroundColor: 'rgba(220, 38, 38, 0.7)',
+          borderColor: '#dc2626',
+          borderWidth: 1,
+          borderRadius: 4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { boxWidth: 12, padding: 8, font: { size: 11 } } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+        y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 11 } } },
+      },
+    },
+  });
+
+  // ── Timeline ──
+  const ctx2 = document.getElementById('timelineChart').getContext('2d');
+  if (timelineChart) timelineChart.destroy();
+
+  // Aggregate times into hourly buckets
+  const hours = Array.from({length: 12}, (_, i) => `${String(i+8).padStart(2,'0')}:00`);
+  const allTimes = data.platforms.flatMap(p => p.times.map(t => ({platform: p.name, time: t})));
+  const buckets = hours.map(h => {
+    const hh = parseInt(h);
+    const count = allTimes.filter(t => {
+      const th = parseInt(t.time);
+      return th >= hh && th < hh + 1;
+    }).length;
+    return count;
+  });
+
+  timelineChart = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: hours,
+      datasets: [{
+        label: '发布次数',
+        data: buckets,
+        borderColor: '#2563eb',
+        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+        fill: true,
+        tension: 0.35,
+        pointRadius: 3,
+        pointBackgroundColor: '#2563eb',
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxTicksLimit: 8 } },
+        y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 10 } } },
+      },
+    },
+  });
+
+  // ── Error Log ──
+  const errorList = document.getElementById('errorList');
+  if (data.errors.length === 0) {
+    errorList.innerHTML = '<div class="no-errors">✅ 当前日期无发布失败记录</div>';
+  } else {
+    errorList.innerHTML = data.errors.map(e =>
+      `<div class="error-item"><span class="error-time">${e.time}</span><span class="error-msg">${e.msg}</span></div>`
+    ).join('');
+  }
+
+  // ── Trend (full 7-day) ──
+  const ctx3 = document.getElementById('trendChart').getContext('2d');
+  if (trendChart) trendChart.destroy();
+  const trendLabels = DAYS;
+  const trendPub = DAYS.map(d => reportData[d].totalPub);
+  const trendFail = DAYS.map(d => reportData[d].totalFail);
+
+  trendChart = new Chart(ctx3, {
+    type: 'line',
+    data: {
+      labels: trendLabels,
+      datasets: [
+        {
+          label: '已发布',
+          data: trendPub,
+          borderColor: '#16a34a',
+          backgroundColor: 'rgba(22, 163, 74, 0.08)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#16a34a',
+          borderWidth: 2,
+        },
+        {
+          label: '失败',
+          data: trendFail,
+          borderColor: '#dc2626',
+          backgroundColor: 'rgba(220, 38, 38, 0.05)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#dc2626',
+          borderWidth: 2,
+          borderDash: [5, 3],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { boxWidth: 12, padding: 8, font: { size: 11 } } },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, maxTicksLimit: 8 } },
+        y: { beginAtZero: true, ticks: { font: { size: 11 } } },
+      },
+    },
+  });
+}
+
+// Initial render
+render();
+</script>
+</body>
+</html>
