@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>小红书博主人设测评 | 30秒测出你的博主类型</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='85'%3E📱%3C/text%3E%3C/svg%3E">
+<meta name="description" content="20题测出你的小红书博主人设：输出方式、内容取向、呈现形态、更新节奏四维定位，附爆款选题与涨粉动作。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:linear-gradient(170deg,#FFF1F5 0%,#FFF7F0 45%,#FFFBF7 100%);color:#4A3728;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh;line-height:1.6}
+.c{max-width:600px;margin:0 auto;padding:20px 20px 40px}
+.pg{display:none}
+.pg.on{display:block;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.brand{text-align:center;font-size:15px;font-weight:600;color:#D9628A;padding:8px 0 20px;letter-spacing:.5px}
+.hero{text-align:center;padding:10px 0 22px}
+.em{font-size:46px;line-height:1.2;margin-bottom:10px}
+.h1{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px;color:#3A2B20}
+.h1 em{font-style:normal;color:#E8457E}
+.sub{font-size:15px;color:#8A7361}
+.card{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:12px;box-shadow:0 2px 16px rgba(200,80,120,.07)}
+.card h3{font-size:15px;font-weight:700;margin-bottom:12px;color:#3A2B20}
+.card ul{list-style:none}
+.card li{font-size:14px;color:#6B5546;list-style:none;padding:6px 0 6px 22px;position:relative}
+.card li:before{content:"·";position:absolute;left:8px;color:#E8457E;font-weight:700}
+.btn{display:block;width:100%;border:none;border-radius:14px;padding:16px 24px;font-size:18px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .12s}
+.btn:active{transform:scale(.98)}
+.btn-go{background:linear-gradient(135deg,#FF7BA9 0%,#E8457E 100%);color:#fff;box-shadow:0 6px 20px rgba(232,69,126,.28)}
+.btn-line{background:#fff;color:#E8457E;border:1.5px solid #FFD0DF}
+.tip{text-align:center;font-size:12.5px;color:#A89080;margin-top:14px;line-height:1.7}
+.prog{height:6px;background:#FFE4EC;border-radius:99px;overflow:hidden;margin-bottom:8px}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#FF9EC0,#E8457E);border-radius:99px;transition:width .3s ease}
+.pnum{font-size:12.5px;color:#A89080;text-align:right;margin-bottom:22px}
+.qn{font-size:12px;font-weight:700;color:#E8457E;letter-spacing:.5px;margin-bottom:8px}
+.qt{font-size:18px;font-weight:700;line-height:1.55;margin-bottom:22px;color:#3A2B20}
+.opt{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1.5px solid #FFE4EC;border-radius:14px;padding:16px 18px;margin-bottom:12px;font-size:15.5px;cursor:pointer;transition:all .15s;color:#4A3728}
+.opt:active{background:#FFF5F8;border-color:#FFB3CB}
+.opt .rd{width:20px;height:20px;border-radius:50%;border:2px solid #FFC9D8;flex:0 0 20px;margin-top:2px}
+.opt.sel{background:#FFF0F5;border-color:#E8457E}
+.opt.sel .rd{border-color:#E8457E;background:#E8457E;box-shadow:inset 0 0 0 3.5px #FFF0F5}
+.nav{display:flex;gap:12px;margin-top:18px}
+.nav .btn{font-size:15.5px;padding:14px}
+.btn-pv{background:#F5EDE6;color:#8A7361}
+.btn-nx{background:linear-gradient(135deg,#FF7BA9,#E8457E);color:#fff}
+.btn-nx:disabled{opacity:.45}
+.rh{text-align:center;font-size:12.5px;color:#A89080;letter-spacing:1px;margin-bottom:6px}
+.hi{text-align:center;font-size:15px;color:#8A7361;margin-bottom:10px}
+.h2{text-align:center;font-size:25px;font-weight:800;color:#3A2B20;line-height:1.35;margin-bottom:8px}
+.h2 em{font-style:normal;color:#E8457E}
+.code{text-align:center;font-size:13px;font-weight:700;color:#E8457E;letter-spacing:2px;margin-bottom:18px}
+.radar-wrap{background:#fff;border-radius:18px;padding:8px 0 4px;margin-bottom:12px;box-shadow:0 2px 16px rgba(200,80,120,.07);text-align:center}
+canvas{max-width:100%}
+.dim{background:#fff;border-radius:16px;padding:16px 20px;margin-bottom:10px;box-shadow:0 2px 16px rgba(200,80,120,.06)}
+.dim-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.dim-name{font-size:14.5px;font-weight:700;color:#3A2B20}
+.tag{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:99px;background:#FFF0F5;color:#E8457E}
+.tag.bal{background:#F2F0EB;color:#9A8A78}
+.dim-desc{font-size:13.5px;color:#7A6555;line-height:1.65}
+.sec-t{font-size:16px;font-weight:800;color:#3A2B20;margin:22px 0 12px;padding-left:11px;border-left:4px solid #E8457E;line-height:1.3}
+.li-item{background:#fff;border-radius:13px;padding:13px 17px;margin-bottom:9px;font-size:14.5px;color:#5A4636;line-height:1.65;box-shadow:0 1px 10px rgba(200,80,120,.05)}
+.li-item b{color:#E8457E}
+.bio{background:#FFF8FA;border:1.5px dashed #FFC9D8;border-radius:14px;padding:16px 18px;font-size:14px;color:#5A4636;line-height:1.8;margin-bottom:9px;white-space:pre-wrap}
+.cp{display:block;width:100%;background:#fff;border:1.5px solid #FFD0DF;color:#E8457E;border-radius:12px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.surprise{background:linear-gradient(135deg,#FFF3F7,#FFF9F2);border:1.5px solid #FFD9E5;border-radius:16px;padding:20px 22px;margin:16px 0}
+.surprise h4{font-size:16px;font-weight:800;color:#E8457E;margin-bottom:8px}
+.surprise p{font-size:13.5px;color:#7A6555;line-height:1.75}
+.surprise ul{margin-top:10px}
+.surprise li{font-size:13.5px;color:#6B5546;list-style:none;padding:4px 0 4px 18px;position:relative}
+.surprise li:before{content:"✓";position:absolute;left:0;color:#E8457E;font-weight:700}
+.footer{text-align:center;font-size:11.5px;color:#B8A395;line-height:1.8;margin-top:26px}
+.row2{display:flex;gap:10px}
+.row2>*{flex:1}
+.toast{position:fixed;left:50%;bottom:60px;transform:translateX(-50%) translateY(20px);background:rgba(58,43,32,.92);color:#fff;font-size:14.5px;padding:12px 22px;border-radius:99px;opacity:0;transition:all .28s ease;pointer-events:none;z-index:99;white-space:nowrap}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.dl{display:none}
+@media(max-width:400px){
+.h1{font-size:22px}.qt{font-size:16px}.opt{font-size:14.5px;padding:14px 15px}
+.h2{font-size:21px}.btn{font-size:16px}.em{font-size:40px}
+}
+</style>
+</head>
+<body>
+<div class="c">
+
+  <!-- ========== 落地页 ========== -->
+  <div class="pg on" id="pg0">
+    <div class="brand">✦ 小红书博主人设测评</div>
+    <div class="hero">
+      <div class="em">📱</div>
+      <div class="h1">你是<em>哪一种</em>博主？</div>
+      <div class="sub">20 道题 · 1 分钟 · 测出你的天生人设</div>
+    </div>
+
+    <div class="card">
+      <h3>测完你会拿到</h3>
+      <ul>
+      <li>你的人设代号 + 四维雷达图</li>
+      <li>天生适合你的内容形态（图文 / 长文 / 干货 / 脑洞）</li>
+      <li>5 个能直接用的爆款选题方向</li>
+      <li>3 条最省力的涨粉动作</li>
+      <li>一条复制就能用的小红书简介</li>
+      </ul>
+    </div>
+
+    <button class="btn btn-go" onclick="go()">开始测试（免费）</button>
+    <div class="tip">没有对错 · 别想「应该怎样」，选你<strong>真实会做</strong>的那个</div>
+    <div class="footer">参考 Felder-Soloman 学习风格量表结构 · 已改造为博主人设模型<br>结果仅供内容定位参考</div>
+  </div>
+
+  <!-- ========== 答题页 ========== -->
+  <div class="pg" id="pg1">
+    <div class="prog"><i id="pbar"></i></div>
+    <div class="pnum"><span id="pnow">1</span> / 20</div>
+    <div class="qn" id="qdim">输出方式</div>
+    <div class="qt" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="nav">
+      <button class="btn btn-pv" id="bprev" onclick="prev()">上一题</button>
+      <button class="btn btn-nx" id="bnext" onclick="next()" disabled>下一题 →</button>
+    </div>
+  </div>
+
+  <!-- ========== 结果页 ========== -->
+  <div class="pg" id="pg2">
+    <div class="rh">你 的 博 主 人 设</div>
+    <div class="hi" id="rhi"></div>
+    <div class="h2" id="rname"></div>
+    <div class="code" id="rcode"></div>
+    <div style="text-align:center;font-size:11.5px;color:#A89080;margin:-12px 0 16px">四个字母依次对应：输出方式 · 内容取向 · 呈现形态 · 更新节奏</div>
+
+    <div class="radar-wrap">
+      <canvas id="radar" width="600" height="600" style="width:300px;height:300px"></canvas>
+    </div>
+
+    <div class="sec-t">四个维度，你的偏向</div>
+    <div id="dims"></div>
+
+    <div class="sec-t">你的天生优势</div>
+    <div id="advs"></div>
+
+    <div class="sec-t">5 个能直接开的选题</div>
+    <div id="topics"></div>
+
+    <div class="sec-t">3 条最省力的涨粉动作</div>
+    <div id="acts"></div>
+
+    <div class="sec-t">复制就用：你的小红书简介</div>
+    <div class="bio" id="bio"></div>
+    <button class="cp" onclick="cpBio()">复制简介文案</button>
+
+    <div class="surprise">
+      <h4>再送你一个小惊喜</h4>
+      <p>人设只是起点，能持续出内容才是关键。我把「人设 → 选题 → 发布节奏」串成了一套可直接照做的流程：</p>
+      <ul>
+        <li>4 周选题日历（每周 3 条，直接抄）</li>
+        <li>7 种开头钩子模板</li>
+        <li>30 天更新打卡表</li>
+      </ul>
+    </div>
+
+    <div class="row2" style="margin-top:16px">
+      <button class="btn btn-line" onclick="saveCard()">保存分享卡</button>
+      <button class="btn btn-line" onclick="location.reload()">重新测</button>
+    </div>
+    <div class="tip">把分享卡发出去，@三个同赛道博主一起测</div>
+    <div class="footer">博主人设模型 · 参考 Felder-Soloman ILS 结构改造<br>人设不是限制，是你最省力的起跑线</div>
+  </div>
+
+</div>
+<canvas id="share" width="1080" height="1440" class="dl"></canvas>
+<div id="toast" class="toast"></div>
+
+<script>
+/* ---------- 维度定义 ---------- */
+var DIMS = [
+  {id:0, name:"输出方式", a:{k:"EX", n:"外向输出型", s:"E"}, b:{k:"IN", n:"内省沉淀型", s:"I"}},
+  {id:1, name:"内容取向", a:{k:"DE", n:"干货细节型", s:"D"}, b:{k:"CR", n:"灵感创意型", s:"C"}},
+  {id:2, name:"呈现形态", a:{k:"VI", n:"视觉图文型", s:"V"}, b:{k:"VE", n:"文字长文型", s:"T"}},
+  {id:3, name:"更新节奏", a:{k:"ST", n:"高频稳定型", s:"S"}, b:{k:"BL", n:"爆发慢更型", s:"B"}}
+];
+
+/* ---------- 20 题 ---------- */
+var Q = [
+  {d:0, q:"想到一个好选题，你第一反应是？", o:[
+    {k:"a", t:"马上发出去，边发边改"},
+    {k:"b", t:"先在备忘录里写清楚再说"}]},
+  {d:0, q:"粉丝在评论区追问细节，你会？", o:[
+    {k:"a", t:"直接在评论里再讲一遍，越聊越来劲"},
+    {k:"b", t:"整理成一条新笔记统一回复"}]},
+  {d:0, q:"拍素材的时候你更习惯？", o:[
+    {k:"a", t:"一边拍一边说，现场想词"},
+    {k:"b", t:"先想好脚本，按顺序拍"}]},
+  {d:0, q:"让你连麦或者露脸直播，你的感觉是？", o:[
+    {k:"a", t:"挺自然，人多反而更兴奋"},
+    {k:"b", t:"有点消耗，更愿意剪好视频再发"}]},
+  {d:0, q:"一条笔记爆了，你会？", o:[
+    {k:"a", t:"趁热马上追更第二条"},
+    {k:"b", t:"先复盘这条为什么爆，再决定"}]},
+
+  {d:1, q:"你更容易被哪类笔记吸引？", o:[
+    {k:"a", t:"步骤清单、价格对比、实测数据"},
+    {k:"b", t:"观点、故事、脑洞和反常识"}]},
+  {d:1, q:"别人夸你内容，你最想听到的是？", o:[
+    {k:"a", t:"太实用了，我照着做了"},
+    {k:"b", t:"这个角度我从没想过"}]},
+  {d:1, q:"准备一条新笔记，你的起点是？", o:[
+    {k:"a", t:"自己踩过的坑、真实经历"},
+    {k:"b", t:"一个突然冒出来的念头"}]},
+  {d:1, q:"看到热榜上的新概念，你会？", o:[
+    {k:"a", t:"先去查资料，搞清楚它到底怎么用"},
+    {k:"b", t:"马上联想它还能连到什么别的"}]},
+  {d:1, q:"你的草稿箱里最多的是？", o:[
+    {k:"a", t:"还没整理完的操作步骤和清单"},
+    {k:"b", t:"没写完的半句话和随手灵感"}]},
+
+  {d:2, q:"同样的内容，你更愿意做成？", o:[
+    {k:"a", t:"好看的图文九宫格 / 短视频"},
+    {k:"b", t:"一篇能说透的长文"}]},
+  {d:2, q:"你会为了画面效果多花时间吗？", o:[
+    {k:"a", t:"会，封面和排版必须顺眼"},
+    {k:"b", t:"不太会，把话说清楚更重要"}]},
+  {d:2, q:"一图流和长文字，你自己刷哪个更多？", o:[
+    {k:"a", t:"图，信息快，看得爽"},
+    {k:"b", t:"字，有细节才看得进去"}]},
+  {d:2, q:"要教别人一个方法，你会？", o:[
+    {k:"a", t:"截图 + 箭头标注，一眼看懂"},
+    {k:"b", t:"分点写清楚，讲透原理"}]},
+  {d:2, q:"你觉得最难的是？", o:[
+    {k:"a", t:"把复杂的事压成一张图"},
+    {k:"b", t:"把话写得短又不丢重点"}]},
+
+  {d:3, q:"你的更新状态更像？", o:[
+    {k:"a", t:"小步不断，几乎天天冒个泡"},
+    {k:"b", t:"憋很久，出一篇就想炸"}]},
+  {d:3, q:"一条笔记数据一般，你会？", o:[
+    {k:"a", t:"换角度继续发，用数量找感觉"},
+    {k:"b", t:"停几天，想清楚方向再发"}]},
+  {d:3, q:"让你每天固定时间发，你的感受是？", o:[
+    {k:"a", t:"有节奏反而轻松"},
+    {k:"b", t:"被框住了，状态好才想发"}]},
+  {d:3, q:"三个月后你希望账号是？", o:[
+    {k:"a", t:"稳定几十条，每类都试过"},
+    {k:"b", t:"只有几条，但条条能打"}]},
+  {d:3, q:"别人问你怎么起号，你会说？", o:[
+    {k:"a", t:"别想太多，先发满 50 条"},
+    {k:"b", t:"先想清楚人设，别浪费好内容"}]}
+];
+
+/* ---------- 8 种人设档案 ---------- */
+var P = {
+EX:{n:"自来熟型博主", pick:"不端着、敢开口，你的真实感就是流量",
+  d:"你天生会「说话」。镜头一开、开口一讲，节奏自然就出来了。观众喜欢你不是因为你多专业，而是因为你说人话。",
+  adv:["现场感强，随便一段日常都能变成故事","评论区和私信是你的主场，粉丝黏性高","敢试新形式，起号速度快"],
+  tp:["「我第一次做 XX 的翻车现场」实录","每天一条 60 秒碎碎念，记录真实进度","评论区高赞问题，逐条拍成回应视频","带粉丝一起做一件事（连更打卡）","把专业内容讲成朋友聊天"],
+  act:["固定口播开场 3 秒钩子，重复用同一个","每周至少 2 次在评论区亲自回复到第 20 条","用「追更」结构做系列，让人点关注等下一集"]},
+IN:{n:"闷声深耕型博主", pick:"你不出声的时候，内容在替你说",
+  d:"你不爱表演，但你想得比谁都深。你的优势不是热闹，是密度——一条顶别人五条。别逼自己做日更脸，做「一出手就有货」的那种人。",
+  adv:["信息密度高，容易被收藏","复盘能力强，能持续优化","内容寿命长，一条能持续涨粉"],
+  tp:["把一件事做到极致的完整复盘","新手最容易踩的 7 个坑（附解决方案）","同赛道 5 个账号拆解对比","我用了 30 天的工具/方法实测","一条讲透一个概念，做成系列"],
+  act:["先写长文再拆成图文，一份内容吃三次","封面统一加「深度」「完整版」字样","用评论区置顶补细节，引导收藏"]},
+DE:{n:"干货小百科", pick:"你不讲道理，你给答案",
+  d:"你脑子里装的是步骤、清单、对比表。粉丝来你这儿不是听故事，是来拿工具的。你的内容天然抗取关，因为有用。",
+  adv:["内容收藏率高，算法喜欢","可复用性强，能做成资料包","信任感建立快，带货转化好"],
+  tp:["XX 全流程清单（照着做就行）","同价位 5 款实测对比表","新人 7 天入门计划（可打印）","我整理的 XX 资源库，一次给全","踩坑合集：这 6 件事别做"],
+  act:["统一用「清单体」封面，做成系列编号","每条结尾留一句「需要完整版评论区扣 1」","把高频内容整理成资料包做引流钩子"]},
+CR:{n:"脑洞制造机", pick:"别人总结现象，你重新定义它",
+  d:"你不太按套路出牌，脑子里的连接跳得快。你不一定实用，但你让人眼前一亮——这是稀缺能力。要防的是：太飘，落不了地。",
+  adv:["选题独特，容易被二创传播","观点鲜明，评论区热闹","跨领域联想强，能开新赛道"],
+  tp:["如果 XX 是个人，它会怎么发小红书","把两个不相关的行业拼在一起会发生什么","反常识：为什么大家都在做的事是错的","我预测 XX 明年会火（附理由）","用一条笔记讲一个奇怪但真实的现象"],
+  act:["每条结尾补一句「具体怎么做，下条讲」","固定一个视觉符号做记忆点（配色/表情/字卡）","把最飘的观点配一张实操清单兜底"]},
+VI:{n:"画报感博主", pick:"你连随手拍都比别人好看",
+  d:"你对画面有天然要求：留白、配色、构图。同样一件事，你做出来就是更想让人点进去。视觉是你的第一层竞争力。",
+  adv:["封面点击率高，起量快","商业合作适配度高","内容有审美溢价，容易被记住"],
+  tp:["同一场景的 6 种拍法对比","xx 元预算拍出高级感（附参数）","我的固定封面模板，直接抄","一张图讲清一个方法（信息图）","改造前后对比：从土到好"],
+  act:["固定 3 套封面模板循环用，形成辨识度","每条至少 1 张「能单独当海报」的图","建一个配色库，所有笔记统一色系"]},
+VE:{n:"长文叙事派", pick:"你能把一件小事写出重量",
+  d:"你擅长把复杂说清楚，把平淡写出情绪。你的读者不是刷到你，是「读」到你。这类人涨粉慢，但粉丝极稳。",
+  adv:["表达完整，容易建立信任","长尾流量好，笔记能一直带来关注","适合做深度个人 IP 和付费内容"],
+  tp:["我这一年做 XX 的全部心路（长文）","一件事的三层理解：表象、原因、本质","给三年前的自己写一封信（讲方法）","读完这 5 本书，我的做法变了","一次失败经历，和它教我的 3 件事"],
+  act:["正文首段压到 3 行内，别一上来就长","做成「上/中/下」系列，制造追更","结尾固定一句提问，把评论区打开"]},
+ST:{n:"日更不掉线博主", pick:"你不靠灵感，你靠系统",
+  d:"你最大的武器是持续。别人等状态，你按表执行。这个赛道 90% 的人死在断更，你只要不断就赢一半。",
+  adv:["算法友好，权重稳定","素材库越滚越大，越来越省力","执行力和抗压是被低估的竞争力"],
+  tp:["连续 30 天做 XX 的第 N 天（系列记录）","今天学到一个点，马上讲给你听","每日一问：粉丝提问现场答","小进度打卡：从 0 到 1000 粉实录","每周固定栏目：本周我踩的坑"],
+  act:["建 30 条素材库，永远有存货","固定发布时间（建议 7:00/12:00/19:00）","做成系列编号：第 1 期、第 2 期……"]},
+BL:{n:"憋大招型博主", pick:"你出得少，但每次都有人转",
+  d:"你不喜欢碎碎念，你要的是「一条立住」。你的节奏是低频高质，代价是必须每次都够狠。别硬学日更，学「憋准」。",
+  adv:["单条爆发力强，容易出爆款","内容质感高，商业报价高","不会被更新量绑架，可持续"],
+  tp:["我用 3 个月做了一件事，完整拆给你","这可能是全网最全的 XX 指南","花 XX 元/XX 天，我测完了所有方案","一次性讲完 XX 的全部玩法（长图文）","年度总结：我删掉了这 10 个方法"],
+  act:["每条都按「可被收藏一年」的标准做","发布前先在 3 个群里小范围测标题","把一条内容拆成 5 条切片，拉长生命周期"]}
+};
+
+/* ---------- 状态 ---------- */
+var idx = 0;
+var ans = new Array(Q.length);
+for (var i=0;i<ans.length;i++) ans[i] = null;
+var timer = null;
+
+/* ---------- 页面切换 ---------- */
+function showPg(n){
+  var pgs = document.querySelectorAll(".pg");
+  for (var i=0;i<pgs.length;i++) pgs[i].className = "pg";
+  document.getElementById("pg"+n).className = "pg on";
+  window.scrollTo(0,0);
+}
+function go(){ showPg(1); idx = 0; render(); }
+
+/* ---------- 渲染题目 ---------- */
+function render(){
+  var q = Q[idx];
+  document.getElementById("pnow").textContent = idx+1;
+  document.getElementById("pbar").style.width = ((idx)/Q.length*100)+"%";
+  document.getElementById("qdim").textContent = DIMS[q.d].name;
+  document.getElementById("qtext").textContent = q.q;
+  var box = document.getElementById("opts");
+  box.innerHTML = "";
+  for (var i=0;i<q.o.length;i++){
+    (function(i){
+      var o = q.o[i];
+      var el = document.createElement("div");
+      el.className = "opt" + (ans[idx]===o.k ? " sel" : "");
+      el.innerHTML = '<div class="rd"></div><div>'+o.t+'</div>';
+      el.onclick = function(){
+        ans[idx] = o.k;
+        var all = box.querySelectorAll(".opt");
+        for (var j=0;j<all.length;j++) all[j].className = "opt";
+        el.className = "opt sel";
+        document.getElementById("bnext").disabled = false;
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          if (idx < Q.length-1) { idx++; render(); }
+          else { finish(); }
+        }, 320);
+      };
+      box.appendChild(el);
+    })(i);
+  }
+  document.getElementById("bnext").disabled = (ans[idx]===null);
+  document.getElementById("bprev").style.visibility = idx===0 ? "hidden" : "visible";
+}
+function next(){
+  if (ans[idx]===null) return;
+  clearTimeout(timer);
+  if (idx < Q.length-1){ idx++; render(); } else { finish(); }
+}
+function prev(){
+  clearTimeout(timer);
+  if (idx>0){ idx--; render(); }
+}
+
+/* ---------- 计分 ---------- */
+function calc(){
+  var cnt = [0,0,0,0];      // 每题维度 a 选项命中数
+  var tot = [0,0,0,0];      // 维度总题数
+  for (var i=0;i<Q.length;i++){
+    var d = Q[i].d;
+    tot[d]++;
+    if (ans[i] === "a") cnt[d]++;
+  }
+  var out = [];
+  for (var d2=0; d2<4; d2++){
+    var a = cnt[d2], b = tot[d2]-a;
+    var absv = Math.abs(a-b);
+    var side = (a>b) ? "a" : (b>a ? "b" : "a");
+    var level = absv>=3 ? "明显偏向" : (absv>0 ? "轻微偏好" : "两边都像");
+    var dim = DIMS[d2];
+    var win = dim[side];
+    out.push({
+      dim: dim.name,
+      key: win.k,
+      name: win.n,
+      other: dim[side==="a"?"b":"a"].n,
+      aCount: a, bCount: b, abs: absv,
+      level: level,
+      bal: absv===0
+    });
+  }
+  return out;
+}
+
+/* ---------- 出结果 ---------- */
+function finish(){
+  var res = calc();
+  document.getElementById("pbar").style.width = "100%";
+
+  // 主副人设：abs 最大的两个
+  var sorted = res.slice().sort(function(x,y){ return y.abs - x.abs; });
+  var main = sorted[0], second = sorted[1];
+
+  document.getElementById("rhi").textContent = "你是 —— " + main.name;
+  document.getElementById("rname").innerHTML = "<em>" + P[main.key].n + "</em>";
+  document.getElementById("rcode").textContent = res.map(function(r){ return r.key; }).join(" · ");
+
+  // 雷达
+  drawRadar(res);
+
+  // 维度卡片
+  var dh = "";
+  for (var i=0;i<res.length;i++){
+    var r = res[i];
+    dh += '<div class="dim"><div class="dim-top"><span class="dim-name">'+r.dim+'：'+r.name+'</span>'
+       + '<span class="tag'+(r.bal?' bal':'')+'">'+r.level+'</span></div>'
+       + '<div class="dim-desc">'+P[r.key].d+'</div></div>';
+  }
+  document.getElementById("dims").innerHTML = dh;
+
+  // 优势：主人设 + 副人设
+  var ah = "";
+  var advMain = P[main.key].adv;
+  for (var m=0;m<advMain.length;m++) ah += '<div class="li-item">'+advMain[m]+'</div>';
+  var advSec = P[second.key].adv;
+  ah += '<div class="li-item"><b>叠加 '+second.name+'：</b>'+advSec[0]+'</div>';
+  document.getElementById("advs").innerHTML = ah;
+
+  // 选题
+  var th = "";
+  var tps = P[main.key].tp;
+  for (var t=0;t<tps.length;t++) th += '<div class="li-item">'+(t+1)+'. '+tps[t]+'</div>';
+  document.getElementById("topics").innerHTML = th;
+
+  // 动作
+  var ch = "";
+  var acts = P[main.key].act;
+  for (var c=0;c<acts.length;c++) ch += '<div class="li-item">'+acts[c]+'</div>';
+  document.getElementById("acts").innerHTML = ch;
+
+  // 简介
+  var bio = main.name + " ｜ " + P[main.key].pick + "\n"
+          + "在这里聊：" + DIMS[0].name + "×" + DIMS[1].name + "，以及我踩过的坑\n"
+          + "每周更新 · 收藏夹比关注更值得";
+  document.getElementById("bio").textContent = bio;
+
+  showPg(2);
+}
+
+/* ---------- 雷达图 ---------- */
+function drawRadar(res){
+  var cv = document.getElementById("radar");
+  var ctx = cv.getContext("2d");
+  var W = cv.width, H = cv.height;
+  var cx = W/2, cy = H/2 + 6, R = W*0.31;
+  ctx.clearRect(0,0,W,H);
+
+  // 网格
+  for (var g=1; g<=4; g++){
+    ctx.beginPath();
+    var rr = R*g/4;
+    for (var i=0;i<4;i++){
+      var ang = -Math.PI/2 + i*Math.PI/2;
+      var x = cx + Math.cos(ang)*rr, y = cy + Math.sin(ang)*rr;
+      if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = "#FFE4EC";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+  // 轴线
+  for (var j=0;j<4;j++){
+    var a2 = -Math.PI/2 + j*Math.PI/2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx+Math.cos(a2)*R, cy+Math.sin(a2)*R);
+    ctx.strokeStyle = "#FFE9F0";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  // 数据多边形：偏向 a 侧则向外伸，偏向 b 侧则向内收
+  var pts = [];
+  for (var k=0;k<4;k++){
+    var r = res[k];
+    var dom = (r.aCount > r.bCount) ? r.aCount : r.bCount;
+    var ratio = 0.42 + (dom/5)*0.58;   // 0.42~1.0
+    var angK = -Math.PI/2 + k*Math.PI/2;
+    pts.push({x: cx + Math.cos(angK)*R*ratio, y: cy + Math.sin(angK)*R*ratio});
+  }
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for (var p=1;p<4;p++) ctx.lineTo(pts[p].x, pts[p].y);
+  ctx.closePath();
+  var grad = ctx.createLinearGradient(cx-R, cy-R, cx+R, cy+R);
+  grad.addColorStop(0,"rgba(255,158,192,.55)");
+  grad.addColorStop(1,"rgba(232,69,126,.42)");
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.strokeStyle = "#E8457E";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  for (var q2=0;q2<4;q2++){
+    ctx.beginPath();
+    ctx.arc(pts[q2].x, pts[q2].y, 6, 0, Math.PI*2);
+    ctx.fillStyle = "#E8457E";
+    ctx.fill();
+  }
+
+  // 四周标签
+  ctx.textAlign = "center";
+  ctx.font = "bold 22px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  ctx.fillStyle = "#4A3728";
+  var labels = [
+    {t: DIMS[0].a.n.slice(0,4)+" / "+DIMS[0].b.n.slice(0,4), x: cx, y: cy-R-38},
+    {t: DIMS[1].a.n.slice(0,4), x: cx+R+8, y: cy-16},
+    {t: DIMS[1].b.n.slice(0,4), x: cx+R+8, y: cy+30},
+    {t: DIMS[2].a.n.slice(0,4), x: cx, y: cy+R+52},
+    {t: DIMS[3].a.n.slice(0,4), x: cx-R-8, y: cy-16},
+    {t: DIMS[3].b.n.slice(0,4), x: cx-R-8, y: cy+30}
+  ];
+  ctx.font = "bold 20px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  for (var L=0;L<labels.length;L++){
+    ctx.fillStyle = "#8A7361";
+    ctx.fillText(labels[L].t, labels[L].x, labels[L].y);
+  }
+}
+
+/* ---------- 复制简介 ---------- */
+function cpBio(){
+  var t = document.getElementById("bio").textContent;
+  copyText(t, "简介已复制，去小红书改一下就行");
+}
+function copyText(t, msg){
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(function(){ toast(msg); }, function(){ fallbackCopy(t,msg); });
+  } else { fallbackCopy(t,msg); }
+}
+function fallbackCopy(t, msg){
+  var ta = document.createElement("textarea");
+  ta.value = t; ta.style.position="fixed"; ta.style.left="-9999px";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); toast(msg); } catch(e){ toast("复制失败，请手动选择文字复制"); }
+  document.body.removeChild(ta);
+}
+var toastTimer = null;
+function toast(msg){
+  var el = document.getElementById("toast");
+  if (!el){ return; }
+  el.textContent = msg;
+  el.className = "toast on";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ el.className = "toast"; }, 2000);
+}
+
+/* ---------- 分享卡 ---------- */
+function saveCard(){
+  var res = calc();
+  var sorted = res.slice().sort(function(x,y){ return y.abs - x.abs; });
+  var main = sorted[0];
+  var cv = document.getElementById("share");
+  var ctx = cv.getContext("2d");
+  var W = 1080, H = 1440;
+
+  var bg = ctx.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,"#FFF1F5");
+  bg.addColorStop(0.5,"#FFF7F0");
+  bg.addColorStop(1,"#FFFBF7");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,W,H);
+
+  // 外框
+  ctx.strokeStyle = "#FFC9D8";
+  ctx.lineWidth = 3;
+  roundRect(ctx, 48, 48, W-96, H-96, 40);
+  ctx.stroke();
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#E8457E";
+  ctx.font = "bold 34px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  ctx.fillText("小 红 书 博 主 人 设 测 评", W/2, 170);
+
+  ctx.font = "28px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  ctx.fillStyle = "#A89080";
+  ctx.fillText("你 的 人 设 是", W/2, 268);
+
+  ctx.font = "bold 82px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  ctx.fillStyle = "#3A2B20";
+  ctx.fillText(P[main.key].n, W/2, 380);
+
+  ctx.font = "bold 36px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  ctx.fillStyle = "#E8457E";
+  ctx.fillText(res.map(function(r){return r.key;}).join(" · "), W/2, 452);
+
+  // 四维条
+  var y0 = 570;
+  for (var i=0;i<4;i++){
+    var r = res[i];
+    ctx.textAlign = "left";
+    ctx.font = "bold 30px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+    ctx.fillStyle = "#4A3728";
+    ctx.fillText(r.dim, 130, y0 + i*130);
+    ctx.font = "26px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+    ctx.fillStyle = "#E8457E";
+    ctx.fillText(r.name, 130, y0 + i*130 + 44);
+
+    // 进度条
+    var bx = 400, bw = 520, by = y0 + i*130 - 14;
+    ctx.fillStyle = "#FFE4EC";
+    roundRect(ctx, bx, by, bw, 20, 10);
+    ctx.fill();
+    var dom = Math.max(r.aCount, r.bCount);
+    var ratio = 0.35 + (dom/5)*0.65;
+    var gr = ctx.createLinearGradient(bx,0,bx+bw,0);
+    gr.addColorStop(0,"#FF9EC0");
+    gr.addColorStop(1,"#E8457E");
+    ctx.fillStyle = gr;
+    roundRect(ctx, bx, by, bw*ratio, 20, 10);
+    ctx.fill();
+
+    ctx.textAlign = "right";
+    ctx.font = "bold 24px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+    ctx.fillStyle = "#A89080";
+    ctx.fillText(r.aCount + " : " + r.bCount, bx+bw, by+58);
+  }
+
+  // 金句
+  ctx.textAlign = "center";
+  ctx.font = "italic 32px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  ctx.fillStyle = "#7A6555";
+  wrapText(ctx, "「" + P[main.key].pick + "」", W/2, 1130, 800, 48);
+
+  // 底部
+  ctx.font = "bold 30px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  ctx.fillStyle = "#E8457E";
+  ctx.fillText("测测你是哪一种博主", W/2, 1290);
+  ctx.font = "24px -apple-system,PingFang SC,Microsoft YaHei,sans-serif";
+  ctx.fillStyle = "#B8A395";
+  ctx.fillText("20 题 · 1 分钟 · 免费", W/2, 1340);
+
+  try {
+    var url = cv.toDataURL("image/png");
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "我的博主人设-" + P[main.key].n + ".png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    toast("分享卡已保存，去相册看看");
+  } catch(e){
+    toast("保存失败，请长按图片保存");
+  }
+}
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.arcTo(x+w, y, x+w, y+h, r);
+  ctx.arcTo(x+w, y+h, x, y+h, r);
+  ctx.arcTo(x, y+h, x, y, r);
+  ctx.arcTo(x, y, x+w, y, r);
+  ctx.closePath();
+}
+function wrapText(ctx, text, x, y, maxW, lh){
+  var line = "";
+  var lines = [];
+  for (var i=0;i<text.length;i++){
+    var test = line + text[i];
+    if (ctx.measureText(test).width > maxW && line !== ""){
+      lines.push(line); line = text[i];
+    } else { line = test; }
+  }
+  if (line) lines.push(line);
+  for (var j=0;j<lines.length;j++){
+    ctx.fillText(lines[j], x, y + j*lh);
+  }
+}
+</script>
+</body>
+</html>
