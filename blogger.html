@@ -73,6 +73,46 @@ canvas{max-width:100%}
 .row2>*{flex:1}
 .toast{position:fixed;left:50%;bottom:60px;transform:translateX(-50%) translateY(20px);background:rgba(58,43,32,.92);color:#fff;font-size:14.5px;padding:12px 22px;border-radius:99px;opacity:0;transition:all .28s ease;pointer-events:none;z-index:99;white-space:nowrap}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.gifts{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+.gift{display:flex;flex-direction:column;align-items:flex-start;gap:2px;position:relative;width:100%;text-align:left;background:#FFF7FA;border:1px solid #FBD9E6;border-radius:13px;padding:13px 38px 13px 15px;font-family:inherit;cursor:pointer;transition:background .15s,transform .12s}
+.gift:active{transform:scale(.985);background:#FFF0F5}
+.gift b{font-size:14.5px;color:#3A2B20;font-weight:700}
+.gift span{font-size:12px;color:#9A8271}
+.gift i{position:absolute;right:15px;top:50%;transform:translateY(-50%);font-style:normal;font-size:20px;color:#E8457E;line-height:1}
+.gift-tip{font-size:11.5px;color:#B8A395;margin-top:10px;text-align:center}
+.mask{position:fixed;inset:0;background:rgba(58,43,32,.42);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+.mask.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-height:86vh;background:#fff;border-radius:22px 22px 0 0;transform:translateY(102%);transition:transform .3s cubic-bezier(.32,.72,0,1);z-index:61;display:flex;flex-direction:column;box-shadow:0 -6px 30px rgba(200,80,120,.14)}
+.sheet.on{transform:translateY(0)}
+.sheet-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 10px;border-bottom:1px solid #F6E9EE;flex-shrink:0}
+.sheet-t{font-size:15.5px;font-weight:700;color:#3A2B20}
+.sheet-x{border:none;background:#FFF0F5;color:#E8457E;width:30px;height:30px;border-radius:50%;font-size:19px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0}
+.sheet-b{padding:16px 20px 34px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.wk{margin-bottom:20px}
+.wk h5{font-size:13.5px;color:#E8457E;font-weight:700;margin-bottom:9px}
+.wk ol{list-style:none;counter-reset:c}
+.wk li{counter-increment:c;position:relative;padding:10px 0 10px 30px;font-size:14px;color:#4A3728;line-height:1.55;border-bottom:1px dashed #F6E9EE}
+.wk li:before{content:counter(c);position:absolute;left:0;top:10px;width:20px;height:20px;border-radius:50%;background:#FFE9F1;color:#E8457E;font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.wk li em{display:block;font-style:normal;font-size:11.5px;color:#A89080;margin-top:3px}
+.hk{padding:13px 0;border-bottom:1px dashed #F6E9EE}
+.hk:last-child{border-bottom:none}
+.hk b{font-size:14px;color:#3A2B20;display:block;margin-bottom:5px}
+.hk .hk-t{font-size:13.5px;color:#E8457E;background:#FFF7FA;border-radius:9px;padding:9px 12px;margin-bottom:6px;line-height:1.5}
+.hk .hk-e{font-size:12.5px;color:#8A7361;line-height:1.55}
+.ck-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.ck-num{font-size:13px;color:#8A7361}
+.ck-num b{font-size:22px;color:#E8457E;font-weight:700}
+.ck-bar{height:6px;background:#F6E9EE;border-radius:99px;overflow:hidden;margin-bottom:16px}
+.ck-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#FF9AB8,#E8457E);border-radius:99px;transition:width .3s}
+.ck-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
+.ck{border:1px solid #F2E2E8;background:#FFFDFE;border-radius:10px;padding:9px 4px;font-family:inherit;cursor:pointer;text-align:center;transition:all .15s}
+.ck .ck-d{font-size:11px;color:#B8A395;display:block}
+.ck .ck-m{font-size:10.5px;color:#8A7361;display:block;margin-top:2px;line-height:1.3;min-height:24px}
+.ck.done{background:#FFE9F1;border-color:#F7AFC8}
+.ck.done .ck-d{color:#E8457E;font-weight:700}
+.ck.done .ck-m{color:#C95A82}
+.ck-note{font-size:11.5px;color:#B8A395;text-align:center;line-height:1.6}
+.sheet-cp{display:block;width:100%;border:none;border-radius:13px;background:linear-gradient(135deg,#FF8FB1,#E8457E);color:#fff;font-size:15px;font-weight:700;padding:14px;font-family:inherit;cursor:pointer;margin-top:16px}
 .dl{display:none}
 @media(max-width:400px){
 .h1{font-size:22px}.qt{font-size:16px}.opt{font-size:14.5px;padding:14px 15px}
@@ -152,11 +192,12 @@ canvas{max-width:100%}
     <div class="surprise">
       <h4>再送你一个小惊喜</h4>
       <p>人设只是起点，能持续出内容才是关键。我把「人设 → 选题 → 发布节奏」串成了一套可直接照做的流程：</p>
-      <ul>
-        <li>4 周选题日历（每周 3 条，直接抄）</li>
-        <li>7 种开头钩子模板</li>
-        <li>30 天更新打卡表</li>
-      </ul>
+      <div class="gifts">
+        <button class="gift" onclick="openGift('cal')"><b>4 周选题日历</b><span>12 条题目，按周排好，直接抄</span><i>›</i></button>
+        <button class="gift" onclick="openGift('hook')"><b>7 种开头钩子</b><span>3 秒留住人，套模板就行</span><i>›</i></button>
+        <button class="gift" onclick="openGift('check')"><b>30 天更新打卡表</b><span>点格子打卡，进度自动存</span><i>›</i></button>
+      </div>
+      <p class="gift-tip">三份都按你的「<span id="gift-key"></span>」人设定制，点开就能用。</p>
     </div>
 
     <div class="row2" style="margin-top:16px">
@@ -170,6 +211,11 @@ canvas{max-width:100%}
 </div>
 <canvas id="share" width="1080" height="1440" class="dl"></canvas>
 <div id="toast" class="toast"></div>
+<div class="mask" id="mask" onclick="closeGift()"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-bar"><span class="sheet-t" id="sheet-t"></span><button class="sheet-x" onclick="closeGift()">&times;</button></div>
+  <div class="sheet-b" id="sheet-b"></div>
+</div>
 
 <script>
 /* ---------- 维度定义 ---------- */
@@ -391,6 +437,8 @@ function finish(){
   document.getElementById("rhi").textContent = "你是 —— " + main.name;
   document.getElementById("rname").innerHTML = "<em>" + P[main.key].n + "</em>";
   document.getElementById("rcode").textContent = res.map(function(r){ return r.key; }).join(" · ");
+  CURKEY = main.key;
+  document.getElementById("gift-key").textContent = P[main.key].n;
 
   // 雷达
   drawRadar(res);
@@ -539,6 +587,145 @@ function toast(msg){
   el.className = "toast on";
   clearTimeout(toastTimer);
   toastTimer = setTimeout(function(){ el.className = "toast"; }, 2000);
+}
+
+/* ---------- 领取资源 ---------- */
+var CURKEY = "EX";
+
+function openGift(kind){
+  var box = document.getElementById("sheet-b");
+  var title = "";
+  if (kind === "cal"){ title = "4 周选题日历"; box.innerHTML = htmlCal(); }
+  else if (kind === "hook"){ title = "7 种开头钩子"; box.innerHTML = htmlHook(); }
+  else { title = "30 天更新打卡表"; box.innerHTML = htmlCheck(); bindCheck(); }
+  document.getElementById("sheet-t").textContent = title;
+  document.getElementById("mask").className = "mask on";
+  document.getElementById("sheet").className = "sheet on";
+  box.scrollTop = 0;
+}
+function closeGift(){
+  document.getElementById("mask").className = "mask";
+  document.getElementById("sheet").className = "sheet";
+}
+
+function calData(){
+  var t = (P[CURKEY] || P.EX).tp;
+  return [
+    {w:"第 1 周 · 先把人设立住", items:[
+      {t:"一条自我介绍：我是谁、我会给你什么、凭什么关注我", f:"口播 / 图文"},
+      {t:t[0], f:"主线内容"},
+      {t:t[4] || t[1], f:"人设加固"}
+    ]},
+    {w:"第 2 周 · 拿出硬货", items:[
+      {t:t[1], f:"清单体"},
+      {t:t[2], f:"对比体"},
+      {t:t[3], f:"实测体"}
+    ]},
+    {w:"第 3 周 · 把评论区打开", items:[
+      {t:"被问最多的 3 个问题，一次答完", f:"答疑体"},
+      {t:"让粉丝投票：下一条拍 A 还是 B", f:"互动体"},
+      {t:"复刻一条同赛道爆款，换成你的角度讲", f:"拆解体"}
+    ]},
+    {w:"第 4 周 · 收口做资料包", items:[
+      {t:"这 4 周我踩的坑和修正（复盘）", f:"复盘体"},
+      {t:"把前 3 周内容整理成资料包，一次给全", f:"引流钩子"},
+      {t:"下个月我要做的 3 件事（预告，让人等更新）", f:"预告体"}
+    ]}
+  ];
+}
+function htmlCal(){
+  var d = calData(), h = "";
+  for (var i=0;i<d.length;i++){
+    h += '<div class="wk"><h5>'+d[i].w+'</h5><ol>';
+    for (var j=0;j<d[i].items.length;j++){
+      h += '<li>'+d[i].items[j].t+'<em>形式：'+d[i].items[j].f+'</em></li>';
+    }
+    h += '</ol></div>';
+  }
+  h += '<div class="ck-note">按这个顺序发 12 条，比乱发 100 条有用。<br>哪天没灵感，就从这 12 条里挑一条重拍。</div>';
+  h += '<button class="sheet-cp" onclick="copyCal()">复制这 12 条题目</button>';
+  return h;
+}
+function copyCal(){
+  var d = calData(), out = "", n = 0;
+  for (var i=0;i<d.length;i++){
+    out += d[i].w + "\n";
+    for (var j=0;j<d[i].items.length;j++){ n++; out += n + ". " + d[i].items[j].t + "（" + d[i].items[j].f + "）\n"; }
+    out += "\n";
+  }
+  copyText(out, "12 条题目已复制");
+}
+
+var HOOKS = [
+  {n:"反常识开场", t:"「大部分人做 __ 都搞错了方向，我试了 3 个月才明白」", e:"先否定一个共识，再给出你的做法。适合有实测经验的内容。"},
+  {n:"数字锚点", t:"「我用 __ 天 / __ 元，把这件事从头试了一遍」", e:"数字越具体越可信，别写「很久」，写「21 天」。"},
+  {n:"痛点直击", t:"「如果你也卡在 __，这条能帮你省半个月」", e:"直接点名观众此刻的处境，让他觉得你说的是他。"},
+  {n:"结果前置", t:"「先看结果：__ 我做到了，方法在下面」", e:"把最亮的结果放第一句，再讲过程，完读率会高很多。"},
+  {n:"场景代入", t:"「晚上 11 点，我第 5 次改这条笔记的封面」", e:"用具体时间地点写画面，比「我曾经很焦虑」有代入感。"},
+  {n:"身份宣言", t:"「作为一个做过 __ 的人，我不建议你这么做」", e:"先亮身份建立可信度，再说反直觉建议。"},
+  {n:"悬念留白", t:"「这条我改了 4 版，第 3 版才是关键」", e:"制造「必须往下看」的钩子，适合复盘类内容。"}
+];
+function htmlHook(){
+  var p = P[CURKEY] || P.EX, h = "";
+  h += '<div class="ck-note" style="text-align:left;margin-bottom:14px">你的语气是「'+p.pick+'」。这 7 个开头直接套，把 __ 换成你的具体事。</div>';
+  for (var i=0;i<HOOKS.length;i++){
+    h += '<div class="hk"><b>'+(i+1)+". "+HOOKS[i].n+'</b><div class="hk-t">'+HOOKS[i].t+'</div><div class="hk-e">'+HOOKS[i].e+'</div></div>';
+  }
+  h += '<button class="sheet-cp" onclick="copyHook()">复制 7 个开头模板</button>';
+  return h;
+}
+function copyHook(){
+  var out = "7 种小红书开头钩子：\n\n";
+  for (var i=0;i<HOOKS.length;i++) out += (i+1)+". "+HOOKS[i].n+"\n"+HOOKS[i].t+"\n用法："+HOOKS[i].e+"\n\n";
+  copyText(out, "7 个开头模板已复制");
+}
+
+function ckData(){
+  var gap = (CURKEY === "ST") ? 1 : (CURKEY === "BL" ? 3 : 2);
+  var out = [];
+  for (var d=1; d<=30; d++){
+    if (d % 7 === 0) out.push({d:d, m:"复盘", task:"复盘日：看数据，记下哪条最有效"});
+    else if (d % gap === 0) out.push({d:d, m:"发布", task:"发布日：按选题日历发一条"});
+    else out.push({d:d, m:"养料"});
+  }
+  return out;
+}
+function ckKey(){ return "blogger_ck_" + CURKEY; }
+function ckLoad(){
+  try { var v = localStorage.getItem(ckKey()); return v ? JSON.parse(v) : []; } catch(e){ return []; }
+}
+function ckSave(arr){
+  try { localStorage.setItem(ckKey(), JSON.stringify(arr)); } catch(e){}
+}
+function htmlCheck(){
+  var d = ckData(), done = ckLoad(), h = "";
+  h += '<div class="ck-top"><span class="ck-num">已打卡 <b id="ckn">'+done.length+'</b> / 30 天</span><span class="ck-num" id="ckp"></span></div>';
+  h += '<div class="ck-bar"><i id="ckb" style="width:'+(done.length/30*100)+'%"></i></div>';
+  h += '<div class="ck-grid">';
+  for (var i=0;i<d.length;i++){
+    var on = done.indexOf(d[i].d) >= 0;
+    h += '<button class="ck'+(on?" done":"")+'" data-d="'+d[i].d+'" title="'+d[i].task+'"><span class="ck-d">D'+d[i].d+'</span><span class="ck-m">'+d[i].m+'</span></button>';
+  }
+  h += '</div>';
+  h += '<div class="ck-note">点一下就打勾，进度存在你自己的手机上。<br>断一天不算失败，连着断三天才要重来。</div>';
+  return h;
+}
+function bindCheck(){
+  var btns = document.querySelectorAll("#sheet-b .ck");
+  for (var i=0;i<btns.length;i++){
+    btns[i].onclick = function(){
+      var d = parseInt(this.getAttribute("data-d"), 10);
+      var arr = ckLoad(), at = arr.indexOf(d);
+      if (at >= 0) arr.splice(at,1); else arr.push(d);
+      ckSave(arr);
+      this.className = "ck" + (at >= 0 ? "" : " done");
+      var n = document.getElementById("ckn");
+      if (n) n.textContent = arr.length;
+      var b = document.getElementById("ckb");
+      if (b) b.style.width = (arr.length/30*100)+"%";
+      if (arr.length === 30) toast("30 天满格，你已经赢过 90% 的人");
+    };
+  }
 }
 
 /* ---------- 分享卡 ---------- */
